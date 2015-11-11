@@ -19,6 +19,54 @@ class registrarForm {
 		
 		$this->miSql = $sql;
 	}
+	function botonRegresar($tab, $col) {
+		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
+		// -----------------CONTROL: Botón ----------------------------------------------------------------
+		$esteCampo = 'botonContinuar';
+		$atributos ["id"] = $esteCampo;
+		$atributos ["tabIndex"] = $tab;
+		$atributos ["tipo"] = 'boton';
+		// submit: no se coloca si se desea un tipo button genérico
+		$atributos ['submit'] = true;
+		$atributos ["estiloMarco"] = '';
+		$atributos ['columnas'] = $col;
+		$atributos ["estiloBoton"] = 'jqueryui';
+		// verificar: true para verificar el formulario antes de pasarlo al servidor.
+		$atributos ["verificar"] = '';
+		$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
+		$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
+		$tab ++;
+		
+		// Aplica atributos globales al control
+		
+		echo $this->miFormulario->campoBoton ( $atributos );
+		// -----------------FIN CONTROL: Botón -----------------------------------------------------------
+	}
+	function botonDocumento($tab, $col) {
+		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
+		// -----------------CONTROL: Botón ----------------------------------------------------------------
+		$esteCampo = 'botonDocumento';
+		$atributos ["id"] = $esteCampo;
+		$atributos ["tabIndex"] = $tab;
+		$atributos ["tipo"] = 'boton';
+		// submit: no se coloca si se desea un tipo button genérico
+		$atributos ['submit'] = true;
+		$atributos ["estiloMarco"] = '';
+		$atributos ['columnas'] = $col;
+		$atributos ["estiloBoton"] = 'jqueryui';
+		// verificar: true para verificar el formulario antes de pasarlo al servidor.
+		$atributos ["verificar"] = '';
+		$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
+		$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
+		$tab ++;
+		
+		// Aplica atributos globales al control
+		
+		echo $this->miFormulario->campoBoton ( $atributos );
+		// -----------------FIN CONTROL: Botón -----------------------------------------------------------
+	}
 	function miForm() {
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
@@ -69,6 +117,30 @@ class registrarForm {
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		echo $this->miFormulario->formulario ( $atributos );
 		{
+			
+			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+			
+			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+			
+			$variable = "pagina=" . $miPaginaActual;
+			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+			
+			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+			$esteCampo = 'botonRegresar';
+			$atributos ['id'] = $esteCampo;
+			$atributos ['enlace'] = $variable;
+			$atributos ['tabIndex'] = 1;
+			$atributos ['estilo'] = 'textoSubtitulo';
+			$atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
+			$atributos ['ancho'] = '10%';
+			$atributos ['alto'] = '10%';
+			$atributos ['redirLugar'] = true;
+			echo $this->miFormulario->enlace ( $atributos );
+			
+			unset ( $atributos );
+			
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
 			$esteCampo = "marcoDatosBasicos";
@@ -80,7 +152,7 @@ class registrarForm {
 			
 			{
 				
-				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirma') {
+				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
 					
 					$mensaje = "Se Registro la Orden de Compra <br> Número de Orden Compra: " . $_REQUEST ['numero_orden'] . "  
 							<br>Fecha : " . $_REQUEST ['fecha_orden'];
@@ -98,8 +170,18 @@ class registrarForm {
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+					
+					// ------------------Division para los botones-------------------------
+					$atributos ["id"] = "botones";
+					$atributos ["estilo"] = "marcoBotones";
+					echo $this->miFormulario->division ( "inicio", $atributos );
+					
+					$this->botonDocumento ( $tab, 2 );
+					$this->botonRegresar ( $tab, 2 );
+					
+					echo $this->miFormulario->division ( 'fin' );
 				}
-				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'error') {
+				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'error') {
 					
 					$mensaje = "No Se Pudo Hacer Registro la Orden de Compra";
 					
@@ -116,9 +198,23 @@ class registrarForm {
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+					
+					// ------------------Division para los botones-------------------------
+					$atributos ["id"] = "botones";
+					$atributos ["estilo"] = "marcoBotones";
+					echo $this->miFormulario->division ( "inicio", $atributos );
+					
+					// ------------------Division para los botones-------------------------
+					$atributos ["id"] = "botones";
+					$atributos ["estilo"] = "marcoBotones";
+					echo $this->miFormulario->division ( "inicio", $atributos );
+					
+					$this->botonRegresar ( $tab, 1 );
+					
+					echo $this->miFormulario->division ( 'fin' );
 				}
 				
-				if (isset($_REQUEST['errores'])&&$_REQUEST ['errores'] == 'noItems') {
+				if (isset ( $_REQUEST ['errores'] ) && $_REQUEST ['errores'] == 'noItems') {
 					
 					$mensaje = "No se Agregaron Items A La Orden de Compra";
 					
@@ -135,9 +231,18 @@ class registrarForm {
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+					
+					// ------------------Division para los botones-------------------------
+					$atributos ["id"] = "botones";
+					$atributos ["estilo"] = "marcoBotones";
+					echo $this->miFormulario->division ( "inicio", $atributos );
+					
+					$this->botonRegresar ( $tab, 1 );
+					
+					echo $this->miFormulario->division ( 'fin' );
 				}
 				
-				if (isset($_REQUEST['errores'])&&$_REQUEST ['errores'] == 'noObligaciones') {
+				if (isset ( $_REQUEST ['errores'] ) && $_REQUEST ['errores'] == 'noObligaciones') {
 					
 					$mensaje = "No se Colocaron Obligaciones del Contratista Y/O Porveedor";
 					
@@ -154,34 +259,17 @@ class registrarForm {
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+					
+					// ------------------Division para los botones-------------------------
+					$atributos ["id"] = "botones";
+					$atributos ["estilo"] = "marcoBotones";
+					echo $this->miFormulario->division ( "inicio", $atributos );
+					
+					$this->botonRegresar ( $tab, 1 );
+					
+					echo $this->miFormulario->division ( 'fin' );
 				}
 			}
-			
-			// ------------------Division para los botones-------------------------
-			$atributos ["id"] = "botones";
-			$atributos ["estilo"] = "marcoBotones";
-			echo $this->miFormulario->division ( "inicio", $atributos );
-			
-			// -----------------CONTROL: Botón ----------------------------------------------------------------
-			$esteCampo = 'botonContinuar';
-			$atributos ["id"] = $esteCampo;
-			$atributos ["tabIndex"] = $tab;
-			$atributos ["tipo"] = 'boton';
-			// submit: no se coloca si se desea un tipo button genérico
-			$atributos ['submit'] = true;
-			$atributos ["estiloMarco"] = '';
-			$atributos ["estiloBoton"] = 'jqueryui';
-			// verificar: true para verificar el formulario antes de pasarlo al servidor.
-			$atributos ["verificar"] = '';
-			$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-			$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
-			$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-			$tab ++;
-			
-			// Aplica atributos globales al control
-			$atributos = array_merge ( $atributos, $atributosGlobales );
-			echo $this->miFormulario->campoBoton ( $atributos );
-			// -----------------FIN CONTROL: Botón -----------------------------------------------------------
 			
 			echo $this->miFormulario->marcoAgrupacion ( 'fin' );
 			
@@ -222,11 +310,16 @@ class registrarForm {
 		
 		// Paso 1: crear el listado de variables
 		
-		$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
+		$valorCodificado = "action=" . $esteBloque ["nombre"];
 		$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-		$valorCodificado .= "&opcion=paginaPrincipal";
+		$valorCodificado .= "&opcion=documento";
+		
+		if (isset ( $_REQUEST ['numero_orden'] )) {
+			$valorCodificado .= "&numero_orden=" . $_REQUEST ['numero_orden'];
+		}
+		
 		/**
 		 * SARA permite que los nombres de los campos sean dinámicos.
 		 * Para ello utiliza la hora en que es creado el formulario para

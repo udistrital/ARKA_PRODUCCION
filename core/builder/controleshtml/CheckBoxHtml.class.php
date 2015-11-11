@@ -25,6 +25,8 @@ class CheckBoxHtml extends HtmlBase {
 		}
 		return $this->cadenaHTML;
 	}
+        
+        
 	function checkBox($misAtributos) {
 		$this->setAtributos ( $misAtributos );
 		

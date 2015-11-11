@@ -2,9 +2,9 @@
 
 namespace registro\loginArka;
 
-if (!isset($GLOBALS["autorizado"])) {
-    include("../index.php");
-    exit;
+if (!isset($GLOBALS ["autorizado"])) {
+    include ("../index.php");
+    exit();
 }
 
 class Formulario {
@@ -14,7 +14,6 @@ class Formulario {
     var $miFormulario;
 
     function __construct($lenguaje, $formulario) {
-
         $this->miConfigurador = \Configurador::singleton();
 
         $this->miConfigurador->fabricaConexiones->setRecursoDB('principal');
@@ -25,21 +24,47 @@ class Formulario {
     }
 
     function formulario() {
-
         $directorioImagenes = $this->miConfigurador->getVariableConfiguracion("rutaUrlBloque") . "/imagenes";
         // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
+
+        $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
+        $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
+        $rutaBloque .= $esteBloque ['grupo'] . "/" . $esteBloque ['nombre'];
         ?>
+
+        <div id="slider1_container" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 50px; overflow: hidden;">
+            <!-- Slides Container -->
+            <div u="slides" style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px; width: 100%; height: 100px; overflow: hidden;">
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_9.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_13.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_97.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_14.png" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_96.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_7.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_8.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_1.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_10.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_12.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_2.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_3.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_15.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_6.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_11.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_17.jpg" /></div>
+            </div>
+        </div>
         <header>
-            <div id="fondo_base"> </div>			
-          
-              
+            <div id="fondo_base"></div>
+
+
         </header>
         <section>
             <article id="fondo_login"> 
                 <?php
+                         
                 $atributosGlobales ['campoSeguro'] = 'false';
-                $_REQUEST['tiempo'] = time();
+                $_REQUEST ['tiempo'] = time();
 
                 // -------------------------------------------------------------------------------------------------
                 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -47,8 +72,8 @@ class Formulario {
                 $atributos ['id'] = $esteCampo;
                 $atributos ['nombre'] = $esteCampo;
                 /**
-                 * Nuevo a partir de la versión 1.0.0.2, se utiliza para crear de manera rápida el js asociado a 
-                 * validationEngine. 
+                 * Nuevo a partir de la versión 1.0.0.2, se utiliza para crear de manera rápida el js asociado a
+                 * validationEngine.
                  */
                 $atributos ['validar'] = true;
 
@@ -72,6 +97,11 @@ class Formulario {
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->formulario($atributos);
 
+                $atributos ["id"] = "botones";
+                $atributos ["estilo"] = "marcoBotones";
+                echo $this->miFormulario->division("inicio", $atributos);
+                unset($atributos);
+
                 $esteCampo = 'usuario';
                 $atributos ['id'] = $esteCampo;
                 $atributos ['nombre'] = $esteCampo;
@@ -81,7 +111,7 @@ class Formulario {
                 $atributos ['columnas'] = 1;
                 $atributos ['dobleLinea'] = false;
                 $atributos ['tabIndex'] = $tab;
-                $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+                $atributos ['textoFondo'] = $this->lenguaje->getCadena($esteCampo);
                 $atributos ['validar'] = 'required';
 
                 if (isset($_REQUEST [$esteCampo])) {
@@ -91,8 +121,8 @@ class Formulario {
                 }
                 $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
                 $atributos ['deshabilitado'] = false;
-                $atributos ['tamanno'] = 10;
-                $atributos ['maximoTamanno'] = '10';
+                $atributos ['tamanno'] = 20;
+                $atributos ['maximoTamanno'] = '20';
                 $tab ++;
 
                 // Aplica atributos globales al control
@@ -109,7 +139,7 @@ class Formulario {
                 $atributos ['columnas'] = 1;
                 $atributos ['dobleLinea'] = false;
                 $atributos ['tabIndex'] = $tab;
-                $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+                $atributos ['textoFondo'] = $this->lenguaje->getCadena($esteCampo);
                 $atributos ['validar'] = 'required';
 
                 if (isset($_REQUEST [$esteCampo])) {
@@ -119,14 +149,16 @@ class Formulario {
                 }
                 $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
                 $atributos ['deshabilitado'] = false;
-                $atributos ['tamanno'] = 10;
-                $atributos ['maximoTamanno'] = '10';
+                $atributos ['tamanno'] = 20;
+                $atributos ['maximoTamanno'] = '15';
                 $tab ++;
 
                 // Aplica atributos globales al control
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->campoCuadroTexto($atributos);
                 unset($atributos);
+
+                echo $this->miFormulario->division("fin");
 
                 $atributos ["id"] = "botones";
                 $atributos ["estilo"] = "marcoBotones";
@@ -169,7 +201,7 @@ class Formulario {
                  * Para ello utiliza la hora en que es creado el formulario para
                  * codificar el nombre de cada campo.
                  */
-                $valorCodificado .= "&campoSeguro=" . $_REQUEST['tiempo'];
+                $valorCodificado .= "&campoSeguro=" . $_REQUEST ['tiempo'];
                 // Paso 2: codificar la cadena resultante
                 $valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
 
@@ -193,28 +225,37 @@ class Formulario {
                 ?>
             </article>
             <div id="logo_u">
-                        <img src="<?php echo $directorioImagenes ?>/UD_logo2.png" />
-                    </div>
-       
+                <img src="<?php echo $directorioImagenes ?>/UD_logo2.png" />
+            </div>
+
         </section>
         <section>
             <div id="fondo_texto">
                 <div id="texto">
                     <h3>SISTEMA DE INFORMACIÓN</h3>
-                    <h3>DE GESTIÓN DE INVENTARIOS Y ALMACÉN</h3><BR>	
+                    <h3>DE GESTIÓN DE INVENTARIOS Y ALMACÉN</h3><BR>
                     <h2>ARKA</h2>
                 </div>
             </div>
         </section>
         <footer>
-               <div id="footerLeft">
-                   <p style="font-size: 15px;">Universidad Distrital Francisco José de Caldas</p>
-                   <p>Todos los derechos reservados. Carrera 8 N. 40-78 Piso 1 / PBX 3238400 - 3239300 <a href="">computo@udistrital.edu.co</a></p>
+            <div id="footerLeft">
+                <p style="font-size: 15px;">Universidad Distrital Francisco José de
+                    Caldas</p>
+                <p>
+                    Todos los derechos reservados. Carrera 8 N. 40-78 Piso 1 / PBX
+                    3238400 - 3239300 <a href="">computo@udistrital.edu.co</a>
+                </p>
             </div>
             <div id="footerRight">
-                <a href="https://www.facebook.com/UniversidadDistrital.SedeIngenieria" target="_blank"><img src="<?php echo $directorioImagenes ?>/facebook.png" /></a>
-                <a href="https://plus.google.com/110031223488101566921/about?gl=co&hl=es" target="_blank"><img src="<?php echo $directorioImagenes ?>/google+.png" /></a>
-                <a href="http://www.udistrital.edu.co/" target="_blank"><img src="<?php echo $directorioImagenes ?>/mail.png" /></a>
+                <a href="https://www.facebook.com/UniversidadDistrital.SedeIngenieria"
+                   target="_blank"><img
+                        src="<?php echo $directorioImagenes ?>/facebook.png" /></a> <a
+                    href="https://plus.google.com/110031223488101566921/about?gl=co&hl=es"
+                    target="_blank"><img
+                        src="<?php echo $directorioImagenes ?>/google+.png" /></a> <a
+                    href="http://www.udistrital.edu.co/" target="_blank"><img
+                        src="<?php echo $directorioImagenes ?>/mail.png" /></a>
             </div>
         </footer>
 
@@ -227,36 +268,29 @@ class Formulario {
         $mensaje = $this->miConfigurador->getVariableConfiguracion('mostrarMensaje');
         $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', null);
 
-        if ($mensaje) {
-
-            $tipoMensaje = $this->miConfigurador->getVariableConfiguracion('tipoMensaje');
-
-            if ($tipoMensaje == 'json') {
-
-                $atributos ['mensaje'] = $mensaje;
-                $atributos ['json'] = true;
+        if (isset($_REQUEST ['error'])) {
+            if ($_REQUEST ['error'] == 'formularioExpirado') {
+                $atributos ["estilo"] = 'information';
             } else {
-                $atributos ['mensaje'] = $this->lenguaje->getCadena($mensaje);
+                $atributos ["estilo"] = 'error';
             }
+
             // -------------Control texto-----------------------
             $esteCampo = 'divMensaje';
             $atributos ['id'] = $esteCampo;
             $atributos ["tamanno"] = '';
-            $atributos ["estilo"] = 'information';
             $atributos ["etiqueta"] = '';
             $atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
+            $atributos ['mensaje'] = $this->lenguaje->getCadena($_REQUEST ['error']);
             echo $this->miFormulario->campoMensaje($atributos);
             unset($atributos);
         }
-
         return true;
     }
 
 }
 
 $miFormulario = new Formulario($this->lenguaje, $this->miFormulario);
-
-
 $miFormulario->formulario();
 $miFormulario->mensaje();
 ?>

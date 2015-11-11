@@ -49,6 +49,10 @@ class redireccion {
 			case "paginaPrincipal" :
 				$variable = "pagina=" . $miPaginaActual;
 				break;
+			
+			default :
+				exit ();
+				break;
 		}
 		
 		foreach ( $_REQUEST as $clave => $valor ) {

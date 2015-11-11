@@ -3,8 +3,8 @@
 $_REQUEST['tiempo']=time();
 
 
-?>
-
+?>            
+            
 // Asociar el widget de validación al formulario
 $("#<?php echo sha1('login'.$_REQUEST['tiempo']);?>").validationEngine({
 	promptPosition : "centerRight",
@@ -27,3 +27,9 @@ $('#<?php echo sha1('clave'.$_REQUEST['tiempo']);?>').keydown(function(e) {
  {
     event.preventDefault();
     });
+    
+setTimeout(function() {
+    $('#divMensaje').hide( "drop", { direction: "up" }, "slow" );
+}, 10000); // <-- time in milliseconds
+
+

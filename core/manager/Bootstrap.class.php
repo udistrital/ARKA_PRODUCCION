@@ -13,6 +13,7 @@ require_once ('core/connection/FabricaDbConexion.class.php');
 require_once ('core/crypto/Encriptador.class.php');
 require_once ('core/builder/Mensaje.class.php');
 require_once ('core/builder/InspectorHTML.class.php');
+include_once ("core/log/logger.class.php");
 
 class Bootstrap {
     
@@ -176,7 +177,9 @@ class Bootstrap {
         $this->autenticador->setPagina ( $pagina );
         
         if ($this->autenticador->iniciarAutenticacion ()) {
-            
+
+        	
+        	
             /**
              * Procesa la página solicitada por el usuario
              */

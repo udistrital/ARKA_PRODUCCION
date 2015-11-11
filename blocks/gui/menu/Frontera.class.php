@@ -1,4 +1,4 @@
-<?
+<?php
 
 include_once("core/manager/Configurador.class.php");
 
@@ -44,14 +44,11 @@ class Fronteramenu {
         
         $miSesion = Sesion::singleton();
         $usuario= $miSesion->getSesionUsuarioId();
-        
         include_once("core/builder/FormularioHtml.class.php");
-
         $this->ruta = $this->miConfigurador->getVariableConfiguracion("rutaBloque");
-                
         $this->miFormulario = new formularioHtml();
-        
         include_once($this->ruta . "/formulario/nuevo.php");
+        
     }
 
 }

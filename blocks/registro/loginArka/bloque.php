@@ -31,6 +31,7 @@ include_once ("Lenguaje.class.php");
 
 if (! class_exists ( '\\registro\\loginArka' )) {
     
+	
     class Bloque implements \Bloque {
         var $nombreBloque;
         var $miFuncion;

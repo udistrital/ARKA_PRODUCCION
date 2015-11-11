@@ -70,11 +70,16 @@ class Bloque implements \Bloque {
 		$this->miLenguaje = new Lenguaje ();
 	}
 	public function bloque() {
+		
+// 		var_dump($_REQUEST);exit;
 		if (isset ( $_REQUEST ['botonCancelar'] ) && $_REQUEST ['botonCancelar'] == "true") {
 			redireccion::redireccionar ( "paginaPrincipal" );
 		} else if (isset ( $_REQUEST ['botonContinuar'] ) && $_REQUEST ['botonContinuar'] == "true") {
 			redireccion::redireccionar ( "paginaPrincipal" );
-		}  else {
+		} else if (isset ( $_REQUEST ['botonRegresar'] ) && $_REQUEST ['botonRegresar'] == "true") {
+			redireccion::redireccionar ( "paginaPrincipal" );
+		} 
+		 else {
 			
 			$this->miFrontera->setSql ( $this->miSql );
 			$this->miFrontera->setFuncion ( $this->miFuncion );
@@ -121,5 +126,4 @@ if (isset ( $lenguaje )) {
 }
 
 $esteBloque->bloque ();
-
 ?>

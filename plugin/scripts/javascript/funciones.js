@@ -11,7 +11,7 @@ function verificarNumeroPalabras(formulario,control,valor1,valor2)
     {
         if(var1>parseInt(valor2))
             {
-                alert1('El resumen tiene más palabras de las esperadas.');
+                alert1('El resumen tiene mÃ¡s palabras de las esperadas.');
                 return false;
             }
     }
@@ -327,69 +327,69 @@ function acentos(x)
 {
 	// version 040623
 	// Spanish - Espa&ntilde;ol
-	// Portuguese - Portugués - Português
+	// Portuguese - PortuguÃ©s - PortuguÃªs
 	// Italian - Italiano
-	// French - Francés - Français
+	// French - FrancÃ©s - FranÃ§ais
 	// Also accepts and converts single and double quotation marks, square and angle brackets
 	// and miscelaneous symbols.
 	// Also accepts and converts html entities for all the above.
 //	if (navigator.appVersion.toLowerCase().indexOf("windows") != -1) {return x}
-	x = x.replace(/¡/g,"\xA1");	x = x.replace(/&iexcl;/g,"\xA1")
-	x = x.replace(/¿/g,"\xBF");	x = x.replace(/&iquest;/g,"\xBF")
-	x = x.replace(/À/g,"\xC0");	x = x.replace(/&Agrave;/g,"\xC0")
-	x = x.replace(/à/g,"\xE0");	x = x.replace(/&agrave;/g,"\xE0")
-	x = x.replace(/Á/g,"\xC1");	x = x.replace(/&Aacute;/g,"\xC1")
-	x = x.replace(/á/g,"\xE1");	x = x.replace(/á/g,"\xE1")
-	x = x.replace(/Â/g,"\xC2");	x = x.replace(/&Acirc;/g,"\xC2")
-	x = x.replace(/â/g,"\xE2");	x = x.replace(/&acirc;/g,"\xE2")
-	x = x.replace(/Ã/g,"\xC3");	x = x.replace(/&Atilde;/g,"\xC3")
-	x = x.replace(/ã/g,"\xE3");	x = x.replace(/&atilde;/g,"\xE3")
-	x = x.replace(/Ä/g,"\xC4");	x = x.replace(/&Auml;/g,"\xC4")
-	x = x.replace(/ä/g,"\xE4");	x = x.replace(/&auml;/g,"\xE4")
-	x = x.replace(/Å/g,"\xC5");	x = x.replace(/&Aring;/g,"\xC5")
-	x = x.replace(/å/g,"\xE5");	x = x.replace(/&aring;/g,"\xE5")
-	x = x.replace(/Æ/g,"\xC6");	x = x.replace(/&AElig;/g,"\xC6")
-	x = x.replace(/æ/g,"\xE6");	x = x.replace(/&aelig;/g,"\xE6")
-	x = x.replace(/Ç/g,"\xC7");	x = x.replace(/&Ccedil;/g,"\xC7")
-	x = x.replace(/ç/g,"\xE7");	x = x.replace(/&ccedil;/g,"\xE7")
-	x = x.replace(/È/g,"\xC8");	x = x.replace(/&Egrave;/g,"\xC8")
-	x = x.replace(/è/g,"\xE8");	x = x.replace(/&egrave;/g,"\xE8")
-	x = x.replace(/É/g,"\xC9");	x = x.replace(/&Eacute;/g,"\xC9")
-	x = x.replace(/é/g,"\xE9");	x = x.replace(/&eacute;/g,"\xE9")
-	x = x.replace(/Ê/g,"\xCA");	x = x.replace(/&Ecirc;/g,"\xCA")
-	x = x.replace(/ê/g,"\xEA");	x = x.replace(/&ecirc;/g,"\xEA")
-	x = x.replace(/Ë/g,"\xCB");	x = x.replace(/&Euml;/g,"\xCB")
-	x = x.replace(/ë/g,"\xEB");	x = x.replace(/&euml;/g,"\xEB")
-	x = x.replace(/Ì/g,"\xCC");	x = x.replace(/&Igrave;/g,"\xCC")
-	x = x.replace(/ì/g,"\xEC");	x = x.replace(/&igrave;/g,"\xEC")
+	x = x.replace(/Â¡/g,"\xA1");	x = x.replace(/&iexcl;/g,"\xA1")
+	x = x.replace(/Â¿/g,"\xBF");	x = x.replace(/&iquest;/g,"\xBF")
+	x = x.replace(/Ã€/g,"\xC0");	x = x.replace(/&Agrave;/g,"\xC0")
+	x = x.replace(/Ã /g,"\xE0");	x = x.replace(/&agrave;/g,"\xE0")
+	x = x.replace(/Ã�/g,"\xC1");	x = x.replace(/&Aacute;/g,"\xC1")
+	x = x.replace(/Ã¡/g,"\xE1");	x = x.replace(/Ã¡/g,"\xE1")
+	x = x.replace(/Ã‚/g,"\xC2");	x = x.replace(/&Acirc;/g,"\xC2")
+	x = x.replace(/Ã¢/g,"\xE2");	x = x.replace(/&acirc;/g,"\xE2")
+	x = x.replace(/Ãƒ/g,"\xC3");	x = x.replace(/&Atilde;/g,"\xC3")
+	x = x.replace(/Ã£/g,"\xE3");	x = x.replace(/&atilde;/g,"\xE3")
+	x = x.replace(/Ã„/g,"\xC4");	x = x.replace(/&Auml;/g,"\xC4")
+	x = x.replace(/Ã¤/g,"\xE4");	x = x.replace(/&auml;/g,"\xE4")
+	x = x.replace(/Ã…/g,"\xC5");	x = x.replace(/&Aring;/g,"\xC5")
+	x = x.replace(/Ã¥/g,"\xE5");	x = x.replace(/&aring;/g,"\xE5")
+	x = x.replace(/Ã†/g,"\xC6");	x = x.replace(/&AElig;/g,"\xC6")
+	x = x.replace(/Ã¦/g,"\xE6");	x = x.replace(/&aelig;/g,"\xE6")
+	x = x.replace(/Ã‡/g,"\xC7");	x = x.replace(/&Ccedil;/g,"\xC7")
+	x = x.replace(/Ã§/g,"\xE7");	x = x.replace(/&ccedil;/g,"\xE7")
+	x = x.replace(/Ãˆ/g,"\xC8");	x = x.replace(/&Egrave;/g,"\xC8")
+	x = x.replace(/Ã¨/g,"\xE8");	x = x.replace(/&egrave;/g,"\xE8")
+	x = x.replace(/Ã‰/g,"\xC9");	x = x.replace(/&Eacute;/g,"\xC9")
+	x = x.replace(/Ã©/g,"\xE9");	x = x.replace(/&eacute;/g,"\xE9")
+	x = x.replace(/ÃŠ/g,"\xCA");	x = x.replace(/&Ecirc;/g,"\xCA")
+	x = x.replace(/Ãª/g,"\xEA");	x = x.replace(/&ecirc;/g,"\xEA")
+	x = x.replace(/Ã‹/g,"\xCB");	x = x.replace(/&Euml;/g,"\xCB")
+	x = x.replace(/Ã«/g,"\xEB");	x = x.replace(/&euml;/g,"\xEB")
+	x = x.replace(/ÃŒ/g,"\xCC");	x = x.replace(/&Igrave;/g,"\xCC")
+	x = x.replace(/Ã¬/g,"\xEC");	x = x.replace(/&igrave;/g,"\xEC")
 	x = x.replace(/&iacute;/g,"\xCD");	x = x.replace(/&Iacute;/g,"\xCD")
 	x = x.replace(/&iacute;/g,"\xED");	x = x.replace(/&iacute;/g,"\xED")
-	x = x.replace(/Î/g,"\xCE");	x = x.replace(/&Icirc;/g,"\xCE")
-	x = x.replace(/î/g,"\xEE");	x = x.replace(/&icirc;/g,"\xEE")
-	x = x.replace(/Ï/g,"\xCF");	x = x.replace(/&Iuml;/g,"\xCF")
-	x = x.replace(/ï/g,"\xEF");	x = x.replace(/&iuml;/g,"\xEF")
+	x = x.replace(/ÃŽ/g,"\xCE");	x = x.replace(/&Icirc;/g,"\xCE")
+	x = x.replace(/Ã®/g,"\xEE");	x = x.replace(/&icirc;/g,"\xEE")
+	x = x.replace(/Ã�/g,"\xCF");	x = x.replace(/&Iuml;/g,"\xCF")
+	x = x.replace(/Ã¯/g,"\xEF");	x = x.replace(/&iuml;/g,"\xEF")
 	x = x.replace(/&ntilde;/g,"\xD1");	x = x.replace(/&Ntilde;/g,"\xD1")
 	x = x.replace(/&ntilde;/g,"\xF1");	x = x.replace(/&ntilde;/g,"\xF1")
-	x = x.replace(/Ò/g,"\xD2");	x = x.replace(/&Ograve;/g,"\xD2")
-	x = x.replace(/ò/g,"\xF2");	x = x.replace(/&ograve;/g,"\xF2")
+	x = x.replace(/Ã’/g,"\xD2");	x = x.replace(/&Ograve;/g,"\xD2")
+	x = x.replace(/Ã²/g,"\xF2");	x = x.replace(/&ograve;/g,"\xF2")
 	x = x.replace(/&oacute;/g,"\xD3");	x = x.replace(/&Oacute;/g,"\xD3")
 	x = x.replace(/&oacute;/g,"\xF3");	x = x.replace(/&oacute;/g,"\xF3")
-	x = x.replace(/Ô/g,"\xD4");	x = x.replace(/&Ocirc;/g,"\xD4")
-	x = x.replace(/ô/g,"\xF4");	x = x.replace(/&ocirc;/g,"\xF4")
-	x = x.replace(/Õ/g,"\xD5");	x = x.replace(/&Otilde;/g,"\xD5")
-	x = x.replace(/õ/g,"\xF5");	x = x.replace(/&otilde;/g,"\xF5")
-	x = x.replace(/Ö/g,"\xD6");	x = x.replace(/&Ouml;/g,"\xD6")
-	x = x.replace(/ö/g,"\xF6");	x = x.replace(/&ouml;/g,"\xF6")
-	x = x.replace(/Ø/g,"\xD8");	x = x.replace(/&Oslash;/g,"\xD8")
-	x = x.replace(/ø/g,"\xF8");	x = x.replace(/&oslash;/g,"\xF8")
-	x = x.replace(/Ù/g,"\xD9");	x = x.replace(/&Ugrave;/g,"\xD9")
-	x = x.replace(/ù/g,"\xF9");	x = x.replace(/&ugrave;/g,"\xF9")
+	x = x.replace(/Ã”/g,"\xD4");	x = x.replace(/&Ocirc;/g,"\xD4")
+	x = x.replace(/Ã´/g,"\xF4");	x = x.replace(/&ocirc;/g,"\xF4")
+	x = x.replace(/Ã•/g,"\xD5");	x = x.replace(/&Otilde;/g,"\xD5")
+	x = x.replace(/Ãµ/g,"\xF5");	x = x.replace(/&otilde;/g,"\xF5")
+	x = x.replace(/Ã–/g,"\xD6");	x = x.replace(/&Ouml;/g,"\xD6")
+	x = x.replace(/Ã¶/g,"\xF6");	x = x.replace(/&ouml;/g,"\xF6")
+	x = x.replace(/Ã˜/g,"\xD8");	x = x.replace(/&Oslash;/g,"\xD8")
+	x = x.replace(/Ã¸/g,"\xF8");	x = x.replace(/&oslash;/g,"\xF8")
+	x = x.replace(/Ã™/g,"\xD9");	x = x.replace(/&Ugrave;/g,"\xD9")
+	x = x.replace(/Ã¹/g,"\xF9");	x = x.replace(/&ugrave;/g,"\xF9")
 	x = x.replace(/&uacute;/g,"\xDA");	x = x.replace(/&Uacute;/g,"\xDA")
 	x = x.replace(/&uacute;/g,"\xFA");	x = x.replace(/&uacute;/g,"\xFA")
-	x = x.replace(/Û/g,"\xDB");	x = x.replace(/&Ucirc;/g,"\xDB")
-	x = x.replace(/û/g,"\xFB");	x = x.replace(/&ucirc;/g,"\xFB")
-	x = x.replace(/Ü/g,"\xDC");	x = x.replace(/&Uuml;/g,"\xDC")
-	x = x.replace(/ü/g,"\xFC");	x = x.replace(/&uuml;/g,"\xFC")
+	x = x.replace(/Ã›/g,"\xDB");	x = x.replace(/&Ucirc;/g,"\xDB")
+	x = x.replace(/Ã»/g,"\xFB");	x = x.replace(/&ucirc;/g,"\xFB")
+	x = x.replace(/Ãœ/g,"\xDC");	x = x.replace(/&Uuml;/g,"\xDC")
+	x = x.replace(/Ã¼/g,"\xFC");	x = x.replace(/&uuml;/g,"\xFC")
 	
 	x = x.replace(/\"/g,"\x22")
 	x = x.replace(/\'/g,"\x27")
@@ -398,16 +398,16 @@ function acentos(x)
 	x = x.replace(/\[/g,"\x5B")
 	x = x.replace(/\]/g,"\x5D")
 
-	x = x.replace(/¢/g,"\xA2");	x = x.replace(/&cent;/g,"\xA2") 
-	x = x.replace(/£/g,"\xA3");	x = x.replace(/&pound;/g,"\xA3")
-	x = x.replace(/€/g,"\u20AC");	x = x.replace(/&euro;/g,"\u20AC") 
-	x = x.replace(/©/g,"\xA9");	x = x.replace(/&copy;/g,"\xA9") 
-	x = x.replace(/®/g,"\xAE");	x = x.replace(/&reg;/g,"\xAE") 
-	x = x.replace(/ª/g,"\xAA");	x = x.replace(/&ordf;/g,"\xAA") 
-	x = x.replace(/º/g,"\xBA");	x = x.replace(/&ordm;/g,"\xBA") 
-	x = x.replace(/°/g,"\xB0");	x = x.replace(/&deg;/g,"\xB0") 
-	x = x.replace(/±/g,"\xB1");	x = x.replace(/&plusmn;/g,"\xB1")
-	x = x.replace(/×/g,"\xD7");	x = x.replace(/&times;/g,"\xD7") 
+	x = x.replace(/Â¢/g,"\xA2");	x = x.replace(/&cent;/g,"\xA2") 
+	x = x.replace(/Â£/g,"\xA3");	x = x.replace(/&pound;/g,"\xA3")
+	x = x.replace(/â‚¬/g,"\u20AC");	x = x.replace(/&euro;/g,"\u20AC") 
+	x = x.replace(/Â©/g,"\xA9");	x = x.replace(/&copy;/g,"\xA9") 
+	x = x.replace(/Â®/g,"\xAE");	x = x.replace(/&reg;/g,"\xAE") 
+	x = x.replace(/Âª/g,"\xAA");	x = x.replace(/&ordf;/g,"\xAA") 
+	x = x.replace(/Âº/g,"\xBA");	x = x.replace(/&ordm;/g,"\xBA") 
+	x = x.replace(/Â°/g,"\xB0");	x = x.replace(/&deg;/g,"\xB0") 
+	x = x.replace(/Â±/g,"\xB1");	x = x.replace(/&plusmn;/g,"\xB1")
+	x = x.replace(/Ã—/g,"\xD7");	x = x.replace(/&times;/g,"\xD7") 
 	
 		
 	return x
@@ -419,7 +419,7 @@ function control_vacio(formulario,control)
 	var isEmpty  = 1;
     var campo = formulario.elements[control];
     
-    // Esto es si la función replace (js1.2) no es soportada
+    // Esto es si la funciÃ³n replace (js1.2) no es soportada
     var isRegExp = (typeof(campo.value.replace) != 'undefined');
 
     if (!isRegExp) {
@@ -447,7 +447,7 @@ function control_vacio(formulario,control)
 
 
 /**
- * Asegura que los valores enviados en un formulario es numérico y está en un rango determinado
+ * Asegura que los valores enviados en un formulario es numÃ©rico y estÃ¡ en un rango determinado
  *
  * @param   object   formulario
  * @param   string   control
@@ -510,7 +510,7 @@ function verificar_rango(formulario,control, min, max)
  * @param   object   formulario
  * @param   string   control - El nombre del control
  *
- * @return  boolean  TRUE si está diligenciado
+ * @return  boolean  TRUE si estÃ¡ diligenciado
  */
 function comparar_contenido(formulario,control_1,control_2)
 {
@@ -540,7 +540,7 @@ function comparar_contenido(formulario,control_1,control_2)
  * @param   object   formulario
  * @param   string   control - El nombre del control
  *
- * @return  boolean  TRUE si está diligenciado
+ * @return  boolean  TRUE si estÃ¡ diligenciado
  */
 function longitud_cadena(formulario,control,tamanno)
 {
@@ -554,9 +554,9 @@ function longitud_cadena(formulario,control,tamanno)
     if (longitud<tamanno) {
         campo.select();
         if(etiqueta==false){
-            alert1('Dato incorrecto. El campo debe contener un dato con más de '+tamanno+' caracteres');
+            alert1('Dato incorrecto. El campo debe contener un dato con mÃ¡s de '+tamanno+' caracteres');
         }else{
-            alert1('Dato incorrecto.\n'+etiqueta.innerHTML+' debe contener más de '+tamanno+' caracteres');
+            alert1('Dato incorrecto.\n'+etiqueta.innerHTML+' debe contener mÃ¡s de '+tamanno+' caracteres');
         }
         campo.focus();
 	return false;
@@ -572,7 +572,7 @@ function longitud_cadena(formulario,control,tamanno)
  * @param   object   formulario
  * @param   string   control - El nombre del control
  *
- * @return  boolean  TRUE si está diligenciado
+ * @return  boolean  TRUE si estÃ¡ diligenciado
  */
 function seleccion_valida(formulario,control)
 {
@@ -671,7 +671,7 @@ if (matchArray==null) {
 /* Too many/few @'s or something; basically, this address doesn't
 even fit the general mould of a valid e-mail address. */
 	campo.select();
-	alert('Direcci&oacute;n de correo no válida.');
+	alert('Direcci&oacute;n de correo no vÃ¡lida.');
         campo.focus();
 	return false;
 }
@@ -683,7 +683,7 @@ var domain=matchArray[2];
 for (i=0; i<user.length; i++) {
 if (user.charCodeAt(i)>127) {
 	campo.select();
-	alert('Direcci&oacute;n de correo no válida.');
+	alert('Direcci&oacute;n de correo no vÃ¡lida.');
         campo.focus();
 	return false;
    }
@@ -691,7 +691,7 @@ if (user.charCodeAt(i)>127) {
 for (i=0; i<domain.length; i++) {
 if (domain.charCodeAt(i)>127) {
 	campo.select();
-	alert('Direcci&oacute;n de correo no válida.');
+	alert('Direcci&oacute;n de correo no vÃ¡lida.');
         campo.focus();
 	return false;
    }
@@ -702,7 +702,7 @@ if (domain.charCodeAt(i)>127) {
 if (user.match(userPat)==null) {
 
 campo.select();
-	alert('Direcci&oacute;n de correo no válida.');
+	alert('Direcci&oacute;n de correo no vÃ¡lida.');
         campo.focus();
 	return false;
 }
@@ -719,7 +719,7 @@ for (var i=1;i<=4;i++) {
 if (IPArray[i]>255) {
 
 campo.select();
-	alert('Direcci&oacute;n de correo no válida.');
+	alert('Direcci&oacute;n de correo no vÃ¡lida.');
         campo.focus();
 	return false;
    }
@@ -735,7 +735,7 @@ var len=domArr.length;
 for (i=0;i<len;i++) {
 if (domArr[i].search(atomPat)==-1) {
 campo.select();
-	alert('Direcci&oacute;n de correo no válida.');
+	alert('Direcci&oacute;n de correo no vÃ¡lida.');
         campo.focus();
 	return false;
    }
@@ -749,7 +749,7 @@ the domain or country. */
 if (checkTLD && domArr[domArr.length-1].length!=2 && 
 domArr[domArr.length-1].search(knownDomsPat)==-1) {
 campo.select();
-	alert('Direcci&oacute;n de correo no válida.');
+	alert('Direcci&oacute;n de correo no vÃ¡lida.');
         campo.focus();
 	return false;
 }
@@ -758,7 +758,7 @@ campo.select();
 
 if (len<2) {
 campo.select();
-	alert('Direcci&oacute;n de correo no válida.');
+	alert('Direcci&oacute;n de correo no vÃ¡lida.');
         campo.focus();
 	return false;
 }
@@ -946,3 +946,11 @@ function verificar_numerico(formulario, control,mensaje){
     return true;
 }
 
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+
+	
+	

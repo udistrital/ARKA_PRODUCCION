@@ -1,0 +1,15 @@
+#tablaImpresion {     
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    margin: 45px;
+    width: 90%;
+    text-align: center;
+    border-collapse: separate;
+    
+    border: 1px solid black;
+     }
+
+#tablaImpresion,tr,th {     
+    border: 1px solid grey;
+    background:url("images/ui-bg_glass_75_e6e6e6_1x400.png") repeat-x scroll 50% 50% #e6e6e6;
+     }

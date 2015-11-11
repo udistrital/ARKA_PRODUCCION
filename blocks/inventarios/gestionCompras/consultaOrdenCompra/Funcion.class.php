@@ -1,6 +1,7 @@
 <?php
 
 namespace inventarios\gestionCompras\consultaOrdenCompra;
+
 use inventarios\gestionCompras\consultaOrdenCompra\funcion\redireccion;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
@@ -52,12 +53,12 @@ class Funcion {
 		include_once ($this->ruta . "funcion/ConsultarOrden.php");
 	}
 	function modificarOrden() {
-		
 		include_once ($this->ruta . "funcion/modificarOrden.php");
 	}
-	
+	function documentoPdf() {
+		include_once ($this->ruta . "funcion/documentoPdf.php");
+	}
 	function action() {
-		 
 		
 		// Evitar qu44444444rrrre se ingrese codigo HTML y PHP en los campos de texto
 		// Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
@@ -73,18 +74,18 @@ class Funcion {
 		if (isset ( $_REQUEST ['procesarAjax'] )) {
 			$this->procesarAjax ();
 		} elseif (isset ( $_REQUEST ["opcion"] )) {
-		 
-			if (isset ( $_REQUEST ["redireccionar"])&&$_REQUEST ['redireccionar'] == 'regresar') {
-				redireccion::redireccionar($_REQUEST['opcion']);
+// 			var_dump($_REQUEST);exit;
+			switch ($_REQUEST ['opcion']) {
+				
+				case 'modificarOrden' :
+					$this->modificarOrden ();
+					break;
+				
+				case 'documento' :
+					
+				$this->documentoPdf ();
+				break;
 			}
-			
-			
-			if ($_REQUEST ['opcion'] == 'modificarOrden') {
-				 			
-				$this->modificarOrden ();
-			}
-
-
 		}
 	}
 	function __construct() {

@@ -31,7 +31,7 @@ include_once ("Lenguaje.class.php");
 
 include_once ('funcion/redireccionar.php');
 
-use inventarios\gestionCompras\registrarOrdenCompra\funcion\redireccion;
+use inventarios\gestionCompras\registrarOrdenServicios\funcion\redireccion;
 // ------------------
 
 // Esta clase actua como control del bloque en un patron FCE
@@ -71,13 +71,10 @@ class Bloque implements \Bloque {
 	}
 	public function bloque() {
 		
-		
-		
 		if (isset ( $_REQUEST ['botonCancelar'] ) && $_REQUEST ['botonCancelar'] == "true") {
 			redireccion::redireccionar ( "paginaPrincipal" );
 		} else if (isset ( $_REQUEST ['botonContinuar'] ) && $_REQUEST ['botonContinuar'] == "true") {
 
-			
 			redireccion::redireccionar ( "paginaPrincipal" );
 		} else {
 			
@@ -90,7 +87,7 @@ class Bloque implements \Bloque {
 			$this->miFuncion->setLenguaje ( $this->miLenguaje );
 			
 			if (! isset ( $_REQUEST ['action'] )) {
-// 				echo "bloque";exit;
+
 				$this->miFrontera->frontera ();
 			} else {
 				

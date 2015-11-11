@@ -1,6 +1,6 @@
 <?php
 $indice=0;
-//$estilo[$indice++]="estiloBloque.css";
+$estilo[$indice++]="estiloBloque.css";
 $estilo[$indice++]="validationEngine.jquery.css";
 $estilo[$indice++]="style.css";
 $estilo[$indice++]="grande.css";

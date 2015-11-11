@@ -1,5 +1,38 @@
 <?php
 
+$this->idioma["FechasError"] =  "<center>Error al Seleccionar rango de Fechas<br>Falta Fecha Inicial y/o Final.</center>";
+$this->idioma["nFechasErrorTitulo"] = "Ingrese Número Contrato ";
+
+
+$this->idioma["num_contrato"] = "Número Contrato :";
+$this->idioma["num_contratoTitulo"] = "Ingrese Número Contrato ";
+
+$this->idioma["fecha_contrato"] = "Fecha Contrato :";
+$this->idioma["fecha_contratoTitulo"] = "Seleccione Contrato ";
+
+$this->idioma["nombre_contratista"] = "Nombre Contratista:";
+$this->idioma["nombre_contratistaTitulo"] = "Ingrese Nombre Contratista ";
+
+$this->idioma["DocumentoSoporte"] = "Nombre Contratista:";
+$this->idioma["DocumentoSoporteTitulo"] = "Ingrese Nombre Contratista ";
+
+$this->idioma["fecha_inicio_c"] = "Fecha Inicial :";
+$this->idioma["fecha_inicio_cTitulo"] = "Seleccione Fecha Inicial ";
+
+$this->idioma["fecha_final_c"] = "Fecha Final :";
+$this->idioma["fecha_final_cTitulo"] = "Seleccione Fecha Final ";
+
+
+$this->idioma["fecha_inicio_r"] = "Fecha Inicial :";
+$this->idioma["fecha_inicio_rTitulo"] = "Seleccione Fecha Inicial ";
+
+$this->idioma["fecha_final_r"] = "Fecha Final :";
+$this->idioma["fecha_final_rTitulo"] = "Seleccione Fecha Final ";
+
+
+$this->idioma ["botonRegresar"] ="< < Regresar";
+
+
 $this->idioma["parametroEjemplo"] = "Cadena";
 $this->idioma["usuario"] = "Identificación:";
 $this->idioma["clave"] = "Clave:";

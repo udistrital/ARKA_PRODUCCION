@@ -133,7 +133,7 @@ class Formulario {
     	foreach($valores as $val){
 
     		$cadena_sql = $this->sql->getCadenaSql("eliminarElementoCatalogo",$val);
-    		$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
+    		$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"acceso",$val,"eliminarElementoCatalogo"); 
     		 
     		if(!$registros){
     			$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCreacion' );
@@ -195,7 +195,8 @@ class Formulario {
     	$esteCampo = 'divMensaje';
     	$atributos ['id'] = $esteCampo;
     	$atributos ["tamanno"] = '';
-    	$atributos ["estilo"] = 'information';
+    	if( $tipoMensaje)  $atributos ["estilo"] = $tipoMensaje;
+        else $atributos ["estilo"] = 'information';
     	$atributos ["etiqueta"] = '';
     	$atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
     	echo $this->miFormulario->campoMensaje ( $atributos );

@@ -120,6 +120,20 @@ class HtmlBase {
     
     const TEXTO = 'texto';
     
+    const ANCHOCAJA = 'anchoCaja';
+
+    const TEXTOFONDO = 'textoFondo';
+    
+    const ENLACEIMAGEN = 'enlaceImagen';
+	
+    const POSICIONIMAGEN = 'posicionImagen';
+	
+    const SALTOLINEA = 'saltoLinea';
+	
+    const REDIRLUGAR = 'redirLugar';
+	
+	
+	
     /**
      * Atributos HTML
      * Se definen como constantes para evitar errores al duplicar

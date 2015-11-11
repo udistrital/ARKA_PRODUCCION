@@ -1,6 +1,7 @@
 <?php
 
 namespace inventarios\gestionCompras\consultaOrdenServicios;
+
 use inventarios\gestionCompras\consultaOrdenServicios\funcion\redireccion;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
@@ -52,12 +53,18 @@ class Funcion {
 		include_once ($this->ruta . "funcion/ConsultarOrden.php");
 	}
 	function modificarOrden() {
-		
 		include_once ($this->ruta . "funcion/modificarOrden.php");
 	}
-	
+	function modificarElementos() {
+		include_once ($this->ruta . "funcion/procesarModificarElementos.php");
+	}
+	function eliminarElementoOrden() {
+		include_once ($this->ruta . "funcion/procesareliminarElemento.php");
+	}
+	function documentoPdf() {
+		include_once ($this->ruta . "funcion/documentoPdf.php");
+	}
 	function action() {
-		 
 		
 		// Evitar qu44444444rrrre se ingrese codigo HTML y PHP en los campos de texto
 		// Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
@@ -73,18 +80,34 @@ class Funcion {
 		if (isset ( $_REQUEST ['procesarAjax'] )) {
 			$this->procesarAjax ();
 		} elseif (isset ( $_REQUEST ["opcion"] )) {
-		 
-			if (isset ( $_REQUEST ["redireccionar"])&&$_REQUEST ['redireccionar'] == 'regresar') {
-				redireccion::redireccionar($_REQUEST['opcion']);
+			
+			switch ($_REQUEST ['opcion']) {
+				
+				case 'modificarOrden' :
+					$this->modificarOrden ();
+					break;
+				
+				case 'procesarModificarElementos' :
+					$this->modificarElementos ();
+					break;
+				
+				case 'eliminarElementoOrden' :
+					$this->eliminarElementoOrden ();
+					break;
+				
+				case 'generarDocumento' :
+					$this->documentoPdf ();
+					break;
 			}
 			
+			// if (isset ( $_REQUEST ["redireccionar"])&&$_REQUEST ['redireccionar'] == 'regresar') {
+			// redireccion::redireccionar($_REQUEST['opcion']);
+			// }
 			
-			if ($_REQUEST ['opcion'] == 'modificarOrden') {
-				 			
-				$this->modificarOrden ();
-			}
-
-
+			// if ($_REQUEST ['opcion'] == 'modificarOrden') {
+			
+			// $this->modificarOrden ();
+			// }
 		}
 	}
 	function __construct() {

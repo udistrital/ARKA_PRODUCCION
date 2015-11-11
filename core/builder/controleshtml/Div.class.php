@@ -86,9 +86,11 @@ class Div extends HtmlBase {
         $this->campoSeguro();
         
         if (isset ( $atributos [self::ESTILO] ) && $atributos [self::ESTILO] != "") {
+        
             if ($atributos [self::ESTILO] == self::JQUERYUI) {
                 $this->cadenaHTML = "<div class='ui-widget ";
             } else {
+                $atributos [self::ESTILO];
                 $this->cadenaHTML = "<div class='" . $atributos [self::ESTILO] . " ";
             }
         } else {
@@ -102,6 +104,7 @@ class Div extends HtmlBase {
         }
         
         $this->cadenaHTML .= ">\n";
+        
         if (isset ( $atributos [self::ETIQUETA] )) {
             $this->cadenaHTML .= "<div class='campoTextoEtiqueta'>\n";
             $this->cadenaHTML .= $atributos [self::ETIQUETA];
@@ -311,15 +314,14 @@ class Div extends HtmlBase {
     
     private function efectos(){
         $cadena='';
-        
-        
+                
         if(isset($this->atributos['efecto'])){
             
             
             $efectos=explode(' ', $this->atributos['efecto']);
             
             if(in_array('desvanecer', $efectos)){
-                $cadena='<script>setTimeout(function() { $("#divMensaje").hide( "drop", { direction: "up" }, "slow" );}, 4000);</script>';
+                $cadena='<script>setTimeout(function() { $("#divMensaje").hide( "drop", { direction: "down" }, "slow" );;</script>';
             }            
         }
         

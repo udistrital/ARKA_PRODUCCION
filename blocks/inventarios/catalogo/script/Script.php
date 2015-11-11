@@ -7,11 +7,12 @@
 $indice=0;
 $funcion[$indice++]="jquery.validationEngine.js";
 $funcion[$indice++]="jquery.validationEngine-es.js";
-$funcion[$indice ++]="modernizr.custom.js";
-$funcion[$indice ++]="jquery.dlmenu.js";
-$funcion[$indice ++]="jquery.dataTables.js";
-
-
+$funcion[$indice++]="jquery.dataTables.js";
+$funcion[$indice++]="jquery-ui-1.10.4.custom.min.js";
+$funcion[$indice++]="jquery.tabelizer.js";
+$funcion[$indice++]="jquery.tabelizer.min.js";
+$funcion[$indice++]="select2.js";
+$funcion[$indice++]="select2_locale_es.js";
 
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
 $rutaBloque.=$this->miConfigurador->getVariableConfiguracion("site");

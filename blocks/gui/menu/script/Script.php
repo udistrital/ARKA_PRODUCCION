@@ -2,7 +2,8 @@
 
 $indice=0;
 $funcion[$indice ++]="modernizr.custom.js";
-$funcion[$indice ++]="jquery.dlmenu.js";
+$funcion[$indice ++]="cbpHorizontalMenu.js";
+$funcion[$indice ++]="cbpHorizontalMenu.min.js";
 
 
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");

@@ -1,9 +1,6 @@
 <?php
 $indice = 0;
-$funcion [$indice ++] = "jquery.easing.1.3.js";
 $funcion [$indice ++] = "jquery-1.11.0.min.js";
-$funcion [$indice ++] = "jquery.jqGrid.min.js";
-$funcion [$indice ++] = "jquery.jqGrid.src.js";
 $funcion [$indice ++] = "jqueryui.js";
 $funcion [$indice ++] = "jquery.validationEngine.js";
 $funcion [$indice ++] = "jquery.validationEngine-es.js";
@@ -14,7 +11,8 @@ $funcion [$indice ++] = "jquery.dataTables.js";
 $funcion [$indice ++] = "jquery.dataTables.min.js";
 $funcion [$indice ++] = "timepicker.js";
 $funcion[$indice ++]="modernizr.custom.js";
-$funcion[$indice ++]="jquery.dlmenu.js";
+$funcion [$indice ++] = "jquery.autocomplete.js";
+$funcion [$indice ++] = "jquery.autocomplete.min.js";
 
 $rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
 $rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" );

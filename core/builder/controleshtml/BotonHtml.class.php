@@ -115,8 +115,14 @@ class BotonHtml extends HtmlBase{
         }
     
         if (isset ( $this->atributos [self::ONCLICK] ) && $this->atributos [self::ONCLICK] != '') {
-            $cadena .= "onclick=\" " . $this->atributos [self::ONCLICK] . "\" ";
+           $cadena .= "onclick=\" " . $this->atributos [self::ONCLICK] . "\" ";
         }
+        
+        $cadena .= "\"";
+        
+        
+        	// Utilizar esto para garantizar que no se envie el formulario varias veces con la misma información 
+        	$cadena .= "onsubmit=\"this.disabled=true;\" ";
     
         return $cadena;
     

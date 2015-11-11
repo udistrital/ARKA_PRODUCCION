@@ -2,7 +2,8 @@
 
 namespace inventarios\gestionCompras\consultaOrdenServicios\funcion;
 
-use inventarios\gestionCompras\consultaOrdenServicios\funcion\redireccion;
+use inventarios\gestionCompras\consultaOrdenServicios\funcion;
+use inventarios\gestionCompras\consultaOrdenCompra\funcion\redireccion;
 
 include_once ('redireccionar.php');
 if (! isset ( $GLOBALS ["autorizado"] )) {
@@ -27,7 +28,7 @@ class RegistradorOrden {
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		
 		$rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" ) . "/blocks/inventarios/gestionCompras/";
-		$rutaBloque .='registrarOrdenCompra' ;
+		$rutaBloque .= 'registrarOrdenCompra';
 		$host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/inventarios/gestionCompras/registrarOrdenCompra/";
 		
 		$conexion = "inventarios";
@@ -37,7 +38,6 @@ class RegistradorOrden {
 		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		if ($items == 0) {
-			
 			redireccion::redireccionar ( 'noItems' );
 		}
 		if ($_REQUEST ['obligacionesProveedor'] == '') {
@@ -50,8 +50,25 @@ class RegistradorOrden {
 			redireccion::redireccionar ( 'noObligaciones' );
 		}
 		
+		$Subtotal = 0;
+		
+		foreach ( $items as $n ) {
+			$Subtotal = $Subtotal + $n [6];
+		}
+		
+		if ($_REQUEST ['iva'] == 6) {
+			
+			$iva = $Subtotal * 0.16;
+		} else if ($_REQUEST ['iva'] == 5) {
+			
+			$iva = $Subtotal * 0.10;
+		} else {
+			$iva = 0;
+		}
+		
+		$total = $Subtotal + $iva;
+		
 		if ($_REQUEST ['actualizarCotizacion'] == '1') {
-			echo "leasas";
 			
 			// Archivo de Cotizacion
 			foreach ( $_FILES as $key => $values ) {
@@ -79,82 +96,37 @@ class RegistradorOrden {
 					$status = "Error al subir archivo";
 				}
 			}
-			
-	
 		} else if ($_REQUEST ['actualizarCotizacion'] == '0') {
 			
 			$destino1 = $_REQUEST ['directorio'];
 			$archivo1 = $_REQUEST ['nombreArchivo'];
 		}
 		
-		$datosProveedor = array (
-				$_REQUEST ['proveedor'],
-				$_REQUEST ['nitProveedor'],
-				$_REQUEST ['direccionProveedor'],
-				$_REQUEST ['telefonoProveedor'],
-				$destino1,
-				$archivo1,
-				$_REQUEST ['idproveedor'] 
+	
+			
+			$_REQUEST ['selec_proveedor'] = $_REQUEST ['selec_proveedor'];
+	
+		$arreglo = array (
+				$_REQUEST ['vigencia_disponibilidad'],
+				$_REQUEST ['diponibilidad'],
+				$_REQUEST ['valor_disponibilidad'],
+				$_REQUEST ['fecha_diponibilidad'],
+				$_REQUEST ['valorLetras_disponibilidad'],
+				$_REQUEST ['vigencia_registro'],
+				$_REQUEST ['registro'],
+				$_REQUEST ['valor_registro'],
+				$_REQUEST ['fecha_registro'],
+				$_REQUEST ['valorL_registro'],
+				$_REQUEST ['infoPresupuestal'] 
 		);
 		
-		// Actualizar Proveedor
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarProveedor', $datosProveedor );
-		$id_proveedor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarPresupuestal', $arreglo );
 		
-		$datosDependencia = array (
-				$_REQUEST ['dependencia'],
-				$_REQUEST ['direccionDependencia'],
-				$_REQUEST ['telefonoDependencia'],
-				$_REQUEST ['iddependencia'] 
-		);
-		
-		// Actualizacion Dependencia
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarDependencia', $datosDependencia );
-		$id_dependencia = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$datosContratista = array (
-				'3',
-				$_REQUEST ['nombreContratista'],
-				$_REQUEST ['identificacionContratista'],
-				'NULL',
-				'NULL',
-				$_REQUEST ['idcontratista'] 
-		);
-		
-		$datosjefe = array (
-				'2',
-				$_REQUEST ['nombreJefeSeccion'],
-				'NULL',
-				$_REQUEST ['cargoJefeSeccion'],
-				'NULL',
-				$_REQUEST ['idjefe'] 
-		);
-		
-		$datosOrdenador = array (
-				'1',
-				$_REQUEST ['nombreOrdenador'],
-				'NULL',
-				'NULL',
-				$_REQUEST ['asignacionOrdenador'],
-				$_REQUEST ['idordenador'] 
-		);
-		
-		// Registro Encargados
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEncargado', $datosContratista );
-		$id_contratista = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEncargado', $datosjefe );
-		$id_jefe = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEncargado', $datosOrdenador );
-		$id_ordenador = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$inf_pre = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		
 		// Actualizar Orden
 		
 		$datosOrden = array (
-				$_REQUEST ['diponibilidad'],
-				$_REQUEST ['fecha_diponibilidad'],
 				$_REQUEST ['rubro'],
 				$_REQUEST ['obligacionesProveedor'],
 				$_REQUEST ['obligacionesContratista'],
@@ -169,16 +141,25 @@ class RegistradorOrden {
 				$_REQUEST ['formaPago'],
 				$_REQUEST ['supervision'],
 				$_REQUEST ['inhabilidades'],
-				$_REQUEST ['idproveedor'],
-				$_REQUEST ['iddependencia'],
-				$_REQUEST ['idcontratista'],
-				$_REQUEST ['idjefe'],
-				$_REQUEST ['idordenador'],
-				$_REQUEST ['numero_orden'] 
+				$_REQUEST ['selec_proveedor'],
+				$destino1,
+				$archivo1,
+				$_REQUEST ['selec_dependencia'],
+				$_REQUEST ['id_ordenador_oculto'],
+				$Subtotal,
+				$iva,
+				$total,
+				$_REQUEST ['valorLetras_registro'],
+				$_REQUEST ['numero_orden'],
+				$_REQUEST ['sede']  ,
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarOrden', $datosOrden );
-		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
+		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+		
+		
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiarItems', $_REQUEST ['numero_orden'] );
 		
@@ -193,7 +174,8 @@ class RegistradorOrden {
 					$contenido ['cantidad'],
 					$contenido ['descripcion'],
 					$contenido ['valor_unitario'],
-					$contenido ['valor_total'] 
+					$contenido ['valor_total'],
+					$contenido ['descuento'] 
 			)
 			;
 			
@@ -208,7 +190,8 @@ class RegistradorOrden {
 				$_REQUEST ['numero_orden'] 
 		);
 		
-		if ($items == 1) {
+		
+		if ($items == true) {
 			
 			redireccion::redireccionar ( 'inserto', $datos );
 		} else {

@@ -14,24 +14,28 @@ if (!isset($GLOBALS["autorizado"])) {
             $variable = "pagina=" . $miPaginaActual;
             $variable.="&opcion=mensaje";
             $variable.="&mensaje=confirma";
+            $variable .= "&usuario=".$_REQUEST['usuario'];
             break;
 
         case "noregistroDocumento":
             $variable = "pagina=" . $miPaginaActual;
             $variable.="&opcion=mensaje";
             $variable.="&mensaje=error";
+            $variable .= "&usuario=".$_REQUEST['usuario'];
             break;
         
         case "actualizoDocumento":
             $variable = "pagina=" . $miPaginaActual;
             $variable.="&opcion=mensaje";
             $variable.="&mensaje=confirma";
+            $variable .= "&usuario=".$_REQUEST['usuario'];
             break;
 
         case "noactualizoDocumento":
             $variable = "pagina=" . $miPaginaActual;
             $variable.="&opcion=mensaje";
             $variable.="&mensaje=error";
+            $variable .= "&usuario=".$_REQUEST['usuario'];
             break;
 
         case "paginaPrincipal":

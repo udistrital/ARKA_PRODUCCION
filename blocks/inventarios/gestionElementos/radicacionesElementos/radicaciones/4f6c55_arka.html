@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang='es'>
+<head>
+<title>Sistema Gestión Almacén y Inventarios</title>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' >
+<link rel='shortcut icon' href='http://localhost/arka/favicon.ico' >
+<link rel='stylesheet' type='text/css' href='http://localhost/arka/theme/basico/css/general.css'>
+<link rel='stylesheet' type='text/css' href='http://localhost/arka/theme/basico/css/estiloCuadrosMensaje.css'>
+<link rel='stylesheet' type='text/css' href='http://localhost/arka/theme/basico/css/estiloTexto.css'>
+<link rel='stylesheet' type='text/css' href='http://localhost/arka/theme/basico/css/estiloFormulario.css'>
+<link rel='stylesheet' type='text/css' href='http://localhost/arka/theme/basico/css/validationEngine.jquery.css'>
+<link rel='stylesheet' type='text/css' href='http://localhost/arka/blocks/registro/loginArka/css/estiloBloque.css'>
+<link rel='stylesheet' type='text/css' href='http://localhost/arka/blocks/registro/loginArka/css/validationEngine.jquery.css'>
+<link rel='stylesheet' type='text/css' href='http://localhost/arka/blocks/registro/loginArka/css/style.css'>
+<link rel='stylesheet' type='text/css' href='http://localhost/arka/blocks/registro/loginArka/css/grande.css'>
+<script type='text/javascript' src='http://localhost/arka/plugin/scripts/funciones.js'></script>
+<script type='text/javascript' src='http://localhost/arka/plugin/scripts/javascript/jquery.js'></script>
+<script type='text/javascript' src='http://localhost/arka/plugin/scripts/javascript/jquery-ui/jquery-ui.js'></script>
+<script type='text/javascript' src='http://localhost/arka/plugin/scripts/javascript/jquery.validationEngine.js'></script>
+<script type='text/javascript' src='http://localhost/arka/plugin/scripts/javascript/jquery.validationEngine-es.js'></script>
+<link rel='stylesheet' type='text/css' href='http://localhost/arka/plugin/scripts/javascript/jquery-ui/jquery-ui-themes/themes/smoothness/jquery-ui.css'>
+
+<script type='text/javascript' src='http://localhost/arka/blocks/registro/loginArka/script/md5.js'>
+</script>
+
+<script type='text/javascript' src='http://localhost/arka/blocks/registro/loginArka/script/jquery.validationEngine.js'>
+</script>
+
+<script type='text/javascript' src='http://localhost/arka/blocks/registro/loginArka/script/jquery.validationEngine-es.js'>
+</script>
+<script type='text/javascript'>
+$(document).ready(function(){
+
+// Asociar el widget de validación al formulario
+$("#efa32f18d25316aa64d48fafc1766a02cf57315a").validationEngine({
+	promptPosition : "centerRight",
+	scroll : false
+});
+
+$('#58e8be9abece190568eee52488a004cc917e82e0').keydown(function(e) {
+    if (e.keyCode == 13) {
+        $('#login').submit();
+    }
+});
+
+$('#44c2674fb404fa53d5adf98b88966e57ed90e59c').keydown(function(e) {
+    if (e.keyCode == 13) {
+        $('#efa32f18d25316aa64d48fafc1766a02cf57315a').submit();
+    }
+});
+
+ $( "button" ).button().click(function( event ) 
+ {
+    event.preventDefault();
+    });
+    
+setTimeout(function() {
+    $('#divMensaje').hide( "drop", { direction: "up" }, "slow" );
+}, 2000); // <-- time in milliseconds
+});
+</script>
+</head>
+<body>
+<div id='marcoGeneral'>
+<div id='seccionAmplia'>
+<header>
+	<div id="fondo_base"></div>
+
+
+</header>
+<section>
+	<article id="fondo_login"> 
+                <script type="text/javascript">$(function() {$("#aT-qzVjg9G_VXbxB_Bk3HTe3pYIMO9I4VK58o8zeodQ").validationEngine({promptPosition : "centerRight",	scroll : false,autoHidePrompt:true})});</script><!-- Inicio del Formulario -->
+<form id='aT-qzVjg9G_VXbxB_Bk3HTe3pYIMO9I4VK58o8zeodQ' method='post' action='index.php' title='Etiqueta No definida' name='aT-qzVjg9G_VXbxB_Bk3HTe3pYIMO9I4VK58o8zeodQ'>
+<div class='marcoBotones' title='Etiqueta No definida' id='zSJBmrbBUTPfjNNu46iI_OeKktc5xiBqGl_9nKv9lSs' >
+<input title='Etiqueta No definida' id='0CHxfYiTG3lT5yBBFfJq7J3mAx3xyWrT34PS9CxcSWY' name='0CHxfYiTG3lT5yBBFfJq7J3mAx3xyWrT34PS9CxcSWY' tabindex='1' class='login ui-widget ui-widget-content ui-corner-all  validate[required] ' type='text' value='' size='20' maxlength='10'  placeholder='Usuario' >
+<br><input title='Etiqueta No definida' id='AtRM6cLg69jjAHLaSb4Dfgo3XIcdkBNA57d3d2z1hFI' name='AtRM6cLg69jjAHLaSb4Dfgo3XIcdkBNA57d3d2z1hFI' tabindex='2' class='login ui-widget ui-widget-content ui-corner-all  validate[required] ' type='password' value='' size='20' maxlength='10'  placeholder='Contraseña' >
+
+</div>
+<div class='marcoBotones' id='botones' >
+<div class='campoBoton'>
+<button class='ui-button ui-state-default ui-corner-all ui-button-text-only' value='Ingresar' id='PeqKlzamGjx99Mhsyvkji0SyBOth0iuHinbgIbKCit8A' tabindex='3' type='submit' onclick="document.forms['aT-qzVjg9G_VXbxB_Bk3HTe3pYIMO9I4VK58o8zeodQ'].elements['PeqKlzamGjx99Mhsyvkji0SyBOth0iuHinbgIbKCit8'].value='true'; $(this).closest('form').submit();">Ingresar</button>
+<input type='hidden' name='PeqKlzamGjx99Mhsyvkji0SyBOth0iuHinbgIbKCit8' id='PeqKlzamGjx99Mhsyvkji0SyBOth0iuHinbgIbKCit8' value='false' >
+</div>
+</div>
+<div class=' '>
+<input type='hidden' name='formSaraData' id='formSaraData' value='VApc0MLWhbSbogt4m4TJmAndzEEenF_l_CnqbFfOFhoFCInB-ysZFCpNM9W-4ZMpsar4xYFGealgodAPBnUgnieJk3hihWsvvb3uTLeBneIGS66RB9A0xeDQmPU6sDhaCD_J8O9H-9NNhSh6npQVHoMLmXRsMYrDrVUJrjs2AL4' >
+</div></form><!-- Fin del Formulario --></div><!-- Fin del marco del Formulario -->            </article>
+	<div id="logo_u">
+		<img src="http://localhost/arka/blocks/registro/loginArka//imagenes/UD_logo2.png" />
+	</div>
+
+</section>
+<section>
+	<div id="fondo_texto">
+		<div id="texto">
+			<h3>SISTEMA DE INFORMACIÓN</h3>
+			<h3>DE GESTIÓN DE INVENTARIOS Y ALMACÉN</h3>
+			<BR>
+			<h2>ARKA</h2>
+		</div>
+	</div>
+</section>
+<footer>
+	<div id="footerLeft">
+		<p style="font-size: 15px;">Universidad Distrital Francisco José de
+			Caldas</p>
+		<p>
+			Todos los derechos reservados. Carrera 8 N. 40-78 Piso 1 / PBX
+			3238400 - 3239300 <a href="">computo@udistrital.edu.co</a>
+		</p>
+	</div>
+	<div id="footerRight">
+		<a href="https://www.facebook.com/UniversidadDistrital.SedeIngenieria"
+			target="_blank"><img
+			src="http://localhost/arka/blocks/registro/loginArka//imagenes/facebook.png" /></a> <a
+			href="https://plus.google.com/110031223488101566921/about?gl=co&hl=es"
+			target="_blank"><img
+			src="http://localhost/arka/blocks/registro/loginArka//imagenes/google+.png" /></a> <a
+			href="http://www.udistrital.edu.co/" target="_blank"><img
+			src="http://localhost/arka/blocks/registro/loginArka//imagenes/mail.png" /></a>
+	</div>
+</footer>
+
+</div>
+</div>
+</body>
+</html>

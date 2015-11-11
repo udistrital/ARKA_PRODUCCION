@@ -49,7 +49,7 @@ class redireccion {
 				break;
 			
 			case "paginaPrincipal" :
-				$variable = "pagina=" . $miPaginaActual;
+				$variable = "pagina=indexAlmacen";
 				break;
 		}
 		

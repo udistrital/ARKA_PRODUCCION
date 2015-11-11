@@ -17,6 +17,15 @@
                     },
                     "alertText": "* Field must equal test"
                 },
+                "valorLista": { 
+                    "func": function(field, rules, i, options){
+                    	
+                    	return validarValorLista(field.val(), field.attr('id'));
+                  
+                    },
+                    "alertText": "* Valor no esta en la lista",
+                    "alertTextLoad": "* Cargando, espere por favor"
+                },
                 "minSize": {
                     "regex": "none",
                     "alertText": "* Mínimo de ",
@@ -84,7 +93,7 @@
                     "alertText": "* No es un valor decimal válido"
                 },
                 "date": {
-                    "regex": /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+                    "regex": /^(0?[1-9]|[12][0-9]|3[01])[\/\/](0?[1-9]|1[012])[\/\/]\d{4}$/,
                     "alertText": "* Fecha inválida, por favor utilize el formato DD/MM/AAAA"
                 },
                 "ipv4": {
@@ -98,6 +107,10 @@
                 "onlyNumberSp": {
                     "regex": /^[0-9\ ]+$/,
                     "alertText": "* Sólo números"
+                },
+                "flotante": {
+                    "regex": /^[+-]?\d+(\.\d+)?$/,
+                    "alertText": "* No es un valor decimal válido"
                 },
 			    "onlyLetterSp": {
                     "regex": /^[a-zA-Z\ \']+$/,

@@ -21,6 +21,30 @@ if (isset ( $_REQUEST ['jquery'] )) {
     $indice ++;
 }
 
+if(isset($_REQUEST['bootstrapjs'])){
+	$funcion [] = "javascript/boostrap/js/bootstrap.js";
+    
+}
+
+if(isset($_REQUEST['bootstrapcss'])){
+	
+	$estilo [] = 'javascript/bootstrap/css/bootstrap.css';
+    
+}
+
+if(isset($_REQUEST['bootstrap'])){
+	$estilo [] = 'javascript/bootstrap/css/bootstrap.css';
+	$funcion [] = "javascript/boostrap/js/bootstrap.js";
+}
+
+if(isset($_REQUEST['datatables'])){
+	$funcion [] = "javascript/datatables/jquery.dataTables.js";
+	$estilo [] = 'javascript/datatables/jquery.dataTables_themeroller.css';
+	$estilo [] = 'javascript/datatables/dataTables.responsive.css';
+    
+}
+
+
 foreach ( $funcion as $nombre ) {
     echo "<script type='text/javascript' src='" . $host . $sitio . '/plugin/scripts/' . $nombre . "'></script>\n";
 }
@@ -28,4 +52,6 @@ foreach ( $funcion as $nombre ) {
 foreach ( $estilo as $nombre ) {
     echo "<link rel='stylesheet' type='text/css' href='" . $host . $sitio . '/plugin/scripts/' . $nombre . "'>\n";
 }
+
+
 ?>

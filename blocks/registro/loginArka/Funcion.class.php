@@ -1,9 +1,9 @@
 <?php
 namespace registro\loginArka;
 
-if (! isset ( $GLOBALS ["autorizado"] )) {
+if (!isset($GLOBALS["autorizado"])) {
     include ("../index.php");
-    exit ();
+    exit();
 }
 
 include_once ("core/manager/Configurador.class.php");
@@ -14,7 +14,6 @@ include_once ("core/crypto/Encriptador.class.php");
 
 // Esta clase contiene la logica de negocio del bloque y extiende a la clase funcion general la cual encapsula los
 // metodos mas utilizados en la aplicacion
-
 // Para evitar redefiniciones de clases el nombre de la clase del archivo funcion debe corresponder al nombre del bloque
 // en camel case precedido por la palabra Funcion
 
@@ -29,8 +28,6 @@ class Funcion {
     var $miRecursoDB;
     var $crypto;
     
-    
-    
     function procesarFormulario() {
     
         include_once ($this->ruta . "funcion/formProcessor.php");
@@ -42,47 +39,58 @@ class Funcion {
         include_once ($this->ruta . "funcion/procesarAjax.php");
     }
     
+    function finSesion() {
+        include_once ($this->ruta . "funcion/finSesion.php");
+    }
+    
     function action() {
-        
         $resultado = true;
         
         // Aquí se coloca el código que procesará los diferentes formularios que pertenecen al bloque
         // aunque el código fuente puede ir directamente en este script, para facilitar el mantenimiento
         // se recomienda que aqui solo sea el punto de entrada para incluir otros scripts que estarán
         // en la carpeta funcion
-        
         // Importante: Es adecuado que sea una variable llamada opcion o action la que guie el procesamiento:
         
         if (isset ( $_REQUEST ['procesarAjax'] )) {
             $this->procesarAjax ();
-        } else{
-            
-            $resultado = $this->procesarFormulario ();
+        } else {
+
+            if (isset($_REQUEST['opcion'])) {
+                switch ($_REQUEST ['opcion']) {
+
+                    case "finSesion" :
+                        $this->finSesion();
+                        break;
+
+                    case "validarLogin":
+                        $resultado = $this->procesarFormulario();
+                        break;
+                }
+            }
         }
         
         return $resultado;
-    
     }
     
     function __construct() {
         
-        $this->miConfigurador = \Configurador::singleton ();
+        $this->miConfigurador = \Configurador::singleton();
         
-        $this->ruta = $this->miConfigurador->getVariableConfiguracion ( "rutaBloque" );
+        $this->ruta = $this->miConfigurador->getVariableConfiguracion("rutaBloque");
         
-        $this->miMensaje = \Mensaje::singleton ();
+        $this->miMensaje = \Mensaje::singleton();
         
         $this->miSesion= \Sesion::singleton();
         
         $conexion = "aplicativo";
-        $this->miRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+        $this->miRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         
         if (! $this->miRecursoDB) {
             
-            $this->miConfigurador->fabricaConexiones->setRecursoDB ( $conexion, "tabla" );
-            $this->miRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+            $this->miConfigurador->fabricaConexiones->setRecursoDB($conexion,"tabla");
+            $this->miRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         }
-    
     }
     
     public function setRuta($unaRuta) {

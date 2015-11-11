@@ -25,7 +25,13 @@ class RegistradorOrden {
 	}
 	function procesarFormulario() {
 		
-		// var_dump ( $_REQUEST );
+		
+		
+		foreach ( $_FILES as $key => $values ) {
+			
+			$archivo = $_FILES [$key];
+		}
+		
 		$fechaActual = date ( 'Y-m-d' );
 		
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
@@ -37,7 +43,8 @@ class RegistradorOrden {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'items' );
+		$cadenaSql = $this->miSql->getCadenaSql ( 'items',$_REQUEST['seccion'] );
+		 	
 		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		if ($items == 0) {
@@ -54,18 +61,35 @@ class RegistradorOrden {
 			redireccion::redireccionar ( 'noObligaciones' );
 		}
 		
+		
+		$Subtotal = 0;
+		
+		foreach ( $items as $n ) {
+			$Subtotal = $Subtotal + $n [6];
+		}
+		
+		if ($_REQUEST ['iva'] == 1) {
+				
+			$iva = $Subtotal * 0.16;
+		} else {
+			$iva = 0;
+		}
+		
+		$total = $Subtotal + $iva;
+		
+		
 		// Archivo de Cotizacion
-		if ($_FILES) {
+		if ($archivo) {
 			// obtenemos los datos del archivo
-			$tamano = $_FILES ["proveedorCotizacion"] ['size'];
-			$tipo = $_FILES ["proveedorCotizacion"] ['type'];
-			$archivo1 = $_FILES ["proveedorCotizacion"] ['name'];
+			$tamano = $archivo ['size'];
+			$tipo = $archivo['type'];
+			$archivo1 = $archivo ['name'];
 			$prefijo = substr ( md5 ( uniqid ( rand () ) ), 0, 6 );
 			
 			if ($archivo1 != "") {
 				// guardamos el archivo a la carpeta files
 				$destino1 = $rutaBloque . "/cotizaciones/" . $prefijo . "_" . $archivo1;
-				if (copy ( $_FILES ['proveedorCotizacion'] ['tmp_name'], $destino1 )) {
+				if (copy ( $archivo['tmp_name'], $destino1 )) {
 					$status = "Archivo subido: <b>" . $archivo1 . "</b>";
 					$destino1 = $host . "/cotizaciones/" . $prefijo . "_" . $archivo1;
 				} else {
@@ -84,7 +108,7 @@ class RegistradorOrden {
 				$destino1,
 				$archivo1 
 		);
-		
+	
 		// Registro Proveedor
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarProveedor', $datosProveedor );
 		$id_proveedor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -143,11 +167,11 @@ class RegistradorOrden {
 				$_REQUEST ['rubro'],
 				$_REQUEST ['obligacionesProveedor'],
 				$_REQUEST ['obligacionesContratista'],
-				isset ( $_REQUEST ['poliza1'] ),
-				isset ( $_REQUEST ['poliza2'] ),
-				isset ( $_REQUEST ['poliza3'] ),
-				isset ( $_REQUEST ['poliza4'] ),
-				isset ( $_REQUEST ['poliza5'] ),
+				isset ( $_REQUEST ['polizaA'] ),
+				isset ( $_REQUEST ['polizaB'] ),
+				isset ( $_REQUEST ['polizaC'] ),
+				isset ( $_REQUEST ['polizaD'] ),
+				isset ( $_REQUEST ['polizaE'] ),
 				$_REQUEST ['lugarEntrega'],
 				$_REQUEST ['destino'],
 				$_REQUEST ['tiempoEntrega'],
@@ -158,7 +182,11 @@ class RegistradorOrden {
 				$id_dependencia [0] [0],
 				$id_contratista [0] [0],
 				$id_jefe [0] [0],
-				$id_ordenador [0] [0] 
+				$id_ordenador [0] [0],
+				$Subtotal,
+				$iva,
+				$total,
+				$_REQUEST['valorLetras_registro']
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarOrden', $datosOrden );
@@ -180,7 +208,7 @@ class RegistradorOrden {
 			$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		}
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items' );
+		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items',$_REQUEST['seccion'] );
 		$resultado_secuancia = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		
 		$datos = array (
@@ -188,6 +216,7 @@ class RegistradorOrden {
 				$fechaActual 
 		);
 		
+	
 		if ($items == 1) {
 			
 			redireccion::redireccionar ( 'inserto', $datos );

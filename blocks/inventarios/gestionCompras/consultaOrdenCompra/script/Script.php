@@ -40,5 +40,4 @@ if (isset ( $funcion [0] )) {
 }
 
 include ("ajax.php");
-
 ?>
