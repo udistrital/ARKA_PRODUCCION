@@ -40,7 +40,7 @@ class RegistradorActa {
         $conexion = 'estructura';
         $esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         //consultar la entrada y sus datos iniciales
-       $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada_pdf', $_REQUEST['id_entrada']);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada_pdf', $_REQUEST['id_entrada']);
         $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         //consultar los elementos asociados a la entrada
@@ -77,7 +77,7 @@ class RegistradorActa {
         $total_entrada = 0;
         $iva_entrada = 0;
 
-    
+
 
         //consultar los elementos asociados a la entrada
         $cadenaSql = $this->miSql->getCadenaSql('consultarJefe', false);
@@ -94,10 +94,10 @@ class RegistradorActa {
                 if ($key != 0) {
                     $contenido.= " <tr> ";
                     $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" > Total Cantidad</th> ";
-                    $contenido.= "<td style='text-align:center'>" . $cantidad . "</td> ";
+                    $contenido.= "<td style='text-align:center'>" . round($cantidad,2) . "</td> ";
                     $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" >Subtotal Grupo</th> ";
                     $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($subtotal, 2, ",", ".") . "</td> ";
-                    $contenido.= "<td  style=\"text-align:right;\" colspan=\"2\" >&nbsp;$&nbsp;" . $iva . "</td> ";
+                    $contenido.= "<td  style=\"text-align:right;\" colspan=\"2\" >&nbsp;$&nbsp;" . number_format($iva, 2, ",", ".") . "</td> ";
                     $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($total, 2, ",", ".") . "</td> ";
                     $contenido.= "</tr> ";
                 }
@@ -113,7 +113,6 @@ class RegistradorActa {
         <th>TOTAL IVA</th>
         <th>TOTAL</th>
     </tr>";
-
                 $cantidad = 0;
                 $subtotal = 0;
                 $total = 0;
@@ -122,7 +121,7 @@ class RegistradorActa {
             $contenido.= " <tr> ";
             $contenido.= "<td style='text-align:right' >" . $datos_elementos[$key]['grupo_cuentaentrada'] . "</td> ";
             $contenido.= "<td style='text-align:center'>" . $datos_elementos[$key]['unidad'] . "</td> ";
-            $contenido.= "<td style='text-align:center'>" . $datos_elementos[$key]['cantidad'] . "</td> ";
+            $contenido.= "<td style='text-align:center'>" . round($datos_elementos[$key]['cantidad'],2) . "</td> ";
             $contenido.= "<td style='text-align:center' >" . wordwrap($datos_elementos[$key]['descripcion'], 80, "<br>") . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($datos_elementos[$key]['valor'], 2, ",", ".") . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($datos_elementos[$key]['subtotal_sin_iva'], 2, ",", ".") . "</td> ";
@@ -131,16 +130,15 @@ class RegistradorActa {
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($datos_elementos[$key]['total_iva_con'], 2, ",", ".") . "</td> ";
             $contenido.= "</tr> ";
 
-            $cantidad = $cantidad + $datos_elementos[$key]['cantidad'];
-            $subtotal = $subtotal + $datos_elementos[$key]['subtotal_sin_iva'];
-            $total = $total + $datos_elementos[$key]['total_iva_con'];
-            $iva = $iva + $datos_elementos[$key]['total_iva'];
+            $cantidad = $cantidad + round($datos_elementos[$key]['cantidad'], 2);
+            $subtotal = $subtotal + round($datos_elementos[$key]['subtotal_sin_iva'], 2);
+            $total = $total + round($datos_elementos[$key]['total_iva_con'], 2);
+            $iva = $iva + round($datos_elementos[$key]['total_iva'], 2);
 
-            $cantidad_entrada = $cantidad_entrada + $datos_elementos[$key]['cantidad'];
-            $subtotal_entrada = $subtotal_entrada + $datos_elementos[$key]['subtotal_sin_iva'];
-            $total_entrada = $total_entrada + $datos_elementos[$key]['total_iva_con'];
-            $iva_entrada = $iva_entrada + $datos_elementos[$key]['total_iva'];
-
+            $cantidad_entrada = $cantidad_entrada + round($datos_elementos[$key]['cantidad'], 2);
+            $subtotal_entrada = $subtotal_entrada + round($datos_elementos[$key]['subtotal_sin_iva'], 2);
+            $total_entrada = $total_entrada + round($datos_elementos[$key]['total_iva_con'], 2);
+            $iva_entrada = $iva_entrada + round($datos_elementos[$key]['total_iva'], 2);
 
             $grupo = $datos_elementos[$key]['grupo_cuentaentrada'];
         }
@@ -150,7 +148,7 @@ class RegistradorActa {
         $contenido.= "<td style='text-align:center'>" . $cantidad . "</td> ";
         $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" >Subtotal Grupo</th> ";
         $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($subtotal, 2, ",", ".") . "</td> ";
-        $contenido.= "<td  style=\"text-align:right;\" colspan=\"2\" >&nbsp;$&nbsp;" . $iva . "</td> ";
+        $contenido.= "<td  style=\"text-align:right;\" colspan=\"2\" >&nbsp;$&nbsp;" . number_format($iva, 2, ",", ".") . "</td> ";
         $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($total, 2, ",", ".") . "</td> ";
         $contenido.= "</tr> ";
 
@@ -159,7 +157,7 @@ class RegistradorActa {
         $contenido.= "<th style='text-align:center'>" . $cantidad_entrada . "</th> ";
         $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" >TOTAL ENTRADA</th> ";
         $contenido.= "<th style='text-align:right' >&nbsp;$&nbsp;" . number_format($subtotal_entrada, 2, ",", ".") . "</th> ";
-        $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" >&nbsp;$&nbsp;" . $iva . "</th> ";
+        $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" >&nbsp;$&nbsp;" . number_format($iva, 2, ",", ".") . "</th> ";
         $contenido.= "<th style='text-align:right' >&nbsp;$&nbsp;" . number_format($total_entrada, 2, ",", ".") . "</th> ";
         $contenido.= "</tr> ";
 

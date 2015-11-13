@@ -80,7 +80,11 @@ class RegistradorOrden {
         $rutaBloque .= $esteBloque ['nombre'];
         $host = $this->miConfigurador->getVariableConfiguracion("host") . $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/inventarios/gestionEntradas/" . $esteBloque ['nombre'];
 
-        $_REQUEST ['total_iva_con'] = round($_REQUEST ['total_iva_con'],2);
+
+        $_REQUEST ['valor'] = round($_REQUEST ['valor'], 2);
+        $_REQUEST ['subtotal_sin_iva'] = round($_REQUEST ['subtotal_sin_iva'], 2);
+        $_REQUEST ['total_iva'] = round($_REQUEST ['total_iva'], 2);
+        $_REQUEST ['total_iva_con'] = round($_REQUEST ['total_iva_con'], 2);
 
         $cadenaSql = $this->miSql->getCadenaSql('idElementoMax');
 
@@ -115,7 +119,7 @@ class RegistradorOrden {
                         ($_REQUEST ['marca'] != '') ? $_REQUEST ['marca'] : 'null',
                         ($_REQUEST ['serie'] != '') ? $_REQUEST ['serie'] : 'null',
                         $_REQUEST ['entrada'],
-                        $elemento_id_max                        
+                        $elemento_id_max
                     );
 
                     $cadenaSql = $this->miSql->getCadenaSql('ingresar_elemento_tipo_1', $arreglo);

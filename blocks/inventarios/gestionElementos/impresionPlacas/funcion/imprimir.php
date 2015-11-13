@@ -96,7 +96,7 @@ class RegistradorOrden {
 						$contenidoPagina .= "<tr>";
 					}
 					
-					$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Inventarios</td>";
+					$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;font-size: 7px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<br><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:4mm; font-size: 2mm'></barcode>" . '' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='20' height='20'><br>Inventarios</td>";
 					
 					if ($contadorSaltoLinea == 3) {
 						
@@ -213,10 +213,10 @@ class RegistradorOrden {
 								
 								$contenidoPagina .= "<td style='width:33.31%; height: 64px;text-align=center;border-spacing: 11px;'> </td><br>";
 								
-								$PLACASFALTANTES [] = "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Inventarios</td>";
+								$PLACASFALTANTES [] = "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;font-size: 7px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:4mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='20' height='20'><br>Inventarios</td>";
 							} else {
 								
-								$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Inventarios</td>";
+								$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;font-size: 7px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:4mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='20' height='20'><br>Inventarios</td>";
 							}
 							if ($contadorPosicion == 39) {
 								
@@ -225,7 +225,7 @@ class RegistradorOrden {
 							$contadorPosicion ++;
 						} else {
 							
-							$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Inventarios</td>";
+							$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;font-size: 7px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:4mm; font-size: 2mm'></barcode>" . '' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='20' height='20'><br>Inventarios</td>";
 						}
 						
 						if ($contadorSaltoLinea == 3) {
@@ -310,7 +310,7 @@ class RegistradorOrden {
 							
 							if ($contadorPlacas < $numeroplacas) {
 								
-								$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placas [$contadorPlacas] . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Inventarios</td>";
+								$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;font-size: 7px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placas [$contadorPlacas] . "' style='width:30mm; height:4mm; font-size: 2mm'></barcode>" . '' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='20' height='20'><br>Inventarios</td>";
 								
 			
 								$contadorPlacas ++;
