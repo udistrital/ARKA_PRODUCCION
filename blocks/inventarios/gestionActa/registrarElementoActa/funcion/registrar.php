@@ -33,8 +33,13 @@ class RegistradorOrden {
 	function procesarFormulario() {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-		 
+		
 		$fechaActual = date ( 'Y-m-d' );
+		
+		$_REQUEST ['valor'] = round ( $_REQUEST ['valor'], 2 );
+		$_REQUEST ['subtotal_sin_iva'] = round ( $_REQUEST ['subtotal_sin_iva'], 2 );
+		$_REQUEST ['total_iva'] = round ( $_REQUEST ['total_iva'], 2 );
+		$_REQUEST ['total_iva_con'] = round ( $_REQUEST ['total_iva_con'], 2 );
 		
 		switch ($_REQUEST ['tipo_registro']) {
 			
@@ -50,7 +55,7 @@ class RegistradorOrden {
 				if ($archivoImagen ['error'] == 0) {
 					
 					if ($archivoImagen ['type'] != 'image/jpeg') {
-						redireccion::redireccionar ( 'noFormatoImagen',$_REQUEST['usuario'] ); 
+						redireccion::redireccionar ( 'noFormatoImagen', $_REQUEST ['usuario'] );
 						exit ();
 					}
 				}
@@ -74,9 +79,9 @@ class RegistradorOrden {
 							$_REQUEST ['unidad'],
 							$_REQUEST ['valor'],
 							$_REQUEST ['iva'],
-							$_REQUEST ['cantidad'] * $_REQUEST ['valor'],
-							$_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva,
-							$_REQUEST ['cantidad'] * $_REQUEST ['valor'] + $_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva ,
+							$_REQUEST ['subtotal_sin_iva'],
+							$_REQUEST ['total_iva'],
+							$_REQUEST ['total_iva_con'],
 							($_REQUEST ['marca'] != '') ? $_REQUEST ['marca'] : null,
 							($_REQUEST ['serie'] != '') ? $_REQUEST ['serie'] : null,
 							$_REQUEST ['numero_acta'] 
@@ -84,7 +89,7 @@ class RegistradorOrden {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
 					
-					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" ,$arreglo,'ingresar_elemento_tipo_1');
+					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $arreglo, 'ingresar_elemento_tipo_1' );
 				} else if ($_REQUEST ['id_tipo_bien'] == 2) {
 					
 					$arreglo = array (
@@ -96,9 +101,9 @@ class RegistradorOrden {
 							$_REQUEST ['unidad'],
 							$_REQUEST ['valor'],
 							$_REQUEST ['iva'],
-							$_REQUEST ['cantidad'] * $_REQUEST ['valor'],
-							$_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva,
-							$_REQUEST ['cantidad'] * $_REQUEST ['valor'] + $_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva ,
+							$_REQUEST ['subtotal_sin_iva'],
+							$_REQUEST ['total_iva'],
+							$_REQUEST ['total_iva_con'],
 							($_REQUEST ['marca'] != '') ? $_REQUEST ['marca'] : null,
 							($_REQUEST ['serie'] != '') ? $_REQUEST ['serie'] : null,
 							$_REQUEST ['numero_acta'] 
@@ -106,7 +111,7 @@ class RegistradorOrden {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
 					
-					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $arreglo,'ingresar_elemento_tipo_1');
+					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $arreglo, 'ingresar_elemento_tipo_1' );
 				} else if ($_REQUEST ['id_tipo_bien'] == 3) {
 					
 					if ($_REQUEST ['tipo_poliza'] == 0) {
@@ -119,9 +124,9 @@ class RegistradorOrden {
 								$_REQUEST ['unidad'],
 								$_REQUEST ['valor'],
 								$_REQUEST ['iva'],
-								$_REQUEST ['cantidad'] * $_REQUEST ['valor'],
-								$_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva,
-								$_REQUEST ['cantidad'] * $_REQUEST ['valor'] + $_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva ,
+								$_REQUEST ['subtotal_sin_iva'],
+								$_REQUEST ['total_iva'],
+								$_REQUEST ['total_iva_con'],
 								$_REQUEST ['tipo_poliza'],
 								NULL,
 								NULL,
@@ -139,9 +144,9 @@ class RegistradorOrden {
 								$_REQUEST ['unidad'],
 								$_REQUEST ['valor'],
 								$_REQUEST ['iva'],
-								$_REQUEST ['cantidad'] * $_REQUEST ['valor'],
-								$_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva,
-								$_REQUEST ['cantidad'] * $_REQUEST ['valor'] + $_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva,
+								$_REQUEST ['subtotal_sin_iva'],
+								$_REQUEST ['total_iva'],
+								$_REQUEST ['total_iva_con'],
 								$_REQUEST ['tipo_poliza'],
 								$_REQUEST ['fecha_inicio'],
 								$_REQUEST ['fecha_final'],
@@ -153,13 +158,13 @@ class RegistradorOrden {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_2', $arreglo );
 					
-					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda",$arreglo,'ingresar_elemento_tipo_2' );
+					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $arreglo, 'ingresar_elemento_tipo_2' );
 				}
 				
 				$datos = array (
 						$_REQUEST ['numero_acta'],
-						$fechaActual ,
-						$_REQUEST['usuario']
+						$fechaActual,
+						$_REQUEST ['usuario'] 
 				);
 				
 				//
@@ -181,16 +186,16 @@ class RegistradorOrden {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ElementoImagen', $arreglo );
 					
-					$imagen = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" ,$arreglo,"ElementoImagen"); 
+					$imagen = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $arreglo, "ElementoImagen" );
 				}
 				
 				if ($elemento) {
-					$this->miConfigurador->setVariableConfiguracion("cache",true);
+					$this->miConfigurador->setVariableConfiguracion ( "cache", true );
 					redireccion::redireccionar ( 'inserto', $datos );
 					exit ();
 				} else {
 					
-					redireccion::redireccionar ( 'noInserto', $_REQUEST['usuario'] ); 
+					redireccion::redireccionar ( 'noInserto', $_REQUEST ['usuario'] );
 					
 					exit ();
 				}
@@ -228,7 +233,7 @@ class RegistradorOrden {
 					$trozos = explode ( ".", $archivo ['name'] );
 					$extension = end ( $trozos );
 					
-					if ($extension == 'xlsx' ) {
+					if ($extension == 'xlsx') {
 						
 						if ($archivo) {
 							// obtenemos los datos del archivo
@@ -245,11 +250,11 @@ class RegistradorOrden {
 								if (copy ( $archivo ['tmp_name'], $ruta_absoluta )) {
 									$status = "Archivo subido: <b>" . $archivo1 . "</b>";
 								} else {
-									redireccion::redireccionar ( 'noArchivoCarga' ,$_REQUEST['usuario']); 
+									redireccion::redireccionar ( 'noArchivoCarga', $_REQUEST ['usuario'] );
 									exit ();
 								}
 							} else {
-								redireccion::redireccionar ( 'noArchivoCarga',$_REQUEST['usuario'] ); 
+								redireccion::redireccionar ( 'noArchivoCarga', $_REQUEST ['usuario'] );
 								exit ();
 							}
 						}
@@ -276,45 +281,66 @@ class RegistradorOrden {
 								
 								$datos [$i] ['Nivel'] = $objPHPExcel->getActiveSheet ()->getCell ( 'A' . $i )->getCalculatedValue ();
 								if (is_null ( $datos [$i] ['Nivel'] ) == true) {
-									 
-									redireccion::redireccionar ( 'datosVacios', array($fechaActual,$_REQUEST['usuario']) );
+									
+									redireccion::redireccionar ( 'datosVacios', array (
+											$fechaActual,
+											$_REQUEST ['usuario'] 
+									) );
 									exit ();
 								}
 								$datos [$i] ['Tipo_Bien'] = $objPHPExcel->getActiveSheet ()->getCell ( 'B' . $i )->getCalculatedValue ();
 								if (is_null ( $datos [$i] ['Tipo_Bien'] ) == true) {
-								
-									redireccion::redireccionar ( 'datosVacios', array($fechaActual,$_REQUEST['usuario']) );
+									
+									redireccion::redireccionar ( 'datosVacios', array (
+											$fechaActual,
+											$_REQUEST ['usuario'] 
+									) );
 									exit ();
 								}
 								$datos [$i] ['Descripcion'] = $objPHPExcel->getActiveSheet ()->getCell ( 'C' . $i )->getCalculatedValue ();
 								if (is_null ( $datos [$i] ['Descripcion'] ) == true) {
-								
-									redireccion::redireccionar ( 'datosVacios', array($fechaActual,$_REQUEST['usuario']) );
+									
+									redireccion::redireccionar ( 'datosVacios', array (
+											$fechaActual,
+											$_REQUEST ['usuario'] 
+									) );
 									exit ();
 								}
 								$datos [$i] ['Cantidad'] = $objPHPExcel->getActiveSheet ()->getCell ( 'D' . $i )->getCalculatedValue ();
 								if (is_null ( $datos [$i] ['Cantidad'] ) == true) {
-								
-									redireccion::redireccionar ( 'datosVacios', array($fechaActual,$_REQUEST['usuario']) );
+									
+									redireccion::redireccionar ( 'datosVacios', array (
+											$fechaActual,
+											$_REQUEST ['usuario'] 
+									) );
 									exit ();
 								}
 								$datos [$i] ['Unidad_Medida'] = $objPHPExcel->getActiveSheet ()->getCell ( 'E' . $i )->getCalculatedValue ();
 								if (is_null ( $datos [$i] ['Unidad_Medida'] ) == true) {
-								
-									redireccion::redireccionar ( 'datosVacios', array($fechaActual,$_REQUEST['usuario']) );
+									
+									redireccion::redireccionar ( 'datosVacios', array (
+											$fechaActual,
+											$_REQUEST ['usuario'] 
+									) );
 									exit ();
 								}
-									
+								
 								$datos [$i] ['Valor_Precio'] = $objPHPExcel->getActiveSheet ()->getCell ( 'F' . $i )->getCalculatedValue ();
 								if (is_null ( $datos [$i] ['Valor_Precio'] ) == true) {
-								
-									redireccion::redireccionar ( 'datosVacios', array($fechaActual,$_REQUEST['usuario']) );
+									
+									redireccion::redireccionar ( 'datosVacios', array (
+											$fechaActual,
+											$_REQUEST ['usuario'] 
+									) );
 									exit ();
 								}
 								$datos [$i] ['Iva'] = $objPHPExcel->getActiveSheet ()->getCell ( 'G' . $i )->getCalculatedValue ();
 								if (is_null ( $datos [$i] ['Iva'] ) == true) {
-								
-									redireccion::redireccionar ( 'datosVacios', array($fechaActual,$_REQUEST['usuario']) );
+									
+									redireccion::redireccionar ( 'datosVacios', array (
+											$fechaActual,
+											$_REQUEST ['usuario'] 
+									) );
 									exit ();
 								}
 								$datos [$i] ['Tipo_poliza'] = $objPHPExcel->getActiveSheet ()->getCell ( 'H' . $i )->getCalculatedValue ();
@@ -396,14 +422,14 @@ class RegistradorOrden {
 											$datos [$i] ['Iva'],
 											$datos [$i] ['Cantidad'] * $datos [$i] ['Valor_Precio'],
 											$datos [$i] ['Cantidad'] * $datos [$i] ['Valor_Precio'] * $IVA,
-											($datos [$i] ['Cantidad'] * $datos [$i] ['Valor_Precio'] * $IVA ) + ($datos [$i] ['Cantidad'] * $datos [$i] ['Valor_Precio']),
+											($datos [$i] ['Cantidad'] * $datos [$i] ['Valor_Precio'] * $IVA) + ($datos [$i] ['Cantidad'] * $datos [$i] ['Valor_Precio']),
 											(is_null ( $datos [$i] ['Marca'] ) == true) ? null : trim ( $datos [$i] ['Marca'], "'" ),
 											(is_null ( $datos [$i] ['Serie'] ) == true) ? null : trim ( $datos [$i] ['Serie'], "'" ),
 											$_REQUEST ['numero_acta'] 
 									);
 									$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
 									
-									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda",$arreglo,'ingresar_elemento_tipo_1');
+									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $arreglo, 'ingresar_elemento_tipo_1' );
 								} else if ($datos [$i] ['Tipo_Bien'] == 2) {
 									
 									$arreglo = array (
@@ -417,7 +443,7 @@ class RegistradorOrden {
 											$datos [$i] ['Iva'],
 											1 * $datos [$i] ['Valor_Precio'],
 											1 * $datos [$i] ['Valor_Precio'] * $IVA,
-											( 1 * $datos [$i] ['Valor_Precio'] * $IVA ) + (1 * $datos [$i] ['Valor_Precio']),
+											(1 * $datos [$i] ['Valor_Precio'] * $IVA) + (1 * $datos [$i] ['Valor_Precio']),
 											(is_null ( $datos [$i] ['Marca'] ) == true) ? null : trim ( $datos [$i] ['Marca'], "'" ),
 											(is_null ( $datos [$i] ['Serie'] ) == true) ? null : trim ( $datos [$i] ['Serie'], "'" ),
 											$_REQUEST ['numero_acta'] 
@@ -425,7 +451,7 @@ class RegistradorOrden {
 									
 									$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
 									
-									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda",$arreglo,'ingresar_elemento_tipo_1');
+									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $arreglo, 'ingresar_elemento_tipo_1' );
 								} else if ($datos [$i] ['Tipo_Bien'] == 3) {
 									
 									if ($datos [$i] ['Tipo_poliza'] == 0) {
@@ -441,7 +467,7 @@ class RegistradorOrden {
 												$datos [$i] ['Iva'],
 												1 * $datos [$i] ['Valor_Precio'],
 												1 * $datos [$i] ['Valor_Precio'] * $IVA,
-												( 1 * $datos [$i] ['Valor_Precio'] * $IVA ) + (1 * $datos [$i] ['Valor_Precio']),
+												(1 * $datos [$i] ['Valor_Precio'] * $IVA) + (1 * $datos [$i] ['Valor_Precio']),
 												$datos [$i] ['Tipo_poliza'],
 												NULL,
 												NULL,
@@ -462,7 +488,7 @@ class RegistradorOrden {
 												$datos [$i] ['Iva'],
 												1 * $datos [$i] ['Valor_Precio'],
 												1 * $datos [$i] ['Valor_Precio'] * $IVA,
-												(1 * $datos [$i] ['Valor_Precio'] * $IVA ) + (1 * $datos [$i] ['Valor_Precio']),
+												(1 * $datos [$i] ['Valor_Precio'] * $IVA) + (1 * $datos [$i] ['Valor_Precio']),
 												$datos [$i] ['Tipo_poliza'],
 												$datos [$i] ['Fecha_Inicio_Poliza_Anio'] . "-" . $datos [$i] ['Fecha_Inicio_Poliza_Mes'] . "-" . $datos [$i] ['Fecha_Inicio_Poliza_Dia'],
 												$datos [$i] ['Fecha_Final_Poliza_Anio'] . "-" . $datos [$i] ['Fecha_Final_Poliza_Mes'] . "-" . $datos [$i] ['Fecha_Final_Poliza_Dia'],
@@ -474,23 +500,23 @@ class RegistradorOrden {
 									
 									$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_2', $arreglo );
 									
-									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" ,$arreglo,'ingresar_elemento_tipo_2');
+									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $arreglo, 'ingresar_elemento_tipo_2' );
 								}
 							}
 							
 							$datos = array (
 									$_REQUEST ['numero_acta'],
 									$fechaActual,
-									$_REQUEST['usuario']
+									$_REQUEST ['usuario'] 
 							);
 							
 							if ($elemento_id && $_REQUEST ['numero_acta']) {
-								$this->miConfigurador->setVariableConfiguracion("cache",true);
+								$this->miConfigurador->setVariableConfiguracion ( "cache", true );
 								redireccion::redireccionar ( 'inserto_cargue_masivo', $datos );
 								exit ();
 							} else {
 								
-								redireccion::redireccionar ( 'noInserto', $_REQUEST['usuario']); 
+								redireccion::redireccionar ( 'noInserto', $_REQUEST ['usuario'] );
 								exit ();
 							}
 						}

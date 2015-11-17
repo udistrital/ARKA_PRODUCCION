@@ -92,7 +92,10 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
              }
           });  
         
-		  
+	
+          
+          
+          
      $( "#<?php echo $this->campoSeguro('tipo_poliza')?>" ).change(function() {
         
             switch($("#<?php echo $this->campoSeguro('tipo_poliza')?>").val())
@@ -104,10 +107,10 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
                     $("#<?php echo $this->campoSeguro('fechas_polizas')?>").css('display','none');
                    
 
-                   
+                    
 
                 break;
-                
+                                                
                 
                 case '1':
                     
@@ -149,7 +152,7 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
             cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
             
-            precio = cantidad * valor;
+            precio = Math.round((cantidad * valor)*100)/100;
       
       
             if (precio==0){
@@ -167,6 +170,8 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
           
           $( "#<?php echo $this->campoSeguro('iva')?>" ).change(function() {
         
+          
+          
 		     switch($("#<?php echo $this->campoSeguro('iva')?>").val())
             {
                            
@@ -175,7 +180,7 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
        			 precio=cantidad * valor;
-       			 total=precio;
+       			 total=Math.round(precio*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val('0');
                  
@@ -188,7 +193,7 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
        			 precio=cantidad * valor;
-       			 total=precio;
+       			 total=Math.round(precio*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val('0');
                  
@@ -200,9 +205,9 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
                 
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
-       			 iva = (cantidad * valor)* 0.05;
-       			 precio=cantidad * valor;
-       			 total=precio+iva;
+       			 iva = Math.round(((cantidad * valor)* 0.05)*100)/100;
+       			 precio=Math.round((cantidad * valor)*100)/100;
+       			 total=Math.round((precio+iva)*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
                  
@@ -214,22 +219,23 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
                 
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
-       			 iva = (cantidad * valor)* 0.04;
-       			 precio = cantidad*valor;
-       			 total=precio+iva;
+       			 iva = Math.round(((cantidad * valor)* 0.04)*100)/100;
+       			 precio = Math.round((cantidad*valor)*100)/100;
+       			 total=Math.round((precio+iva)*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
                  $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);
                                      
                 break;
                 
+                
                 case '5':
                 
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
-       			 iva = (cantidad * valor)* 0.1;
-       			 precio = cantidad*valor;
-       			 total=precio+iva;
+       			 iva = Math.round(((cantidad * valor)* 0.1)*100)/100;
+       			 precio = Math.round((cantidad*valor)*100)/100;
+       			 total=Math.round((precio+iva)*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
                  $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);
@@ -240,9 +246,9 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
                 
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
-       			 iva = (cantidad * valor)* 0.16;
-       			 precio = cantidad*valor;
-       			 total=precio+iva;
+       			 iva = Math.round(((cantidad * valor)* 0.16)*100)/100;
+       			 precio = Math.round((cantidad*valor)*100)/100;
+       			 total=Math.round((precio+iva)*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
                  $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);

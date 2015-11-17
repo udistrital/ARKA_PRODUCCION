@@ -29,6 +29,15 @@ class RegistradorOrden {
 		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
+		
+		$_REQUEST ['valor'] = round($_REQUEST ['valor'], 2);
+		$_REQUEST ['subtotal_sin_iva'] = round($_REQUEST ['subtotal_sin_iva'], 2);
+		$_REQUEST ['total_iva'] = round($_REQUEST ['total_iva'], 2);
+		$_REQUEST ['total_iva_con'] = round($_REQUEST ['total_iva_con'], 2);
+		
+		
+		
 		//------- Registro de Imagen 
 		foreach ( $_FILES as $key => $values ) {
 					
@@ -111,9 +120,9 @@ class RegistradorOrden {
 					$_REQUEST ['unidad'],
 					$_REQUEST ['valor'],
 					$_REQUEST ['iva'],
-					$_REQUEST ['cantidad'] * $_REQUEST ['valor'],
-					$_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva,
-					( $_REQUEST ['cantidad'] * $_REQUEST ['valor'] + $_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva ),
+				$_REQUEST ['subtotal_sin_iva'],
+                        $_REQUEST ['total_iva'],
+                        $_REQUEST ['total_iva_con'],
 					($_REQUEST ['marca'] != '') ? $_REQUEST ['marca'] : null,
 					($_REQUEST ['serie'] != '') ? $_REQUEST ['serie'] : null,
 					$_REQUEST ['id_elemento_acta'] 
@@ -132,9 +141,9 @@ class RegistradorOrden {
 					$_REQUEST ['unidad'],
 					$_REQUEST ['valor'],
 					$_REQUEST ['iva'],
-					1 * $_REQUEST ['valor'],
-					1 * $_REQUEST ['valor'] * $valor_iva,
-					( 1 * $_REQUEST ['valor'] + 1 * $_REQUEST ['valor'] * $valor_iva ),
+					$_REQUEST ['subtotal_sin_iva'],
+                        $_REQUEST ['total_iva'],
+                        $_REQUEST ['total_iva_con'],
 					($_REQUEST ['marca'] != '') ? $_REQUEST ['marca'] : null,
 					($_REQUEST ['serie'] != '') ? $_REQUEST ['serie'] : null,
 					$_REQUEST ['id_elemento_acta'] 
@@ -155,9 +164,9 @@ class RegistradorOrden {
 						$_REQUEST ['unidad'],
 						$_REQUEST ['valor'],
 						$_REQUEST ['iva'],
-						$_REQUEST ['cantidad'] * $_REQUEST ['valor'],
-						$_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva,
-						( $_REQUEST ['cantidad'] * $_REQUEST ['valor'] + $_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva ),
+						$_REQUEST ['subtotal_sin_iva'],
+                        $_REQUEST ['total_iva'],
+                        $_REQUEST ['total_iva_con'],
 						$_REQUEST ['tipo_poliza'],
 						NULL,
 						NULL,
@@ -174,9 +183,9 @@ class RegistradorOrden {
 						$_REQUEST ['unidad'],
 						$_REQUEST ['valor'],
 						$_REQUEST ['iva'],
-						$_REQUEST ['cantidad'] * $_REQUEST ['valor'],
-						$_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva,
-						( $_REQUEST ['cantidad'] * $_REQUEST ['valor'] + $_REQUEST ['cantidad'] * $_REQUEST ['valor'] * $valor_iva ),
+						$_REQUEST ['subtotal_sin_iva'],
+                        $_REQUEST ['total_iva'],
+                        $_REQUEST ['total_iva_con'],
 						$_REQUEST ['tipo_poliza'],
 						$_REQUEST ['fecha_inicio'],
 						$_REQUEST ['fecha_final'],

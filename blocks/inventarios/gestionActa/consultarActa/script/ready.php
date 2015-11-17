@@ -145,7 +145,7 @@
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
        			 precio=cantidad * valor;
-       			 total=precio;
+       			 total=Math.round(precio*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val('0');
                  
@@ -158,7 +158,7 @@
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
        			 precio=cantidad * valor;
-       			 total=precio;
+       			 total=Math.round(precio*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val('0');
                  
@@ -170,9 +170,9 @@
                 
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
-       			 iva = (cantidad * valor)* 0.05;
-       			 precio=cantidad * valor;
-       			 total=precio+iva;
+       			 iva = Math.round(((cantidad * valor)* 0.05)*100)/100;
+       			 precio=Math.round((cantidad * valor)*100)/100;
+       			 total=Math.round((precio+iva)*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
                  
@@ -184,9 +184,9 @@
                 
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
-       			 iva = (cantidad * valor)* 0.04;
-       			 precio = cantidad*valor;
-       			 total=precio+iva;
+       			 iva = Math.round(((cantidad * valor)* 0.04)*100)/100;
+       			 precio = Math.round((cantidad*valor)*100)/100;
+       			 total=Math.round((precio+iva)*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
                  $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);
@@ -197,9 +197,9 @@
                 
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
-       			 iva = (cantidad * valor)* 0.1;
-       			 precio = cantidad*valor;
-       			 total=precio+iva;
+       			 iva = Math.round(((cantidad * valor)* 0.1)*100)/100;
+       			 precio = Math.round((cantidad*valor)*100)/100;
+       			 total=Math.round((precio+iva)*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
                  $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);
@@ -210,9 +210,9 @@
                 
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
-       			 iva = (cantidad * valor)* 0.16;
-       			 precio = cantidad*valor;
-       			 total=precio+iva;
+       			 iva = Math.round(((cantidad * valor)* 0.16)*100)/100;
+       			 precio = Math.round((cantidad*valor)*100)/100;
+       			 total=Math.round((precio+iva)*100)/100;
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
                  $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);
@@ -255,7 +255,7 @@
             cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
             
-            precio = cantidad * valor;
+            precio = Math.round((cantidad * valor)*100)/100;
       
       
             if (precio==0){
