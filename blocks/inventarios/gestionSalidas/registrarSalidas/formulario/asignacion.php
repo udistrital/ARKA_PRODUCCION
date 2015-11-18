@@ -367,7 +367,7 @@ class registrarForm {
                                 $atributos ['textoFondo'] = "Cantidad";
                                 $atributos ['dobleLinea'] = 0;
                                 $atributos ['tabIndex'] = $tab;
-                                $atributos ['validar'] = 'custom[onlyNumberSp]';
+                                $atributos ['validar'] = 'custom[number]';
                                 if (isset($_REQUEST [$esteCampo])) {
                                     $atributos ['valor'] = $_REQUEST [$esteCampo];
                                 } else {

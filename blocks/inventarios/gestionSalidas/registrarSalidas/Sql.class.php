@@ -207,7 +207,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "AND entrada.cierre_contable='f' ";
 				$cadenaSql .= "AND entrada.estado_entrada = 1 ";
 				$cadenaSql .= "AND entrada.estado_registro='t' ";
-				$cadenaSql .= " AND cantidad-cantidad_por_asignar >= 0";
+				$cadenaSql .= " AND cantidad_por_asignar > 0";
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND entrada.id_entrada = '" . $variable [0] . "'";
 				}
