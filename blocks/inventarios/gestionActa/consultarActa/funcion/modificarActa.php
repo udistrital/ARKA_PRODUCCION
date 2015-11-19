@@ -73,7 +73,7 @@ class RegistradorOrden {
 					'dependencia' => $_REQUEST ['dependencia'],
 					'fecha_registro' => $fechaActual,
 					'tipo_bien' => 0,
-					'nit_proveedor' => $_REQUEST ['id_proveedor'],
+					'nit_proveedor' => ($_REQUEST ['id_proveedor']=='')?'NULL':"'".$_REQUEST ['id_proveedor']."'",
 					'ordenador' => $_REQUEST ['id_ordenador'],
 					'fecha_revision' => $_REQUEST ['fecha_revision'],
 					'revisor' => NULL,
@@ -86,7 +86,8 @@ class RegistradorOrden {
 			);
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarActa_soporte', $datosActa );
-			$id_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			
+			$id_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 			
 			
 			
@@ -96,7 +97,7 @@ class RegistradorOrden {
 					'dependencia' => $_REQUEST ['dependencia'],
 					'fecha_registro' => $fechaActual,
 					'tipo_bien' => 0,
-					'nit_proveedor' => $_REQUEST ['id_proveedor'],
+					'nit_proveedor' => ($_REQUEST ['id_proveedor']=='')?'NULL':"'".$_REQUEST ['id_proveedor']."'",
 					'ordenador' => $_REQUEST ['id_ordenador'],
 					'fecha_revision' => $_REQUEST ['fecha_revision'],
 					'revisor' => NULL,
@@ -108,13 +109,14 @@ class RegistradorOrden {
 			
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarActa', $datosActa );
-			$id_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			
+			
+			$id_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 			
 			
 			
 		}
-
-
+ 
 		$datos = array (
 				$_REQUEST ['id_acta'],
 				$fechaActual ,

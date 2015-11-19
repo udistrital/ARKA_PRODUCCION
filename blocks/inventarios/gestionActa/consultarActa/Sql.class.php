@@ -234,7 +234,7 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT DISTINCT ra.*, \"PRO_NIT\"||' - ('||\"PRO_RAZON_SOCIAL\"||')' AS  nom_razon ";
 				$cadenaSql .= " FROM registro_actarecibido ra  ";
-				$cadenaSql .= " JOIN  arka_parametros.arka_proveedor ap ON ap.\"PRO_NIT\" =CAST(ra.proveedor AS CHAR (50))  ";
+				$cadenaSql .= " LEFT JOIN  arka_parametros.arka_proveedor ap ON ap.\"PRO_NIT\" =CAST(ra.proveedor AS CHAR (50))  ";
 				$cadenaSql .= " WHERE 1 = 1 ";
 				$cadenaSql .= " AND estado_registro = 1 ";
 				$cadenaSql .= " AND id_actarecibido = '" . $variable . "' ";
@@ -398,7 +398,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "dependencia='" . $variable ['dependencia'] . "',";
 				$cadenaSql .= "fecha_recibido='" . $variable ['fecha_registro'] . "',";
 				$cadenaSql .= "tipo_bien='" . $variable ['tipo_bien'] . "',";
-				$cadenaSql .= "proveedor='" . $variable ['nit_proveedor'] . "',";
+				$cadenaSql .= "proveedor=" . $variable ['nit_proveedor'] . ",";
 				$cadenaSql .= "ordenador_gasto='" . $variable ['ordenador'] . "',";
 				$cadenaSql .= "fecha_revision='" . $variable ['fecha_revision'] . "',";
 				$cadenaSql .= "revisor=NULL,";
@@ -421,7 +421,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "dependencia='" . $variable ['dependencia'] . "',";
 				$cadenaSql .= "fecha_recibido='" . $variable ['fecha_registro'] . "',";
 				$cadenaSql .= "tipo_bien='" . $variable ['tipo_bien'] . "',";
-				$cadenaSql .= "proveedor='" . $variable ['nit_proveedor'] . "',";
+				$cadenaSql .= "proveedor=" . $variable ['nit_proveedor'] . ",";
 				$cadenaSql .= "ordenador_gasto='" . $variable ['ordenador'] . "',";
 				$cadenaSql .= "fecha_revision='" . $variable ['fecha_revision'] . "',";
 				$cadenaSql .= "revisor=NULL,";

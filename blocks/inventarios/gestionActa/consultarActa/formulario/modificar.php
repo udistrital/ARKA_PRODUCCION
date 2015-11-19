@@ -73,7 +73,15 @@ class registrarForm {
 				'id_proveedor' => $Acta ['proveedor'] 
 		);
 		
-		$_REQUEST = array_merge ( $_REQUEST, $Acta, $arreglo, $ordenadorGasto );
+		
+		if (is_null ( $Acta ) == true) {
+			
+					
+			$_REQUEST = array_merge ( $_REQUEST, $Acta, $arreglo );
+		} else {
+			
+			$_REQUEST = array_merge ( $_REQUEST, $Acta, $arreglo, $ordenadorGasto );
+		}
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'tipoBien' );
 		$tipoBien = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -113,13 +121,12 @@ class registrarForm {
 			$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=ConsultarActa";
- 
 			
 			$variable = "pagina=" . $miPaginaActual;
-			$variable .= "&usuario=" . $_REQUEST['usuario'];   
-
+			$variable .= "&usuario=" . $_REQUEST ['usuario'];
+			
 			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
-			 
+			
 			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 			$esteCampo = 'botonRegresar';
 			$atributos ['id'] = $esteCampo;
@@ -407,7 +414,7 @@ class registrarForm {
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ['validar'] = 'required';
+					$atributos ['validar'] = ' ';
 					$atributos ['textoFondo'] = 'Ingrese Mínimo 3 Caracteres de Búsqueda';
 					
 					if (isset ( $_REQUEST [$esteCampo] )) {
@@ -816,7 +823,7 @@ class registrarForm {
 				$valorCodificado .= "&seccion=" . $tiempo;
 				$valorCodificado .= "&id_acta=" . $_REQUEST ['numero_acta'];
 				$valorCodificado .= "&arreglo=" . $_REQUEST ['arreglo'];
-				$valorCodificado .= "&usuario=".$_REQUEST['usuario']; 
+				$valorCodificado .= "&usuario=" . $_REQUEST ['usuario'];
 				
 				/**
 				 * SARA permite que los nombres de los campos sean dinámicos.
