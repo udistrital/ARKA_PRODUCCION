@@ -47,7 +47,14 @@ $('#<?php echo $this->campoSeguro('funcionario')?>').width(500);
               	 });
               	 
               	 
-              	            	            	 
+              	    $("#radicadoLevantamiento").mousemove(function() {
+              	    
+              	    
+              	    $("#<?php echo $this->campoSeguro('botonGenerarPdf')?>").val('false');
+              	    $("#<?php echo $this->campoSeguro('botonGuadar')?>").val('false');
+              	    
+              	    
+              	    });        	            	 
               	               	 
              	
 

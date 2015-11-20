@@ -218,7 +218,7 @@ class registrarForm {
 						
 						// Aplica atributos globales al control
 						$atributos = array_merge ( $atributos, $atributosGlobales );
-						$mostrarHtml .= ($resultado [$i] ['radicacion'] == 'TRUE') ? '&#8730 ' : $this->miFormulario->campoCuadroSeleccion ( $atributos );
+						$mostrarHtml .= (is_null($resultado [$i] ['radicacion']) == true) ? $this->miFormulario->campoCuadroSeleccion ( $atributos ):'&#8730';
 						
 						$mostrarHtml .= "</center> </td> </tr>";
 					}
