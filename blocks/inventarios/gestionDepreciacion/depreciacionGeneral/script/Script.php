@@ -9,15 +9,24 @@ $funcion [$indice ++] = "jquery.validationEngine.js";
 $funcion [$indice ++] = "jquery.validationEngine-es.js";
 $funcion [$indice ++] = "jquery-te.js";
 $funcion [$indice ++] = "select2.js";
+$funcion [$indice ++] = "select2.min.js";
 $funcion [$indice ++] = "select2_locale_es.js";
 $funcion [$indice ++] = "jquery.dataTables.js";
-$funcion [$indice ++] = "jquery.dataTables.min.js";
+
 $funcion [$indice ++] = "timepicker.js";
 $funcion[$indice ++]="modernizr.custom.js";
 $funcion[$indice ++]="jquery.dlmenu.js";
 $funcion [$indice ++] = "jquery.easing.1.3.js";
-$funcion [$indice ++] = "dataTables.tableTools.js";
-$funcion [$indice ++] = "dataTables.tableTools.min.js";
+
+
+
+$funcion [$indice ++] = "jquery.dataTables.min.js";
+$funcion [$indice ++] = "dataTables.buttons.min.js";
+$funcion [$indice ++] = "buttons.flash.min.js";
+
+
+
+
 
 $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
 $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site");

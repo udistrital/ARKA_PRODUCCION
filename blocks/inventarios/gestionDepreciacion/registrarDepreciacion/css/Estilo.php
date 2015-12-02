@@ -16,8 +16,21 @@ $estilo[$indice++]="dataTables.tableTools.min.css";
 $estilo[$indice++]="demo_page.css";
 $estilo[$indice++]="demo_table.css";
 $estilo[$indice++]="jquery.dataTables.css";
+$estilo[$indice++]="jquery.dataTables.min.css";
 $estilo[$indice++]="jquery.dataTables_themeroller.css";
 $estilo[$indice++]="jquery.auto-complete.css";
+//boton
+
+$estilo[$indice++] = "buttons.bootstrap.css";
+$estilo[$indice++] = "buttons.bootstrap.min.css";
+$estilo[$indice++] = "buttons.dataTables.css";
+$estilo[$indice++] = "buttons.dataTables.min.css";
+$estilo[$indice++] = "buttons.foundation.css";
+$estilo[$indice++] = "buttons.foundation.min.css";
+$estilo[$indice++] = "buttons.jqueryui.css";
+$estilo[$indice++] = "buttons.jqueryui.min.css";
+$estilo[$indice++] = "common.scss";
+$estilo[$indice++] = "mixins.scss";
 
 
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");

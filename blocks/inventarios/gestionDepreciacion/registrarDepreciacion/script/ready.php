@@ -18,28 +18,6 @@ return false;
 });
 });
 
-$(document).ready(function() {
-$('#tablaReporte').DataTable( {
-dom: 'T<"clear">lfrtip',
-"sPaginationType": "full_numbers",
-tableTools: {
-"sSwfPath": "blocks/inventarios/gestionDepreciacion/registrarDepreciacion/script/swf/copy_csv_xls_pdf.swf",
-"aButtons": [
-{
-"sExtends":    "collection",
-"sButtonText": "Descargar",
-"aButtons":    [ "csv" ]
-}
-]
-}
-} );
-} );
-
-$('#tablaTitulos').dataTable( {
-"sPaginationType": "full_numbers"
-} );
-
-
 
 //-------------------------------------------------
 $('#<?php echo $this->campoSeguro('fechaCorte') ?>').datepicker({
@@ -69,19 +47,4 @@ $('#<?php echo $this->campoSeguro('fechaCorte') ?>').attr("class", "cuadroTexto 
 });
 
 
-
-$("#<?php echo $this->campoSeguro('grupo_contable') ?>").select2({
-placeholder: "Seleccione...",
-minimumInputLength: 1,
-});
-
-$("#<?php echo $this->campoSeguro('funcionario') ?>").select2({
-placeholder: "Seleccione...",
-minimumInputLength: 1,
-});
-
-$("#<?php echo $this->campoSeguro('cuenta_salida') ?>").select2({
-placeholder: "Seleccione...",
-minimumInputLength: 1,
-});
 

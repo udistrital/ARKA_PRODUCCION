@@ -1,18 +1,26 @@
 <?php
 
 $indice = 0;
-$funcion [$indice ++] = "jquery-ui.js";
-$funcion [$indice ++] = "jquery-ui.min.js";
+$funcion [$indice ++] = "jquery-1.11.0.min.js";
+$funcion [$indice ++] = "jquery.jqGrid.min.js";
+$funcion [$indice ++] = "jquery.jqGrid.src.js";
+$funcion [$indice ++] = "jqueryui.js";
 $funcion [$indice ++] = "jquery.validationEngine.js";
 $funcion [$indice ++] = "jquery.validationEngine-es.js";
-$funcion [$indice ++] = "select2.js";
-$funcion[$indice++]="select2_locale_es.js";
+$funcion [$indice ++] = "jquery-te.js";
 $funcion [$indice ++] = "jquery.dataTables.js";
-$funcion [$indice ++] = "jquery.dataTables.min.js";
+
 $funcion [$indice ++] = "timepicker.js";
-$funcion [$indice ++] = "dataTables.tableTools.js";
-$funcion [$indice ++] = "dataTables.tableTools.min.js";
+$funcion [$indice ++] = "jquery.easing.1.3.js";
 $funcion [$indice ++] = "jquery.autocomplete.js";
+
+
+$funcion [$indice ++] = "jquery.dataTables.min.js";
+$funcion [$indice ++] = "dataTables.buttons.min.js";
+$funcion [$indice ++] = "buttons.flash.min.js";
+
+
+
 
 
 $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");

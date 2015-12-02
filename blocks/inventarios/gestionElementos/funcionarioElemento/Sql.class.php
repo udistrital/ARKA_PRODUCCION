@@ -163,10 +163,14 @@ class Sql extends \Sql {
 			
 			case "jefe_recursos_fisicos" :
 				
-				$cadenaSql = "	SELECT \"FUN_IDENTIFICACION\" 	identificacion, \"FUN_NOMBRE\" nombre, \"FUN_CARGO\" cargo ";
-				$cadenaSql .= "	FROM arka_parametros.arka_funcionarios  ";
-				$cadenaSql .= "WHERE \"FUN_IDENTIFICACION\"='14231658' ";
-				$cadenaSql .= "			AND \"FUN_ESTADO\"='A';";
+				$cadenaSql = 'SELECT "FUN_IDENTIFICACION" identificacion, "FUN_NOMBRE" nombre ';
+				$cadenaSql .= " FROM arka_parametros.arka_funcionarios ";
+				$cadenaSql .= " WHERE 1=1 ";
+				$cadenaSql .= ' AND "FUN_ESTADO"=';
+				$cadenaSql .= "'A'  ";
+				$cadenaSql .= ' AND "FUN_CARGO" ';
+				$cadenaSql .= " ='JEFE DE SECCION' ";
+				$cadenaSql .= ' AND "FUN_DEP_COD_ACADEMICA"=60 ; ';
 				
 				break;
 			
@@ -294,7 +298,7 @@ class Sql extends \Sql {
                 						CASE
                 						WHEN  tfs.descripcion IS  NULL THEN 'Activo'
 										ELSE  tfs.descripcion  
-                						END   as estado_bien, ele.descripcion descripcion_elemento, eli.confirmada_existencia , eli.tipo_confirmada  	";
+                						END   as estado_bien, ele.descripcion descripcion_elemento, eli.confirmada_existencia , eli.tipo_confirmada, espacios.\"ESF_NOMBRE_ESPACIO\" espaciofisico " ;
 				$cadenaSql .= "FROM elemento_individual  eli ";
 				$cadenaSql .= "JOIN elemento ele ON ele.id_elemento =eli .id_elemento_gen ";
 				$cadenaSql .= "JOIN tipo_bienes  tb ON tb.id_tipo_bienes = ele.tipo_bien ";

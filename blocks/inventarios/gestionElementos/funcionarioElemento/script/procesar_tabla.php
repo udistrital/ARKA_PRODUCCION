@@ -77,7 +77,7 @@ $(function() {
 				language: {
                 url: "<?php echo $urlDirectorio?>"
             			},
-             	 processing: true,
+             	processing: true,
 		"aLengthMenu": [[10,25, 50,100,300,500,1000,-1], [10,25, 50,100,300,500,1000,'Todos']],
 //                   ordering: true,
                   searching: true,
@@ -100,6 +100,7 @@ $(function() {
                   { data :"descripcion" },
                   { data :"sede" },
                   { data :"dependencia" },
+                  { data :"espaciofisico" },
                   { data :"estadoelemento" },
                   { data :"detalle" },
                   { data :"observaciones" },

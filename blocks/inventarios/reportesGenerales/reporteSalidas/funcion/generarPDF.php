@@ -84,7 +84,7 @@ class RegistradorActa {
         //consultar los elementos asociados a la entrada
         $cadenaSql = $this->miSql->getCadenaSql('consultarJefe', false);
         $jefeAlmacen = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-// consulta datos del usuario
+		//consulta datos del usuario
 
         $cadenaSql = $this->miSql->getCadenaSql('datosUsuario', $_REQUEST['usuario']);
         $datosUsuario = $esteRecursoDB2->ejecutarAcceso($cadenaSql, "busqueda");
@@ -111,6 +111,7 @@ class RegistradorActa {
         <th>TIPO BIEN</th>
         <th>PLACA</th>
         <th>DESCRIPCIÓN</th>
+        <th>MARCA-SERIE</th>
         <th>VALOR UNITARIO</th>
         <th>SUBTOTAL</th>
         <th>% IVA</th>
@@ -130,6 +131,7 @@ class RegistradorActa {
             $contenido.= "<td style='text-align:center'>" . $datos_elementos[$key]['tipo_bien'] . "</td> ";
             $contenido.= "<td style='text-align:center'>" . $datos_elementos[$key]['placa'] . "</td> ";
             $contenido.= "<td style='text-align:center' >" . wordwrap($datos_elementos[$key]['descripcion'], 80, "<br>") . "</td> ";
+            $contenido.= "<td style='text-align:center' >" . wordwrap($datos_elementos[$key]['datos_elem'], 80, "<br>") . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($datos_elementos[$key]['valor'], 2, ",", ".") . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($datos_elementos[$key]['subtotal_sin_iva'], 2, ",", ".") . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;&nbsp;" . $datos_elementos[$key]['iva'] * 100 . "&nbsp;% </td> ";
@@ -154,7 +156,7 @@ class RegistradorActa {
         $contenido.= " <tr> ";
         $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" > Total Cantidad</th> ";
         $contenido.= "<td style='text-align:center'>" . number_format($cantidad, 2, ",", ".") . "</td> ";
-        $contenido.= "<th  style=\"text-align:right;\" colspan=\"4\" >Subtotal Grupo</th> ";
+        $contenido.= "<th  style=\"text-align:right;\" colspan=\"5\" >Subtotal Grupo</th> ";
         $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($subtotal, 2, ",", ".") . "</td> ";
         $contenido.= "<td  style=\"text-align:right;\" colspan=\"2\" >&nbsp;$&nbsp;" . number_format($iva, 2, ",", ".") . "</td> ";
         $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($total, 2, ",", ".") . "</td> ";
@@ -163,7 +165,7 @@ class RegistradorActa {
         $contenido.= " <tr> ";
         $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" > TOTAL CANTIDAD SALIDA</th> ";
         $contenido.= "<th style='text-align:center'>" . number_format($cantidad_entrada, 2, ",", ".") . "</th> ";
-        $contenido.= "<th  style=\"text-align:right;\" colspan=\"4\" >TOTAL SALIDA</th> ";
+        $contenido.= "<th  style=\"text-align:right;\" colspan=\"5\" >TOTAL SALIDA</th> ";
         $contenido.= "<th style='text-align:right' >&nbsp;$&nbsp;" . number_format($subtotal_entrada, 2, ",", ".") . "</th> ";
         $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" >&nbsp;$&nbsp;" . number_format($iva, 2, ",", ".") . "</th> ";
         $contenido.= "<th style='text-align:right' >&nbsp;$&nbsp;" . number_format($total_entrada, 2, ",", ".") . "</th> ";
@@ -299,7 +301,7 @@ class RegistradorActa {
 <table align='center'>
 <thead>
     <tr>
-        <th style=\"text-align:right;width:940px;font-size:12px;\" colspan=\"11\"></th>
+        <th style=\"text-align:right;width:940px;font-size:12px;\" colspan=\"12\"></th>
     </tr>
 
     </thead>

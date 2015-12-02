@@ -177,16 +177,8 @@ class Sql extends \Sql {
 
             case "consultar_grupo_contable" :
                 $cadenaSql = "SELECT elemento_id, elemento_codigo ||' - '||elemento_nombre as nivel ";
-                $cadenaSql.= " FROM catalogo.catalogo_elemento ";
-                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo ";
-                $cadenaSql.= " WHERE elemento_id>0 ";
-                $cadenaSql.= " AND lista_activo=1";
-                break;
-
-            case "consultar_grupo_contable" :
-                $cadenaSql = "SELECT elemento_id, elemento_codigo ||' - '||elemento_nombre as nivel ";
-                $cadenaSql.= " FROM catalogo.catalogo_elemento ";
-                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo ";
+                $cadenaSql.= " FROM grupo.catalogo_elemento ";
+                $cadenaSql.= " JOIN grupo.catalogo_lista ON grupo.catalogo_lista.lista_id=elemento_catalogo ";
                 $cadenaSql.= " WHERE elemento_id>0 ";
                 $cadenaSql.= " AND lista_activo=1";
                 break;
@@ -243,31 +235,31 @@ class Sql extends \Sql {
             //-------------- LAS QUE FINALMENTE QUEDARON DEL CASO DE USO --------------//
             case "mostrarInfoDepreciar":
                 $cadenaSql = " SELECT DISTINCT   ";
-                $cadenaSql.= " id_elemento_ind,  ";
-                $cadenaSql.= " placa, ";
-                $cadenaSql.= " elemento.descripcion, ";
-                $cadenaSql.= " elemento_nombre grupo, ";
-                $cadenaSql.= " grupo_vidautil,  ";
-                $cadenaSql.= " elemento.valor, ";
-                $cadenaSql.= " salida.fecha_registro , grupo_cuentasalida ";
-                $cadenaSql.= " FROM elemento_individual  ";
-                $cadenaSql.= " JOIN elemento ON elemento.id_elemento=elemento_individual.id_elemento_gen  ";
-                $cadenaSql.= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel  ";
-                $cadenaSql.= " JOIN salida ON salida.id_salida=elemento_individual.id_salida  ";
-                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo   ";
-                $cadenaSql.= " INNER JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(elemento_id as character varying)  ";
-                $cadenaSql.= " WHERE catalogo.catalogo_elemento.elemento_id>0   ";
-                $cadenaSql.= " AND catalogo.catalogo_lista.lista_activo=1  ";
-                //$cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t'  ";
-                $cadenaSql.= " AND elemento.estado=TRUE   ";
-                $cadenaSql.= " AND id_elemento_ind NOT IN (    ";
-                $cadenaSql.= " SELECT dep_idelemento   ";
-                $cadenaSql.= " FROM registro_depreciacion   ";
-                $cadenaSql.= " )  ";
-                $cadenaSql.= " AND id_elemento_ind NOT IN (    ";
-                $cadenaSql.= " SELECT id_elemento_ind   ";
-                $cadenaSql.= " FROM estado_elemento  ";
-                $cadenaSql.= " )  ";
+                $cadenaSql .= " id_elemento_ind,  ";
+                $cadenaSql .= " grupo_cuentasalida,  ";
+                $cadenaSql .= " salida.fecha_registro,  ";
+                $cadenaSql .= " grupo.catalogo_elemento.elemento_id grupo,  ";
+                $cadenaSql .= " grupo.catalogo_elemento.elemento_codigo grupo_codigo,  ";
+                $cadenaSql .= " grupo.catalogo_elemento.elemento_nombre grupo_nombre,   ";
+                $cadenaSql .= " grupo_vidautil,   ";
+                $cadenaSql .= " elemento.total_iva_con - elemento.ajuste as valor,  ";
+                $cadenaSql .= " 0 as valor_cuota,  ";
+                $cadenaSql .= " ajuste_inflacionario ";
+                $cadenaSql .= " FROM arka_inventarios.elemento_individual    ";
+                $cadenaSql .= " JOIN arka_inventarios.elemento ON elemento.id_elemento=elemento_individual.id_elemento_gen   ";
+                $cadenaSql .= " JOIN arka_inventarios.salida ON salida.id_salida=elemento_individual.id_salida   ";
+                $cadenaSql .= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel    ";
+                $cadenaSql .= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_elemento.elemento_catalogo=catalogo.catalogo_lista.lista_id   ";
+                $cadenaSql .= " JOIN grupo.catalogo_elemento ON cast(grupo.catalogo_elemento.elemento_id as character varying)=catalogo.catalogo_elemento.elemento_grupoc   ";
+                $cadenaSql .= " JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(grupo.catalogo_elemento.elemento_id as character varying)   ";
+                $cadenaSql .= " WHERE catalogo.catalogo_elemento.elemento_id>0   ";
+                $cadenaSql .= " AND catalogo.catalogo_lista.lista_activo=1    ";
+                $cadenaSql .= " AND elemento.tipo_bien <> 1  ";
+                $cadenaSql .= " AND elemento.estado=TRUE   ";
+                $cadenaSql .= " AND id_elemento_ind NOT IN (     ";
+                $cadenaSql .= " SELECT id_elemento_ind    ";
+                $cadenaSql .= " FROM estado_elemento   ";
+                $cadenaSql .= " )  ";
 
                 if ($variable ['cuenta_salida'] != '') {
                     $cadenaSql .= " AND grupo_cuentasalida = '" . $variable ['cuenta_salida'] . "'";
@@ -275,6 +267,10 @@ class Sql extends \Sql {
 
                 if ($variable ['grupo'] != '') {
                     $cadenaSql.= " AND grupo_id='" . $variable['grupo'] . "' ";
+                }
+
+                if ($variable ['fecha_corte'] != '') {
+                    $cadenaSql.= " AND salida.fecha_registro<='" . $variable['fecha_corte'] . "' ";
                 }
 
                 $cadenaSql.= " ORDER BY id_elemento_ind ASC ";
@@ -351,6 +347,56 @@ class Sql extends \Sql {
                 $cadenaSql.= " ORDER BY id_elemento_ind ASC ";
                 break;
 
+            case "mostrarInfoDepreciar3":
+                $cadenaSql = " SELECT DISTINCT   ";
+                $cadenaSql .= " id_elemento_ind,  ";
+                $cadenaSql .= " grupo_cuentasalida,  ";
+                $cadenaSql .= " placa,  ";
+                $cadenaSql .= " descripcion,  ";
+                $cadenaSql .= " salida.fecha_registro,  ";
+                $cadenaSql .= " salida.consecutivo,  ";
+                $cadenaSql .= " grupo.catalogo_elemento.elemento_id grupo,  ";
+                $cadenaSql .= " grupo.catalogo_elemento.elemento_codigo grupo_codigo,  ";
+                $cadenaSql .= " grupo.catalogo_elemento.elemento_nombre grupo_nombre,   ";
+                $cadenaSql .= " grupo_vidautil,   ";
+                $cadenaSql .= " elemento.valor,  ";
+                $cadenaSql .= " 0 as valor_cuota,  ";
+                $cadenaSql .= " ajuste as ajuste_inflacionario  ";
+                $cadenaSql .= " FROM arka_inventarios.elemento_individual    ";
+                $cadenaSql .= " JOIN arka_inventarios.elemento ON elemento.id_elemento=elemento_individual.id_elemento_gen   ";
+                $cadenaSql .= " JOIN arka_inventarios.salida ON salida.id_salida=elemento_individual.id_salida   ";
+                $cadenaSql .= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel    ";
+                $cadenaSql .= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_elemento.elemento_catalogo=catalogo.catalogo_lista.lista_id   ";
+                $cadenaSql .= " JOIN grupo.catalogo_elemento ON cast(grupo.catalogo_elemento.elemento_id as character varying)=catalogo.catalogo_elemento.elemento_grupoc   ";
+                $cadenaSql .= " JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(grupo.catalogo_elemento.elemento_id as character varying)   ";
+                $cadenaSql .= " WHERE catalogo.catalogo_elemento.elemento_id>0   ";
+                $cadenaSql .= " AND catalogo.catalogo_lista.lista_activo=1    ";
+                $cadenaSql .= " AND elemento.tipo_bien <> 1  ";
+                $cadenaSql .= " AND elemento.estado=TRUE   ";
+                $cadenaSql .= " AND id_elemento_ind NOT IN (     ";
+                $cadenaSql .= " SELECT id_elemento_ind    ";
+                $cadenaSql .= " FROM estado_elemento   ";
+                $cadenaSql .= " )  ";
+
+                if ($variable ['funcionario'] != '') {
+                    $cadenaSql .= " AND salida.funcionario = '" . $variable ['funcionario'] . "'";
+                }
+
+                if ($variable ['cuenta_salida'] != '') {
+                    $cadenaSql .= " AND grupo_cuentasalida = '" . $variable ['cuenta_salida'] . "'";
+                }
+
+
+                if ($variable ['placa'] != '') {
+                    $cadenaSql .= " AND id_elemento = '" . $variable ['placa'] . "'";
+                }
+
+                if ($variable ['grupo'] != '') {
+                    $cadenaSql.= " AND grupo_id='" . $variable['grupo'] . "' ";
+                }
+
+                $cadenaSql.= " ORDER BY id_elemento_ind ASC ";
+                break;
 
             case "mostrarInfoDepreciado":
                 $cadenaSql = " SELECT  ";

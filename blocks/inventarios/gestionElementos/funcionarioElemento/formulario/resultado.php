@@ -274,6 +274,7 @@ class registrarForm {
 					<th>Descripción</th>
 					<th>Sede</th>
 					<th>Dependencia</th>
+					<th>Espacio Físico</th>
                 	<th>Estado Elemento</th>
 					<th>Detalle Elemento</th> 
 					<th>Registrar<br>Observaciones</th> 
