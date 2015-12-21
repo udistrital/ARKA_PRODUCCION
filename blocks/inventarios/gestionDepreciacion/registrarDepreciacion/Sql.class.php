@@ -163,8 +163,10 @@ class Sql extends \Sql {
                 $cadenaSql.= " FROM grupo.catalogo_elemento ";
                 $cadenaSql.= " JOIN grupo.catalogo_lista ON grupo.catalogo_lista.lista_id=elemento_catalogo ";
                 $cadenaSql.= " WHERE elemento_id>0 ";
+                $cadenaSql.= " AND catalogo_elemento.elemento_tipobien <>1 ";
                 $cadenaSql.= " AND lista_activo=1 ) as consulta";
                 $cadenaSql.= " WHERE value LIKE '%" . $variable . "%' ";
+
                 break;
 
             case "consultar_cuentasalida":
@@ -252,7 +254,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " grupo.catalogo_elemento.elemento_codigo grupo_codigo,  ";
                 $cadenaSql .= " grupo.catalogo_elemento.elemento_nombre grupo_nombre,   ";
                 $cadenaSql .= " grupo_vidautil,   ";
-                $cadenaSql .= " elemento.total_iva_con - elemento.ajuste valor,  ";
+                $cadenaSql .= " elemento.total_iva_con - coalesce(elemento.ajuste,0) valor,  ";
                 $cadenaSql .= " 0 as valor_cuota,  ";
                 $cadenaSql .= " ajuste_inflacionario  ";
                 $cadenaSql .= " FROM arka_inventarios.elemento_individual    ";

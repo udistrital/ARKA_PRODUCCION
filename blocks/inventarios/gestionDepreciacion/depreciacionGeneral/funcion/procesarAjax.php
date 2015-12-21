@@ -9,7 +9,6 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
 
     $arreglo = unserialize($_REQUEST['arreglo']);
     $cadenaSql = $this->sql->getCadenaSql('mostrarInfoDepreciar', $arreglo);
-
     $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
     $arr = array();
@@ -17,7 +16,6 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
     foreach ($items as $key => &$entry) {
         $arr[$entry['grupo_cuentasalida']][$key] = $entry;
     }
-
 
     $a = 0;
     $cuota_inflacion = 0;
@@ -80,8 +78,24 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
             $total_dep56 = $total_dep56 + $circular_depreciacion;
             $total_libros = $total_libros + $valor_libros;
             $nombre_cuenta = $items[$key]['grupo_nombre'];
+
+
+
             $count ++;
         }
+
+        $codificar[$llave] = array(
+            'cuenta' => $llave,
+            'grupo' => $nombre_cuenta,
+            'total_elementos' => $count,
+            'total_valor_historico' => $total_valorhistorico,
+            'total_ajuste_inflacion' => $total_ajusteinflacion,
+            'total_valor_ajustado' => $total_valorajustado,
+            'total_depreciacion' => $total_depreciacion,
+            'total_ajuste_inflacionario' => $total_api,
+            'total_depreciacion_circular56' => $total_dep56,
+            'total_libros' => $total_libros,
+        );
 
         $resultadoFinal[] = array(
             'cuenta' => "<center>" . $llave . "</center>",
@@ -96,6 +110,17 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
             'total_libros' => "<center>" . number_format($total_libros, 2, ',', '.') . "</center>",
         );
     }
+
+    $codificado = array(
+        'json' => json_encode($codificar),
+        'fecha_corte' => $arreglo['fecha_corte'],
+        'estado' => 0,
+        'registro' => date('Y-m-d')
+    );
+
+    $cadenaSql = $this->sql->getCadenaSql('insertarDepreciacion', $codificado);
+    $tmp = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar', $arreglo);
+
 
     $total = count($resultadoFinal);
     $resultado = json_encode($resultadoFinal);

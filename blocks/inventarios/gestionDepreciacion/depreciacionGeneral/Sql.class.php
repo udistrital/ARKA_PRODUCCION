@@ -181,6 +181,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " JOIN grupo.catalogo_lista ON grupo.catalogo_lista.lista_id=elemento_catalogo ";
                 $cadenaSql.= " WHERE elemento_id>0 ";
                 $cadenaSql.= " AND lista_activo=1";
+                $cadenaSql.= " AND catalogo_elemento.elemento_tipobien <>1 ";
                 break;
 
             case "consultar_cuentasalida":
@@ -242,7 +243,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " grupo.catalogo_elemento.elemento_codigo grupo_codigo,  ";
                 $cadenaSql .= " grupo.catalogo_elemento.elemento_nombre grupo_nombre,   ";
                 $cadenaSql .= " grupo_vidautil,   ";
-                $cadenaSql .= " elemento.total_iva_con - elemento.ajuste as valor,  ";
+                $cadenaSql .= " elemento.total_iva_con - coalesce(elemento.ajuste,0) as valor,  ";
                 $cadenaSql .= " 0 as valor_cuota,  ";
                 $cadenaSql .= " ajuste_inflacionario ";
                 $cadenaSql .= " FROM arka_inventarios.elemento_individual    ";
@@ -491,15 +492,67 @@ class Sql extends \Sql {
                 $cadenaSql.= "'" . $variable['valor_libros'] . "', ";
                 $cadenaSql.= "'" . $variable['estado'] . "', ";
                 $cadenaSql.= "'" . $variable['fregistro'] . "') ";
-                $cadenaSql.= ";
-";
+                $cadenaSql.= ";";
                 break;
 
-            case "oracle_prueba":
-                $cadenaSql = "SELECT CON_IDENTIFICADOR, CON_NOMBRE ";
-                $cadenaSql.= "FROM CONTRATISTAS ";
-                $cadenaSql.= "WHERE CON_IDENTIFICADOR = '43542' ";
+            // Para generar el PDF general//
+
+
+            case "insertarDepreciacion":
+                $cadenaSql = " INSERT INTO arka_inventarios.registro_depreciacion( ";
+                $cadenaSql.= " dep_fechacorte, ";
+                $cadenaSql.= " dep_json, ";
+                //   $cadenaSql.= " dep_estado, ";
+                $cadenaSql.= " dep_registro) ";
+                $cadenaSql.= "VALUES (";
+                $cadenaSql.= " '" . $variable['fecha_corte'] . "', ";
+                $cadenaSql.= " '" . $variable['json'] . "', ";
+                //$cadenaSql.= " ".$variable['estado'].", ";
+                $cadenaSql.= " '" . $variable['registro'] . "' ";
+                $cadenaSql.= " ); ";
                 break;
+
+            case "consultarGeneral":
+                $cadenaSql = " SELECT dep_id, dep_fechacorte, dep_json, dep_estado, dep_registro ";
+                $cadenaSql.= " FROM arka_inventarios.registro_depreciacion ";
+                $cadenaSql.= " ORDER BY dep_id DESC ";
+                $cadenaSql.= " LIMIT 1 ";
+                break;
+
+            case "updateGeneral":
+                $cadenaSql = " UPDATE arka_inventarios.registro_depreciacion SET dep_estado=TRUE ";
+                $cadenaSql.= " WHERE dep_id='" . $variable . "'  ";
+                break;
+            
+            
+            case "removeGeneral":
+                $cadenaSql = " DELETE FROM arka_inventarios.registro_depreciacion ";
+                $cadenaSql.= " WHERE dep_estado=FALSE;";
+                break;
+
+            case "datosUsuario":
+                $cadenaSql = " SELECT DISTINCT ";
+                $cadenaSql.=" id_usuario, ";
+                $cadenaSql.=" nombre ||' '||";
+                $cadenaSql.=" apellido as nombre,";
+                $cadenaSql.=" correo ,";
+                $cadenaSql.=" imagen ,";
+                $cadenaSql.=" estado ";
+                $cadenaSql.=" FROM " . $prefijo . "usuario";
+                $cadenaSql.=" WHERE id_usuario='" . $variable . "' ";
+                break;
+
+            case "consultarJefe":
+                $cadenaSql = 'SELECT "FUN_IDENTIFICACION", "FUN_NOMBRE" ';
+                $cadenaSql .= " FROM arka_parametros.arka_funcionarios ";
+                $cadenaSql .= " WHERE 1=1 ";
+                $cadenaSql .= ' AND "FUN_ESTADO"=';
+                $cadenaSql .= "'A'  ";
+                $cadenaSql .= ' AND "FUN_CARGO" ';
+                $cadenaSql .= " ='JEFE DE SECCION' ";
+                $cadenaSql .= ' AND "FUN_DEP_COD_ACADEMICA"=60 ; ';
+                break;
+
             /*             * ***************** */
         }
         return $cadenaSql;

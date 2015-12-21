@@ -3,6 +3,7 @@
  * Los datos del bloque se encuentran en el arreglo $esteBloque.
  */
 // URL base
+
 $url = $this->miConfigurador->getVariableConfiguracion("host");
 $url.= $this->miConfigurador->getVariableConfiguracion("site");
 $url.= "/index.php?";
@@ -46,6 +47,7 @@ $arreglo = array(
 $arreglo = serialize($arreglo);
 
 $cadenaACodificar2.= "&arreglo=" . $arreglo;
+$cadenaACodificar2.= "&usuario=" . $_REQUEST['usuario'];
 
 // Codificar las variables
 $enlace2 = $this->miConfigurador->getVariableConfiguracion("enlace");
@@ -55,16 +57,14 @@ $cadena2 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cade
 $urlFinal2 = $url . $cadena2;
 ?>
 <script type='text/javascript'>
-
-
     $(function () {
         $('#tablaTitulos').ready(function () {
 
             $('#tablaTitulos').dataTable({
                 dom: 'Blfrtip',
                 buttons: [
-                    'csvFlash',
-                    'excelFlash',
+                    'csv',
+                    'excel',
                 ],
                 language: {
                     url: "<?php echo $urlDirectorio ?>"
@@ -72,10 +72,9 @@ $urlFinal2 = $url . $cadena2;
                 processing: true,
                 searching: true,
                 info: true,
-                paging: true,
                 ajax: {
                     url: "<?php echo $urlFinal2 ?>",
-                    dataSrc: "data"
+                    dataSrc: "data",
                 },
                 columns: [
                     {data: "cuenta"},
@@ -92,7 +91,6 @@ $urlFinal2 = $url . $cadena2;
             });
         });
     });
-
-
 </script>
+
 

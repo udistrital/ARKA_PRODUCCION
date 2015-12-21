@@ -278,7 +278,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "JOIN elemento_individual ON elemento_individual.id_elemento_gen = elemento.id_elemento ";
 				$cadenaSql .= "JOIN entrada ON entrada.id_entrada = elemento.id_entrada ";
 				$cadenaSql .= "WHERE  elemento.estado=TRUE ";
-				// $cadenaSql .= "AND elemento_individual.id_salida IS NULL ";
+				$cadenaSql .= "AND elemento_individual.id_salida IS NULL ";
 				$cadenaSql .= "AND entrada.cierre_contable='f' ";
 				$cadenaSql .= "AND   entrada.estado_entrada='1' ";
 				$cadenaSql .= "AND elemento_individual.estado_registro='TRUE' ";
@@ -319,7 +319,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "AND elemento.estado='t' ";
 				$cadenaSql .= "AND entrada.cierre_contable='f' ";
 // 				$cadenaSql .= "AND elemento_individual.estado_registro='t' ";
-				// $cadenaSql .= "AND elemento_individual.id_salida IS NULL ";
+				$cadenaSql .= "AND elemento_individual.id_salida IS NULL ";
 				$cadenaSql .= "AND   entrada.estado_registro='t' ";
 				$cadenaSql .= "AND   entrada.estado_entrada='1' ";
 				$cadenaSql .= "AND   tipo_bienes.id_tipo_bienes='1' ";
@@ -413,7 +413,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " marca='" . $variable [11] . "', ";
 				$cadenaSql .= " serie='" . $variable [12] . "',  ";
 				$cadenaSql .= " nivel='" . $variable [14] . "',  ";
-				$cadenaSql .= " cantidad_por_asignar='0'  ";
+				$cadenaSql .= " cantidad_por_asignar='" . $variable [2] . "'  ";
 				$cadenaSql .= "  WHERE id_elemento='" . $variable [13] . "';";
 				
 				break;
@@ -440,7 +440,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " marca='" . $variable [14] . "', ";
 				$cadenaSql .= " serie='" . $variable [15] . "', ";
 				$cadenaSql .= " nivel='" . $variable [17] . "', ";
-				$cadenaSql .= " cantidad_por_asignar='0'  ";
+				$cadenaSql .= " cantidad_por_asignar='" . $variable [2] . "'  ";
 				$cadenaSql .= "  WHERE id_elemento='" . $variable [16] . "';";
 				
 				break;

@@ -98,6 +98,13 @@ class RegistradorOrden {
 					
 					if ($valor ['tipo_bien'] != 1) {
 						
+						$cadenaSql = $this->miSql->getCadenaSql ( 'ActualizarElementosIndividuales', array (
+								$valor ['identificacion_elemento'],
+								1 
+						) );
+						
+						$elementos_inds = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso", $valor, "ActualizarElementosIndividuales" );
+						
 						$cadenaSql = $this->miSql->getCadenaSql ( 'LimpiarElementosIndividuales', $valor ['identificacion_elemento'] );
 						$elementos_inds = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso", $valor, "LimpiarElementosIndividuales" );
 					} else {
