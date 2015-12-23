@@ -99,7 +99,7 @@ class RegistradorOrden {
 					if ($valor ['tipo_bien'] != 1) {
 						
 						$cadenaSql = $this->miSql->getCadenaSql ( 'ActualizarElementosIndividuales', array (
-								$valor ['identificacion_elemento'],
+								$valor ['identificacion_elemento_general'],
 								1 
 						) );
 						
@@ -110,7 +110,7 @@ class RegistradorOrden {
 					} else {
 						
 						$cadenaSql = $this->miSql->getCadenaSql ( 'ActualizarElementosIndividuales', array (
-								$valor ['identificacion_elemento'],
+								$valor ['identificacion_elemento_general'],
 								$valor ['cantidad_por_asignar'] + $valor ['cantidad_asignada'] 
 						) );
 						

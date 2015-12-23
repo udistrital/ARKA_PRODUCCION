@@ -643,7 +643,8 @@ class registrarForm {
 							echo "<thead>
 				                <tr>
 				                   <th>Nivel Inventarios</th>
-				                    <th>Cantidad</th>
+									
+									<th>Cantidad</th>
 									<th>Nombre</th>
 									<th>Elementos Descargar</th>
 							    </tr>
@@ -661,6 +662,7 @@ class registrarForm {
 								if ($elementos_restantes) {
 									$mostrarHtml = "<tr>
 						                    <td><center>" . $elementos [$i] ['item'] . "</center></td>
+						                    
 						                    <td><center>" . $elementos [$i] ['cantidad_asignada'] . "</center></td>";
 									
 									$mostrarHtml .= "<td><center>" . $elementos [$i] ['descripcion'] . "</center></td>
