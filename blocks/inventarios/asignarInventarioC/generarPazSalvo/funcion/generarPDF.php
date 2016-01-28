@@ -52,10 +52,31 @@ class RegistradorActa {
         $meses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
         $fecha_ps = $dias[date('w')] . ' ' . date('d') . ' de ' . $meses[date('n') - 1] . ' de ' . date('Y');
 
-        $conexion = "sicapital";
-        $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-       $cadenaSql2 = $this->miSql->getCadenaSql('datosContratista', $_REQUEST['documentoContratista']);
+        
+        
+//         var_dump($_REQUEST);
+        $conexion = "inventarios";
+        $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+        
+        
+       	$cadenaSql2 = $this->miSql->getCadenaSql('datosContratista', $_REQUEST['documentoContratista']);
         $datos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "busqueda");
+        
+        
+//         var_dump($datos_contratista);
+
+        $cadenaSql = $this->miSql->getCadenaSql ( 'datosFuncionario',$_REQUEST['funcionario'] );
+        
+        $funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+        
+//         var_dump($funcionario);
+
+        $cadenaSql = $this->miSql->getCadenaSql ( 'jefe_recursos_fisicos' );
+
+        $jefe = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+        $jefe = $jefe [0];
+        
+//         var_dump($jefe);exit;
         
         $ContenidoPdf = "
 <style type=\"text/css\">
@@ -88,19 +109,19 @@ class RegistradorActa {
         
     }
 </style>
-<page backtop='55mm' backbottom='20mm' backleft='30mm' backright='10mm' pagegroup='new'>
+<page backtop='55mm' backbottom='20mm' backleft='10mm' backright='10mm' pagegroup='new'>
 <page_header>
-    <table align='right'>
+    <table>
         <thead>
             <tr>
-                <th style=\"width:10px;\" colspan=\"1\">
+                <th style=\"width:50px;text-align:center;\" colspan=\"1\">
                     <img alt=\"Imagen\" src=" . $rutaBloque . "/css/images/escudo1.png\" />
                 </th>
                 <th style=\"width:600px;font-size:15px;\" colspan=\"1\">
-                    <br>UNIVERSIDAD DISTRITAL FRANCISCO JOSÉ DE CALDAS
+                    <br><br><br>UNIVERSIDAD DISTRITAL FRANCISCO JOSÉ DE CALDAS
                     <br> NIT 899999230-7<br>
-                    <br> SISTEMA DE GESTIÓN DE INVENTARIOS Y ALMACÉN<br><br>
-                    <br> " . $fecha_ps . "<br><br>
+                    <br>
+                     " . $fecha_ps . "<br><br>
                 </th>
                             </tr>
         </thead>        
@@ -109,8 +130,68 @@ class RegistradorActa {
     <br>
 </page_header>
 
-<page_footer>
-    <table align='center' width='100%'>
+
+
+             
+            <table align='right'>
+                    <tr>
+                    <td align:center style=\"font-size:16px; text-align:center; \" >
+                            <b>LA SECCIÓN DE ALMACEN E INVENTARIOS INFORMA<br>
+                            </b>
+                            <br><br><br><br>
+                            </td>
+                    </tr>
+                    <tr>
+                     <td  style=\"text-align:justify;font-size:12px;\">
+                            Que el contratista <B>".$datos_contratista[0]["CON_NOMBRE"]."</B> con cédula de ciudadanía No. <B>".$datos_contratista[0]["CON_IDENTIFICACION"]."</B> con contrato ".$_REQUEST['tipo_contrato']." Número <B>".$_REQUEST['numero_contrato']."</B> y Vigencia <B>".$_REQUEST['vigencia']."</B>,  
+                            ha entregado los elementos correspondientes a su relación contractual y quien certifica es el Supervisor y/o Funcionario ".$funcionario [0]['FUN_NOMBRE']." por lo tanto se encuentra
+                            a <b>PAZ Y SALVO</b> con la Universidad Distrital Francisco José de Caldas.
+                            <br><br><br><br><br><br><br>
+                            Se firma el día " . $fecha_ps . ".
+                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td   align=justify style=\"font-size:12px;\" >
+                            <br><br><br><br>
+                        </td>
+                    </tr>
+               
+                </table>
+
+
+             
+              
+";
+        
+        
+        
+        
+
+        $ContenidoPdf.="
+    	
+			<page_footer  '1mm' backbottom='1mm' backleft='10mm' backright='10mm'>
+			
+				
+			<table style='width:100%; background:#FFFFFF ; border: 0px  #FFFFFF;'>
+			<tr>
+			
+			<td style='width:100%;text-align:center;background:#FFFFFF ; border: 0px  #FFFFFF;'>  ____________________________________</td>
+			</tr>
+			<tr>
+					
+			<td style='width:100%;text-align:center;background:#FFFFFF ; border: 0px  #FFFFFF;'>" . $funcionario [0]['FUN_NOMBRE'] . "</td>
+			
+			</tr>
+			<tr>
+			
+			<td style='width:100%;text-align:center;background:#FFFFFF ; border: 0px  #FFFFFF; text-transform:capitalize;'>Funcionario y/o Supervisor</td>
+			</tr>
+			</table>
+		  <br><br><br><br><br>
+					
+					
+					 <table align='center' width='100%'>
         <tr>
             <th align='center' style=\"width: 750px;\">
                 Universidad Distrital Francisco José de Caldas
@@ -123,44 +204,13 @@ class RegistradorActa {
             </th>
         </tr>
     </table>
-             <p style='text-align: right; font-size:10px;'>[[page_cu]]/[[page_nb]]</p>
-</page_footer> 
+					
 
-             
-            <table align='right'>
-                    <tr>
-                    <td align:center style=\"font-size:16px; text-align:center; \" >
-                            <b>LA DEPENDENCIA DE GESTIÓN DE INVENTARIOS Y ALMACÉN <br>
-                            INFORMA</b>
-                            <br><br><br><br>
-                            </td>
-                    </tr>
-                    <tr>
-                     <td align:justify style=\"font-size:12px;\">
-                            Que el contratista ".$datos_contratista[0]["CON_NOMBRE"]." con cédula de ciudadanía No. ".$datos_contratista[0]["CON_IDENTIFICACION"].", 
-                            ha entregado los elementos correspondientes a su relación contraactual, y por lo tanto se encuentra
-                            a <b>PAZ Y SALVO</b> con la dependencia.
-                            <br><br><br><br><br><br><br>
-                            Se firma el día " . $fecha_ps . ".
-                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td   align=justify style=\"font-size:12px;\" >
-                            <br><br><br><br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align=center>
-                            <br><b>JEFE DEPENDENCIA DE ALMACÉN</b>
-                        </td>
-                    </tr>
-                </table>
-
-</page>
-             
-              
-";
+				
+		
+			</page_footer> </page>";  
+        
+        
         return $ContenidoPdf;
     }
 

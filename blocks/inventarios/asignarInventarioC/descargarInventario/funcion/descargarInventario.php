@@ -69,10 +69,11 @@ class RegistradorActa {
 			);
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'inactivarAsignacion', $datosInactivar1 );
-			$inasignar = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "insertar", $datosInactivar1, "inactivarAsignacion" );
+			
+			$inasignar = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso", $datosInactivar1, "inactivarAsignacion" );
 			
 			$cadenaSql2 = $this->miSql->getCadenaSql ( 'inactivarElemento', $datosInactivar );
-			$inactivar = $esteRecursoDB->ejecutarAcceso ( $cadenaSql2, "insertar", $datosInactivar, "inactivarElemento" );
+			$inactivar = $esteRecursoDB->ejecutarAcceso ( $cadenaSql2, "acceso", $datosInactivar, "inactivarElemento" );
 		}
 		
 		if ($inactivar == true) {
@@ -102,11 +103,13 @@ class RegistradorActa {
 				$_REQUEST ['usuario'] 
 		);
 		
-		if ($inactivar == true && $inasignar == true) {
+		
+		
+		if ( $inactivar == true && $inasignar==true) {
 			redireccion::redireccionar ( 'inserto', $datos );
 			exit;
 		} else {
-			redireccion::redireccionar ( 'noInserto', $_REQUEST['usuario'] );
+			redireccion::redireccionar ( 'noInserto', $datos);
 			exit;
 			
 		}

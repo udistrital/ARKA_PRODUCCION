@@ -39,17 +39,37 @@ class RegistradorOrden {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        if ($fechaActual == $fechaReinicio) {
+//         if ($fechaActual == $fechaReinicio) {
 
-            $cadenaSql = $this->miSql->getCadenaSql('consultaConsecutivo', $fechaReinicio);
-            $consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+//             $cadenaSql = $this->miSql->getCadenaSql('consultaConsecutivo', $fechaReinicio);
+//             $consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-            if (isset($consecutivo) && $consecutivo == false) {
-                $cadenaSql = $this->miSql->getCadenaSql('reiniciarConsecutivo');
-                $consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
-            }
+//             if (isset($consecutivo) && $consecutivo == false) {
+//                 $cadenaSql = $this->miSql->getCadenaSql('reiniciarConsecutivo');
+//                 $consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+//             }
+//         }
+
+        
+        
+        
+        $AnioActual = date ( 'Y' );
+        $cadenaSql = $this->miSql->getCadenaSql ( 'consultaConsecutivo', $AnioActual );
+        
+        $consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+        
+        if ($consecutivo == false) {
+        		
+        	$cadenaSql = $this->miSql->getCadenaSql ( 'reiniciarConsecutivo' );
+        		
+        	$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
         }
-
+        
+        
+        
+        
+        
+        
         $cadenaSql = $this->miSql->getCadenaSql('id_salida_maximo');
 
         $max_id_salida = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
@@ -183,33 +203,33 @@ class RegistradorOrden {
         }
 
 
-        // GENERAR LOS DATOS DE LA DEPRECIACIÓN PARA CADA ELEMENTO
-        // Consultar los elementos asociados a la salida
-        $cadenaSql = $this->miSql->getCadenaSql('elementos_salida', $id_salida [0] [0]);
-        $elementos_salida = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
-
-        foreach ($elementos_salida as $key => $values) {
-            // Consultar los datos para la generación
-            // Cálculos
-            $precio = $elementos_salida[$key]['total_iva_con'];
-            $vida_util = $elementos_salida[$key]['grupo_vidautil'];
-            $valor_cuota = round($precio / $vida_util, 4);
-
-            // Registro de la depreciación 
-            $cadena_depreciacion = array(
-                'id_elemento_ind' => $elementos_salida[$key]['id_elemento_ind'],
-                'id_salida' => $elementos_salida[$key]['id_salida'],
-                'fecha_salida' => $elementos_salida[$key]['fecha_salida'],
-                'grupo_contable' => $elementos_salida[$key]['grupo_id'],
-                'vida_util' => $elementos_salida[$key]['grupo_vidautil'],
-                'valor' => $elementos_salida[$key]['total_iva_con'],
-                'valor_cuota' => $valor_cuota,
-            );
-
-            $cadenaSql = $this->miSql->getCadenaSql('registro_detalle_depreciacion', $cadena_depreciacion);
-            $registro_data_depreciacion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
-        }
+//        // GENERAR LOS DATOS DE LA DEPRECIACIÓN PARA CADA ELEMENTO
+//        // Consultar los elementos asociados a la salida
+//        $cadenaSql = $this->miSql->getCadenaSql('elementos_salida', $id_salida [0] [0]);
+//        $elementos_salida = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+//
+//
+//        foreach ($elementos_salida as $key => $values) {
+//            // Consultar los datos para la generación
+//            // Cálculos
+//            $precio = $elementos_salida[$key]['total_iva_con'];
+//            $vida_util = $elementos_salida[$key]['grupo_vidautil'];
+//            $valor_cuota = round($precio / $vida_util, 4);
+//
+//            // Registro de la depreciación 
+//            $cadena_depreciacion = array(
+//                'id_elemento_ind' => $elementos_salida[$key]['id_elemento_ind'],
+//                'id_salida' => $elementos_salida[$key]['id_salida'],
+//                'fecha_salida' => $elementos_salida[$key]['fecha_salida'],
+//                'grupo_contable' => $elementos_salida[$key]['grupo_id'],
+//                'vida_util' => $elementos_salida[$key]['grupo_vidautil'],
+//                'valor' => $elementos_salida[$key]['total_iva_con'],
+//                'valor_cuota' => $valor_cuota,
+//            );
+//
+//            $cadenaSql = $this->miSql->getCadenaSql('registro_detalle_depreciacion', $cadena_depreciacion);
+//            $registro_data_depreciacion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
+//        }
 
         // ----- Salidas Contables ----------
 
@@ -217,8 +237,6 @@ class RegistradorOrden {
         $elementos_tipo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         foreach ($elementos_tipo as $elemento) {
-
-            //Aprovechemos para crear las cosas de depreciación
 
             switch ($elemento ['tipo_bien']) {
                 case '1' :
@@ -261,7 +279,7 @@ class RegistradorOrden {
                     );
 
                     $cadenaSql = $this->miSql->getCadenaSql('SalidaContableVigencia', $arreglo);
-
+                    
                     $max_consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
                     if (is_null($max_consecutivo [0] [0])) {
@@ -294,7 +312,7 @@ class RegistradorOrden {
                     );
 
                     $cadenaSql = $this->miSql->getCadenaSql('SalidaContableVigencia', $arreglo);
-
+                    
                     $max_consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
                     if (is_null($max_consecutivo [0] [0])) {

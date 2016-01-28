@@ -617,7 +617,7 @@ class Sql extends \Sql {
 			case 'consultaConsecutivo' :
 				$cadenaSql = "SELECT consecutivo ";
 				$cadenaSql .= "FROM entrada  ";
-				$cadenaSql .= "WHERE  fecha_registro='" . $variable . "';";
+				$cadenaSql .= "WHERE  vigencia='" . $variable . "';";
 				
 				break;
 			

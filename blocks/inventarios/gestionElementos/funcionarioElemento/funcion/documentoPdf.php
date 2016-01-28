@@ -166,9 +166,10 @@ class RegistradorOrden {
 			<td style='width:10%;text-align=center;'>Dependencia</td>
 			<td style='width:10%;text-align=center;'>Sede</td>
 			<td style='width:10%;text-align=center;'>Espacio Físico</td>
-			<td style='width:35%;text-align=center;'>Descripción</td>
+			<td style='width:20%;text-align=center;'>Descripción</td>
 			<td style='width:10%;text-align=center;'>Marca y Serie</td>
 			<td style='width:5%;text-align=center;'>Estado</td>
+			<td style='width:15%;text-align=center;'>Contratista<br>A Cargo</td>
 			<td style='width:10%;text-align=center;'>Verificación</td>
 			</tr>";
 			
@@ -179,9 +180,10 @@ class RegistradorOrden {
                     			<td style='width:10%;text-align=center;'><font size='0.5px'>" . $valor ['dependencia'] . "</font></td>
                     			<td style='width:10%;text-align=center;'><font size='0.5px'>" . $valor ['sede'] . "</font></td>
                     			<td style='width:10%;text-align=center;'><font size='0.5px'>" . $valor ['espacio_fisico'] . "</font></td>
-                    			<td style='width:35%;text-align=center;'>" . $valor ['descripcion_elemento'] . "</td>
+                    			<td style='width:20%;text-align=center;'>" . $valor ['descripcion_elemento'] . "</td>
                     			<td style='width:10%;text-align=center;'>" . $valor ['marca'] . " - " . $valor ['serie'] . "</td>
                     			<td style='width:5%;text-align=center;'>" . $valor ['estado_bien'] . "</td>
+                    			<td style='width:15%;text-align=center;'>" . $valor ['contratista'] . "</td>
                     			<td style='width:10%;text-align=center;'>" . $valor ['marca_existencia'] . "</td>
                     			</tr>";
 			}
@@ -327,9 +329,10 @@ class RegistradorOrden {
 			<td style='width:10%;text-align=center;'>Dependencia</td>
 			<td style='width:10%;text-align=center;'>Sede</td>
 			<td style='width:10%;text-align=center;'>Espacio Físico</td>
-			<td style='width:35%;text-align=center;'>Descripción</td>
+			<td style='width:20%;text-align=center;'>Descripción</td>
 			<td style='width:10%;text-align=center;'>Marca y Serie</td>
 			<td style='width:5%;text-align=center;'>Estado</td>
+			<td style='width:15%;text-align=center;'>Contratista<br>A Cargo</td>
 			<td style='width:10%;text-align=center;'>Verificación</td>
 			</tr>";
 			
@@ -340,9 +343,10 @@ class RegistradorOrden {
                     			<td style='width:10%;text-align=center;'><font size='0.5px'>" . $valor ['dependencia'] . "</font></td>
                     			<td style='width:10%;text-align=center;'><font size='0.5px'>" . $valor ['sede'] . "</font></td>
                     			<td style='width:10%;text-align=center;'><font size='0.5px'>" . $valor ['espacio_fisico'] . "</font></td>
-                    			<td style='width:35%;text-align=center;'>" . $valor ['descripcion_elemento'] . "</td>
+                    			<td style='width:20%;text-align=center;'>" . $valor ['descripcion_elemento'] . "</td>
                     			<td style='width:10%;text-align=center;'>" . $valor ['marca'] . " - " . $valor ['serie'] . "</td>
                     			<td style='width:5%;text-align=center;'>" . $valor ['estado_bien'] . "</td>
+                    			<td style='width:15%;text-align=center;'>" . $valor ['contratista'] . "</td>
                     			<td style='width:10%;text-align=center;'>" . $valor ['marca_existencia'] . "</td>
                     			</tr>";
 			}

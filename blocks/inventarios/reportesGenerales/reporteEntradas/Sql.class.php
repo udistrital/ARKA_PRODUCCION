@@ -308,6 +308,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " JOIN arka_inventarios.elemento ON elemento.id_entrada=entrada.id_entrada ";
                 $cadenaSql.= "WHERE estado_registro='TRUE' ";
                 $cadenaSql.= "AND 1=1 ";
+                $cadenaSql.= "AND entrada.estado_entrada <> 3 ";
 
                 if ($variable ['numero_entrada'] != '') {
                     $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['numero_entrada'] . "'";
@@ -355,7 +356,6 @@ class Sql extends \Sql {
                 $cadenaSql.= ' LEFT JOIN arka_parametros.arka_proveedor ON arka_parametros.arka_proveedor."PRO_NIT"=cast(proveedor as character varying) ';
                 $cadenaSql.= " WHERE estado_registro='TRUE' ";
                 $cadenaSql.= " AND id_entrada='" . $variable . "' ";
-
                 break;
 
 

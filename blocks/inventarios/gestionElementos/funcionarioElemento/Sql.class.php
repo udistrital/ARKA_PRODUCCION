@@ -298,7 +298,8 @@ class Sql extends \Sql {
                 						CASE
                 						WHEN  tfs.descripcion IS  NULL THEN 'Activo'
 										ELSE  tfs.descripcion  
-                						END   as estado_bien, ele.descripcion descripcion_elemento, eli.confirmada_existencia , eli.tipo_confirmada, espacios.\"ESF_NOMBRE_ESPACIO\" espaciofisico " ;
+                						END   as estado_bien, ele.descripcion descripcion_elemento, eli.confirmada_existencia , eli.tipo_confirmada, espacios.\"ESF_NOMBRE_ESPACIO\" espaciofisico,
+										crn.\"CON_IDENTIFICACION\"||'-'||crn.\"CON_NOMBRE\" contratista " ;
 				$cadenaSql .= "FROM elemento_individual  eli ";
 				$cadenaSql .= "JOIN elemento ele ON ele.id_elemento =eli .id_elemento_gen ";
 				$cadenaSql .= "JOIN tipo_bienes  tb ON tb.id_tipo_bienes = ele.tipo_bien ";
@@ -308,8 +309,11 @@ class Sql extends \Sql {
 				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=eli.ubicacion_elemento ';
 				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_dependencia as ad ON ad."ESF_ID_ESPACIO"=eli.ubicacion_elemento ';
 				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_sedes as sas ON sas."ESF_COD_SEDE"=espacios."ESF_COD_SEDE" ';
+				$cadenaSql .= ' LEFT JOIN  asignar_elementos asl ON asl.id_elemento=eli.id_elemento_ind ';
+				$cadenaSql .= ' LEFT JOIN  arka_parametros.arka_contratistas crn ON crn."CON_IDENTIFICACION"=asl.contratista  ';	
 				$cadenaSql .= "WHERE tb.id_tipo_bienes <> 1 ";
 				$cadenaSql .= " AND eli.estado_registro = 'TRUE'  ";
+				
 				$cadenaSql .= " AND eli.funcionario= '" . $variable ['funcionario'] . "' ";
 				
 				if ($variable ['sede'] != '') {
@@ -325,7 +329,7 @@ class Sql extends \Sql {
 					$cadenaSql .= ' AND espacios."ESF_ID_ESPACIO" = ';
 					$cadenaSql .= " '" . $variable ['ubicacion'] . "' ";
 				}
-				
+				$cadenaSql .= " OR asl.estado = 1  ";
 				$cadenaSql .= " ORDER BY dependencia DESC   ;  ";
 				
 				break;

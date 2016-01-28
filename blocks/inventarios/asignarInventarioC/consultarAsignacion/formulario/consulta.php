@@ -41,15 +41,14 @@ class registrarForm {
         $atributosGlobales ['campoSeguro'] = 'true';
 
 
-        $_REQUEST['usuario'] = '28851755';
+        
         $_REQUEST ['tiempo'] = time();
         $tiempo = $_REQUEST ['tiempo'];
         // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $conexion2 = "sicapital";
-        $esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
+
         // Limpia Items Tabla temporal
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
@@ -76,7 +75,7 @@ class registrarForm {
             $atributos ['id'] = $esteCampo;
             $atributos ["estilo"] = "jqueryui";
             $atributos ['tipoEtiqueta'] = 'inicio';
-            $atributos ["leyenda"] = "Consultar Contratista para Modificar Asignación de Elementos";
+            $atributos ["leyenda"] = "Consultar Contratista para Modificar Préstamo de Elementos";
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
 
@@ -92,10 +91,10 @@ class registrarForm {
             $atributos ['tab'] = $tab;
             $atributos ['tamanno'] = 1;
             $atributos ['estilo'] = 'jqueryui';
-            $atributos ['validar'] = 'required, minSize[1],maxSize[15],custom[onlyNumberSp]';
+            $atributos ['validar'] = 'required';
             $atributos ['limitar'] = false;
             $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-            $atributos ['anchoEtiqueta'] = 213;
+            $atributos ['anchoEtiqueta'] = 185;
 
             if (isset($_REQUEST[0][$esteCampo])) {
                 $atributos ['valor'] = $_REQUEST[0][$esteCampo];
@@ -104,7 +103,7 @@ class registrarForm {
             }
 
             $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("contratistas");
-            $matrizItems = $esteRecursoDB2->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+            $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
             $atributos ['matrizItems'] = $matrizItems;
 
             // Utilizar lo siguiente cuando no se pase un arreglo:
@@ -166,6 +165,11 @@ class registrarForm {
         $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
         $valorCodificado .= "&opcion=consultarContratista";
         $valorCodificado .= "&usuario=" . $_REQUEST['usuario'];
+        $valorCodificado .= "&funcionario=" . $_REQUEST['usuario'];
+        if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+        		
+        	$valorCodificado .= "&accesoCondor=true";
+        }
         /**
          * SARA permite que los nombres de los campos sean dinámicos.
          * Para ello utiliza la hora en que es creado el formulario para

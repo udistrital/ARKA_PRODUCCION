@@ -248,6 +248,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " ajuste_inflacionario ";
                 $cadenaSql .= " FROM arka_inventarios.elemento_individual    ";
                 $cadenaSql .= " JOIN arka_inventarios.elemento ON elemento.id_elemento=elemento_individual.id_elemento_gen   ";
+                $cadenaSql .= " JOIN arka_inventarios.entrada ON entrada.id_entrada=elemento.id_entrada ";
                 $cadenaSql .= " JOIN arka_inventarios.salida ON salida.id_salida=elemento_individual.id_salida   ";
                 $cadenaSql .= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel    ";
                 $cadenaSql .= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_elemento.elemento_catalogo=catalogo.catalogo_lista.lista_id   ";
@@ -256,6 +257,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " WHERE catalogo.catalogo_elemento.elemento_id>0   ";
                 $cadenaSql .= " AND catalogo.catalogo_lista.lista_activo=1    ";
                 $cadenaSql .= " AND elemento.tipo_bien <> 1  ";
+                $cadenaSql .= " AND entrada.estado_entrada <> 3 ";
                 $cadenaSql .= " AND elemento.estado=TRUE   ";
                 $cadenaSql .= " AND id_elemento_ind NOT IN (     ";
                 $cadenaSql .= " SELECT id_elemento_ind    ";

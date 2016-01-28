@@ -23,6 +23,7 @@ $this->idioma ["observacionesActa"] ="Observaciones: ";
 $this->idioma ["aprobacionCheck"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp¿Aprobado?:";
 $this->idioma ["aprobacionCheckTitulo"] ="Seleccione en caso de ser aprobado";
 
+$this->idioma ["botonDocumentoSoporte"] ="Documento Soporte Asignación Elementos ";
 
 $this->idioma ["botonAceptar"] ="Modificar Elementos";
 $this->idioma ["botonCancelar"] ="Cancelar";

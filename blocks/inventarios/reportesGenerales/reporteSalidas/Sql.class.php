@@ -366,6 +366,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " 'A') as dependencias ";
                 $cadenaSql.= ' ON dependencias."ESF_CODIGO_DEP"=salida.dependencia ';
                 $cadenaSql.= ' WHERE 1=1 AND entrada.id_entrada=salida.id_entrada ';
+                $cadenaSql.= "AND entrada.estado_entrada <> 3 ";
 
                 if ($variable ['dependencia'] != '') {
                     $cadenaSql .= ' AND dependencias."ESF_CODIGO_DEP" = ';
@@ -435,7 +436,7 @@ class Sql extends \Sql {
 
             case "consultarElementos_pdf":
                 $cadenaSql = "SELECT grupo_cuentasalida, unidad, cantidad, elemento.descripcion, valor,  ";
-                $cadenaSql .= " subtotal_sin_iva, aplicacion_iva.iva, total_iva, total_iva_con ,  tipo_bienes.descripcion as tipo_bien, placa,elemento.marca||' - '||elemento.serie datos_elem  ";
+                $cadenaSql .= " subtotal_sin_iva, aplicacion_iva.iva, total_iva, total_iva_con ,  tipo_bienes.descripcion as tipo_bien, placa ";
                 $cadenaSql .= " FROM arka_inventarios.elemento  ";
                 $cadenaSql .= " JOIN arka_inventarios.elemento_individual On elemento_individual.id_elemento_gen=elemento.id_elemento ";
                 $cadenaSql .= " JOIN arka_inventarios.salida ON elemento_individual.id_salida=salida.id_salida  ";
@@ -446,7 +447,6 @@ class Sql extends \Sql {
                 $cadenaSql .= " WHERE elemento.estado='1'  ";
                 $cadenaSql .= " AND salida.id_salida='" . $variable . "' ";
                 $cadenaSql .= " ORDER BY grupo_cuentasalida ASC  ";
-                
                 break;
 
             case "consultarJefe":

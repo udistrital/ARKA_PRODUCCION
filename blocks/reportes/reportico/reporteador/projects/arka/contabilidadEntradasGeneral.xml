@@ -20,6 +20,8 @@ LEFT JOIN arka_parametros.arka_proveedor ON arka_parametros.arka_proveedor.&quot
 JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=aele.nivel
 JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=catalogo.catalogo_elemento.elemento_grupoc
 JOIN arka_inventarios.aplicacion_iva ON id_iva=aele.iva
+WHERE 1=1
+AND ae.estado_entrada &lt;&gt; 3
 GROUP BY consecutivo, 
 proveedor,
 grupo_cuentaentrada,

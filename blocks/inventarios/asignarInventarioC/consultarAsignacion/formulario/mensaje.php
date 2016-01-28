@@ -75,9 +75,18 @@ class registrarForm {
 			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
 			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
 			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
-				
+			$_REQUEST['funcionario']= $_REQUEST ['usuario'];
 			$variable = "pagina=" . $miPaginaActual;
-			$variable .= "&usuario=".$_REQUEST['usuario'];
+			$variable .= "&usuario=" . $_REQUEST ['usuario'];
+			$variable .= "&funcionario=" . $_REQUEST ['funcionario'];
+			
+			
+			if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+			
+				$variable	 .= "&accesoCondor=true";
+			}
+			
+			
 			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
 			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -105,7 +114,7 @@ class registrarForm {
 			{
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirma') {
 					
-					$mensaje = "Se realizó la asignación de los items para el contratista ".$_REQUEST['contratista'];
+					$mensaje = "Se realizó la Modificación de los Elementos del Contratista ".$_REQUEST['contratista'];
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -123,7 +132,7 @@ class registrarForm {
 				}
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No fue posible realizar la asignación de los items al contratista.";
+					$mensaje = "No fue posible realizar modificación de  la asignación de los items al contratista.<br>Verifique los Datos";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -184,7 +193,7 @@ class registrarForm {
 			
 			// Aplica atributos globales al control
 			$atributos = array_merge ( $atributos, $atributosGlobales );
-			echo $this->miFormulario->campoBoton ( $atributos );
+// 			echo $this->miFormulario->campoBoton ( $atributos );
 			// -----------------FIN CONTROL: Botón -----------------------------------------------------------
 			
 			echo $this->miFormulario->marcoAgrupacion ( 'fin' );

@@ -100,6 +100,7 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
 				'dependencia' => "<center>" . $resultado [$i] ['dependencia'] . "</center>",
 				'espaciofisico' => "<center>" . $resultado [$i] ['espaciofisico'] . "</center>",
 				'estadoelemento' => "<center>" . $resultado [$i] ['estado_bien'] . "</center>",
+				'contratista' => "<center>" . $resultado [$i] ['contratista'] . "</center>",
 				'detalle' => "<center><a href='" . $VariableDetalles . "'><u>Ver Detalles</u></a></center>",
 				'observaciones' => "<center><a href='" . $VariableObservaciones . "'>&#9658; &blk34;</a></center>",
 				'verificacion' => "<center>" . $item . "</center>" 

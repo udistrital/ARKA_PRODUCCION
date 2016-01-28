@@ -46,8 +46,6 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $conexion2 = "sicapital";
-        $esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
         // Limpia Items Tabla temporal
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
@@ -92,10 +90,10 @@ class registrarForm {
             $atributos ['tab'] = $tab;
             $atributos ['tamanno'] = 1;
             $atributos ['estilo'] = 'jqueryui';
-            $atributos ['validar'] = 'required, minSize[1],maxSize[15],custom[onlyNumberSp]';
+            $atributos ['validar'] = 'required';
             $atributos ['limitar'] = false;
             $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-            $atributos ['anchoEtiqueta'] = 213;
+            $atributos ['anchoEtiqueta'] = 185;
 
             if (isset($_REQUEST[0][$esteCampo])) {
                 $atributos ['valor'] = $_REQUEST[0][$esteCampo];
@@ -104,7 +102,7 @@ class registrarForm {
             }
 
             $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("contratistas");
-            $matrizItems = $esteRecursoDB2->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+            $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
             $atributos ['matrizItems'] = $matrizItems;
 
             // Utilizar lo siguiente cuando no se pase un arreglo:

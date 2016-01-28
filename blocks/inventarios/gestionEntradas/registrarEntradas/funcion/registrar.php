@@ -24,9 +24,8 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
-// 		var_dump ( $_REQUEST );
-// 		exit ();
-		
+		// var_dump ( $_REQUEST );
+		// exit ();
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
@@ -40,15 +39,27 @@ class RegistradorOrden {
 		
 		$fechaReinicio = date ( "Y-m-d", mktime ( 0, 0, 0, 1, 1, date ( 'Y' ) ) );
 		
-		if ($fechaActual == $fechaReinicio) {
+// 		if ($fechaActual == $fechaReinicio) {
 			
-			$cadenaSql = $this->miSql->getCadenaSql ( 'consultaConsecutivo', $fechaReinicio );
-			$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 			$cadenaSql = $this->miSql->getCadenaSql ( 'consultaConsecutivo', $fechaReinicio );
+// 			$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 			
-			if (isset ( $consecutivo ) && $consecutivo == false) {
-				$cadenaSql = $this->miSql->getCadenaSql ( 'reiniciarConsecutivo' );
-				$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-			}
+// 			if (isset ( $consecutivo ) && $consecutivo == false) {
+// 				$cadenaSql = $this->miSql->getCadenaSql ( 'reiniciarConsecutivo' );
+// 				$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+// 			}
+// 		}
+		
+		$AnioActual = date ( 'Y' );
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultaConsecutivo', $AnioActual );
+		
+		$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		if ($consecutivo == false) {
+			
+			$cadenaSql = $this->miSql->getCadenaSql ( 'reiniciarConsecutivo' );
+			
+			$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		}
 		
 		$i = 0;
@@ -94,7 +105,7 @@ class RegistradorOrden {
 				$archivo = $archivo [1];
 				$_REQUEST ['id_ordenador'] = '';
 				$_REQUEST ['tipo_ordenador'] = '';
-				$_REQUEST ['identificacion_ordenador']='';
+				$_REQUEST ['identificacion_ordenador'] = '';
 				$_REQUEST ['id_proveedor'] = '';
 				$_REQUEST ['fecha_contrato'] = '';
 				$_REQUEST ['numero_contrato'] = '';
@@ -140,7 +151,6 @@ class RegistradorOrden {
 				$_REQUEST ['numero_factura'] = '';
 				$_REQUEST ['fecha_factura'] = '';
 				
-				
 				break;
 			
 			case '6' :
@@ -168,7 +178,6 @@ class RegistradorOrden {
 				$_REQUEST ['fecha_contrato'] = '';
 				$_REQUEST ['numero_contrato'] = '';
 				$_REQUEST ['tipo_contrato'] = '';
-				
 				
 				break;
 		}
@@ -211,7 +220,7 @@ class RegistradorOrden {
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarInformación', $arreglo_clase );
-		$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda",$arreglo_clase,"insertarInformación");  
+		$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $arreglo_clase, "insertarInformación" );
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'idMaximoEntrada' );
 		$idEntradamax = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -232,7 +241,7 @@ class RegistradorOrden {
 				($_REQUEST ['id_proveedor'] != '') ? $_REQUEST ['id_proveedor'] : NULL, // donacion
 				($_REQUEST ['numero_factura'] != '') ? $_REQUEST ['numero_factura'] : NULL, // donacion
 				($_REQUEST ['fecha_factura'] != '') ? $_REQUEST ['fecha_factura'] : NULL, // donacion
-				($_REQUEST['observaciones_entrada']=='')?"NULL":"'".$_REQUEST ['observaciones_entrada']."'",
+				($_REQUEST ['observaciones_entrada'] == '') ? "NULL" : "'" . $_REQUEST ['observaciones_entrada'] . "'",
 				$_REQUEST ['numero_acta'],
 				($_REQUEST ['id_ordenador'] == '') ? NULL : $_REQUEST ['id_ordenador'], // obligatorio donacion
 				$_REQUEST ['sede'], // obligatorio
@@ -245,17 +254,16 @@ class RegistradorOrden {
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarEntrada', $arregloDatos );
 		
-		$id_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda",$arregloDatos,"insertarEntrada" );
+		$id_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $arregloDatos, "insertarEntrada" );
 		
 		$arreglo = array (
 				$idEntradamax,
-				$id_entrada [0] [0] ,
-				$id_entrada [0] [1] ,
+				$id_entrada [0] [0],
+				$id_entrada [0] [1] 
 		);
 		
-		
 		if ($id_entrada) {
-			$this->miConfigurador->setVariableConfiguracion("cache",true);
+			$this->miConfigurador->setVariableConfiguracion ( "cache", true );
 			redireccion::redireccionar ( 'inserto', $arreglo );
 			exit ();
 		} else {

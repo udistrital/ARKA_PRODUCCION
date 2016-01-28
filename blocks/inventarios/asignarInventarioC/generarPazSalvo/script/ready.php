@@ -109,7 +109,7 @@
         
         
         
-        
+        $('#<?php echo $this->campoSeguro('documentoContratista')?>').width(650);
                  $("#<?php echo $this->campoSeguro('documentoContratista') ?>").select2();
           
 

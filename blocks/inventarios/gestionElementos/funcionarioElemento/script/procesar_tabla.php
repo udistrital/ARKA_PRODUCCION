@@ -102,6 +102,7 @@ $(function() {
                   { data :"dependencia" },
                   { data :"espaciofisico" },
                   { data :"estadoelemento" },
+                  { data :"contratista" },
                   { data :"detalle" },
                   { data :"observaciones" },
                   { data :"verificacion" },
