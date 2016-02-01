@@ -1,18 +1,13 @@
 <?php
-
 /*
  * ---------------------------------------------------------------------------------------- | Control Versiones | ----------------------------------------------------------------------------------------- | fecha | Autor | version | Detalle | ----------------------------------------------------------------------------------------- | 2015/12/13 | Stiv Verdugo | 0.0.0.1 | | -----------------------------------------------------------------------------------------
  */
 use inventarios\asignarInventarioC\gestionContratista\funcion\redireccion;
-
 include_once ('redireccionar.php');
-
 $ruta_1 = $this->miConfigurador->getVariableConfiguracion ( 'raizDocumento' ) . '/plugin/php_excel/Classes/PHPExcel.class.php';
 $ruta_2 = $this->miConfigurador->getVariableConfiguracion ( 'raizDocumento' ) . '/plugin/php_excel/Classes/PHPExcel/Reader/Excel2007.class.php';
-
 include_once ($ruta_1);
 include_once ($ruta_2);
-
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
@@ -170,14 +165,12 @@ class Registrador {
 					}
 				}
 				
-                                                
 				if (isset ( $datos ) == true && $datos != false) {
 					foreach ( $datos as $valor ) {
 						$registrar = true;
 						
-						$fechaInicio = date ( 'Y/m/d', strtotime (str_replace('/', '-',  $valor ['Fecha_Inicio']) ) );
-
-						$fechaFinal = date ( 'Y/m/d', strtotime (str_replace('/', '-',  $valor ['Fecha_Final'] ) ));
+						$fechaInicio = date ( 'd/m/Y', strtotime ( $valor ['Fecha_Inicio'] ) );
+						$fechaFinal = date ( 'd/m/Y', strtotime ( $valor ['Fecha_Final'] ) );
 						
 						$anio_inicio = date ( 'Y', strtotime ( $fechaInicio ) );
 						
@@ -197,7 +190,6 @@ class Registrador {
 							$registrar = false;
 							$log_error ['Error_Fecha_Inicio'] [] = $arreglo;
 						}
-						
 						
 						if ($fechaFinal <= $fechaInicio) {
 							
@@ -225,11 +217,9 @@ class Registrador {
 								$registrar = true;
 							}
 						}
-                                                
-                         					
+						
 						$cadenaSql = $this->miSql->getCadenaSql ( 'registrarContratista', $arreglo );
 						
-                        
 						if ($registrar == true) {
 							
 							$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso", $arreglo, "registrarContratista" );
@@ -273,7 +263,7 @@ class Registrador {
 				foreach ( glob ( $ruta_eliminar_xls ) as $filename ) {
 					unlink ( $filename );
 				}
-			
+				
 				// /__________________________________________________
 				
 				if (isset ( $registrado_unico ) == true) {
@@ -282,7 +272,7 @@ class Registrador {
 					exit ();
 				} else {
 					
-					redireccion::redireccionar ( 'noInserto',$log_error );
+					redireccion::redireccionar ( 'noInserto' );
 					exit ();
 				}
 			}
@@ -293,8 +283,6 @@ class Registrador {
 		}
 	}
 }
-
 $miRegistrador = new Registrador ( $this->lenguaje, $this->sql, $this->funcion );
-
 $resultado = $miRegistrador->procesarFormulario ();
 ?>
