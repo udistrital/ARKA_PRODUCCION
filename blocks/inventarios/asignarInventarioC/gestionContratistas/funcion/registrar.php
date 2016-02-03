@@ -1,13 +1,18 @@
 <?php
+
 /*
  * ---------------------------------------------------------------------------------------- | Control Versiones | ----------------------------------------------------------------------------------------- | fecha | Autor | version | Detalle | ----------------------------------------------------------------------------------------- | 2015/12/13 | Stiv Verdugo | 0.0.0.1 | | -----------------------------------------------------------------------------------------
  */
 use inventarios\asignarInventarioC\gestionContratista\funcion\redireccion;
+
 include_once ('redireccionar.php');
+
 $ruta_1 = $this->miConfigurador->getVariableConfiguracion ( 'raizDocumento' ) . '/plugin/php_excel/Classes/PHPExcel.class.php';
 $ruta_2 = $this->miConfigurador->getVariableConfiguracion ( 'raizDocumento' ) . '/plugin/php_excel/Classes/PHPExcel/Reader/Excel2007.class.php';
+
 include_once ($ruta_1);
 include_once ($ruta_2);
+
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
@@ -164,17 +169,25 @@ class Registrador {
 						exit ();
 					}
 				}
+				$j = 2;
 				
 				if (isset ( $datos ) == true && $datos != false) {
 					foreach ( $datos as $valor ) {
 						$registrar = true;
 						
-						$fechaInicio = date ( 'd/m/Y', strtotime ( $valor ['Fecha_Inicio'] ) );
-						$fechaFinal = date ( 'd/m/Y', strtotime ( $valor ['Fecha_Final'] ) );
+						$fechaInicio = date ( 'd/m/Y', strtotime ( str_replace ( '/', '-', $valor ['Fecha_Inicio'] ) ) );
 						
-						$anio_inicio = date ( 'Y', strtotime ( $fechaInicio ) );
+						$fechaFinal = date ( 'd/m/Y', strtotime ( str_replace ( '/', '-', $valor ['Fecha_Final'] ) ) );
+						
+						$anio = strtotime ( $valor ['Fecha_Inicio'] );
+						
+						$anio_inicio = explode ( "/", $valor ['Fecha_Inicio'] );
 						
 						$anio_actual = date ( 'Y' );
+						
+						$valor_fecha_inicia = strtotime ( str_replace ( '/', '-', $valor ['Fecha_Inicio'] ) );
+						
+						$valor_fecha_final = strtotime ( str_replace ( '/', '-', $valor ['Fecha_Final'] ) );
 						
 						$arreglo = array (
 								"identificacion" => $valor ['identificacion'],
@@ -186,15 +199,15 @@ class Registrador {
 								"fecha_final" => $fechaFinal 
 						);
 						
-						if ($anio_inicio != $anio_actual) {
+						if ($anio_inicio [2] != $anio_actual) {
 							$registrar = false;
-							$log_error ['Error_Fecha_Inicio'] [] = $arreglo;
+							$log_error ['Error_Fecha_Inicio'] [] = $j;
 						}
 						
-						if ($fechaFinal <= $fechaInicio) {
+						if ($valor_fecha_final <= $valor_fecha_inicia) {
 							
 							$registrar = false;
-							$log_error ['Error_Fechas'] [] = $arreglo;
+							$log_error ['Error_Fechas'] [] = $j;
 						}
 						
 						if ($valor ['tipo_contrato'] == 1 && $registrar != false) {
@@ -209,7 +222,7 @@ class Registrador {
 									if ($valores ['tipo_contrato'] == '1') {
 										
 										$registrar = false;
-										$log_error ['Error_Tipo_Contratos(Duplicidad_de_OPS)'] [] = $arreglo;
+										$log_error ['Error_Tipo_Contratos(Duplicidad_de_OPS)'] [] = $j;
 									}
 								}
 							} else {
@@ -227,7 +240,7 @@ class Registrador {
 							if ($resultado == false) {
 								$registrado = false;
 								$registrar = false;
-								$log_error ['Error_Registro'] [] = $arreglo;
+								$log_error ['Error_Registro'] [] = $j;
 							} else {
 								
 								$k = $k + 1;
@@ -237,6 +250,7 @@ class Registrador {
 								}
 							}
 						}
+						$j++;
 					}
 				} else {
 					
@@ -272,7 +286,7 @@ class Registrador {
 					exit ();
 				} else {
 					
-					redireccion::redireccionar ( 'noInserto' );
+					redireccion::redireccionar ( 'noInserto', $log_error );
 					exit ();
 				}
 			}
@@ -283,6 +297,8 @@ class Registrador {
 		}
 	}
 }
+
 $miRegistrador = new Registrador ( $this->lenguaje, $this->sql, $this->funcion );
+
 $resultado = $miRegistrador->procesarFormulario ();
 ?>

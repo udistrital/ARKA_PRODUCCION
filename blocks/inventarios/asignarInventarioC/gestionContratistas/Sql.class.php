@@ -446,6 +446,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " JOIN  arka_parametros.arka_tipo_contrato tp ON tp.tc_identificador= cns.\"CON_TIPO_CONTRATO\"  ";
 				$cadenaSql .= " WHERE \"CON_VIGENCIA_FISCAL\"= '" . $variable . "' ";
 				$cadenaSql .= " AND cns.estado=TRUE ; ";
+				  
 				
 				break;
 			

@@ -87,10 +87,9 @@ class registrarForm {
 		echo $this->miFormulario->formulario ( $atributos );
 		// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 		
-               
 		if (isset ( $_REQUEST ['mensaje'] )) {
- 
-     			switch ($_REQUEST ['mensaje']) {
+			
+			switch ($_REQUEST ['mensaje']) {
 				case 'registro' :
 					$atributos ['mensaje'] = "<center>SE REGISTRO N#" . $_REQUEST ['num_exito'] . " CON EXITO LOS CONTRATISTAS VALIDOS </center>";
 					$atributos ["estilo"] = 'success';
@@ -141,42 +140,17 @@ class registrarForm {
 					
 					$Log_errores = unserialize ( $_REQUEST ['log_error'] );
 					
+					// var_dump($Log_errores);exit;
+					
 					foreach ( $Log_errores as $valor => $key ) {
 						
-						$atributos ['mensaje'] .= "<br>" . $valor . " en los Siguientes Datos en el Archivo: ";
-						$atributos ['mensaje'] .= "<center><table>
-															<thead>
-												                <tr>
-												                   <th>Vigencia</th>
-												                    <th>Tipo de Contrato</th>
-																	<th>Número de Contrato</th>
-												                    <th>Identificación<br>Contratista</th>
-																	<th>Nombre y Apellidos<br>Contratistas</th>
-																	<th>Fecha de Inicio<br>Contrato</th>
-															        <th>Fecha de Final<br>Contrato</th>
-																</tr>
-												            </thead>";
+						$atributos ['mensaje'] .= "<br>" . $valor . " en la(s) siguiente(s) fila(s):<br> ";
+						$atributos ['mensaje'] .= "";
 						
-						foreach ( $key as $val ) {
-							
-							if ($val ['tipo_contrato'] == '2') {
-								$val ['tipo_contrato'] = 'CPS';
-							} else {
-								
-								$val ['tipo_contrato'] = 'OPS';
-							}
-							$atributos ['mensaje'] .= "<tr>
-	                   					 		<td><center>" . $val ['vigencia'] . "</center></td>
-							                    <td><center>" . $val ['tipo_contrato'] . "</center></td>
-         					                    <td><center>" . $val ['numero'] . "</center></td> 		
-							                   	<td><center>" . $val ['identificacion'] . "</center></td>
-							                    <td><center>" . $val ['nombres'] . "</center></td>
-							                    <td><center>" . $val ['fecha_inicial'] . "</center></td>
-							                    <td><center>" . $val ['fecha_final'] . "</center></td>				
-						                    </tr>";
-						}
+						$filas = implode ( ",", $key );
+						$atributos ['mensaje'] .= $filas;
 						
-						$atributos ['mensaje'] .= "</table></center><br>";
+						$atributos ['mensaje'] .= "<br>";
 					}
 				}
 				
