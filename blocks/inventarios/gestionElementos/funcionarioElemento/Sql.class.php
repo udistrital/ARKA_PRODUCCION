@@ -309,8 +309,8 @@ class Sql extends \Sql {
 				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=eli.ubicacion_elemento ';
 				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_dependencia as ad ON ad."ESF_ID_ESPACIO"=eli.ubicacion_elemento ';
 				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_sedes as sas ON sas."ESF_COD_SEDE"=espacios."ESF_COD_SEDE" ';
-				$cadenaSql .= ' LEFT JOIN  asignar_elementos asl ON asl.id_elemento=eli.id_elemento_ind ';
-				$cadenaSql .= ' LEFT JOIN  arka_parametros.arka_contratistas crn ON crn."CON_IDENTIFICACION"=asl.contratista  ';	
+				$cadenaSql .= ' LEFT JOIN  asignar_elementos asl ON asl.id_elemento=eli.id_elemento_ind AND asl.estado = 1  ';
+				$cadenaSql .= ' LEFT JOIN  arka_parametros.arka_contratistas crn ON crn."CON_IDENTIFICACION"=asl.contratista  ';	  
 				$cadenaSql .= "WHERE tb.id_tipo_bienes <> 1 ";
 				$cadenaSql .= " AND eli.estado_registro = 'TRUE'  ";
 				
@@ -329,9 +329,8 @@ class Sql extends \Sql {
 					$cadenaSql .= ' AND espacios."ESF_ID_ESPACIO" = ';
 					$cadenaSql .= " '" . $variable ['ubicacion'] . "' ";
 				}
-				$cadenaSql .= " OR asl.estado = 1  ";
 				$cadenaSql .= " ORDER BY dependencia DESC   ;  ";
-				
+ 
 				break;
 			
 			case "consultarElementoParticular" :
