@@ -67,8 +67,7 @@ class registrarForm {
 				"tipo_contrato" => $arregloDatos [1],
 				"numero_contrato" => $arregloDatos [2],
 				"vigencia" => $arregloDatos [3] 
-		)
-		 );
+		) );
 		
 		$elementos_contratista = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$total_elementos = count ( $elementos_contratista );
@@ -112,6 +111,26 @@ class registrarForm {
 			$variable .= "&accesoCondor=true";
 		}
 		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+		
+		if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+			$atributos ["id"] = "logos";
+			$atributos ["estilo"] = " ";
+			echo $this->miFormulario->division ( "inicio", $atributos );
+			unset ( $atributos );
+			{
+				
+				$esteCampo = 'logo';
+				$atributos ['id'] = $esteCampo;
+				$atributos ['tabIndex'] = $tab;
+				$atributos ['estilo'] = '';
+				$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'css/images/banner_arka.png';
+				$atributos ['ancho'] = '100%';
+				$atributos ['alto'] = '150px';
+				$tab ++;
+				echo $this->miFormulario->enlace ( $atributos );
+				unset ( $atributos );
+			}
+		}
 		
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 		$esteCampo = 'botonRegresar';
@@ -252,10 +271,10 @@ class registrarForm {
 			$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=descargar";
-			$valorCodificado .= "&contratista=" . $arregloDatos[0];
-			$valorCodificado .= "&tipo_contrato=" .$arregloDatos[1];
-			$valorCodificado .= "&numero_contrato=" . $arregloDatos[2];
-			$valorCodificado .= "&vigencia=" . $arregloDatos[3];
+			$valorCodificado .= "&contratista=" . $arregloDatos [0];
+			$valorCodificado .= "&tipo_contrato=" . $arregloDatos [1];
+			$valorCodificado .= "&numero_contrato=" . $arregloDatos [2];
+			$valorCodificado .= "&vigencia=" . $arregloDatos [3];
 			$valorCodificado .= "&num_elementos=" . $total_elementos;
 			$valorCodificado .= "&funcionario=" . $_REQUEST ['funcionario'];
 			$valorCodificado .= "&supervisor=" . $_REQUEST ['funcionario'];

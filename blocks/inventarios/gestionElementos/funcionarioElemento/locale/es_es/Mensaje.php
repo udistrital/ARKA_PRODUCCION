@@ -9,14 +9,20 @@ $this->idioma ["botonGenerarPdf"] ="Generar PDF";
 
 
 $this->idioma ["encabezado"] ="
-Apreciado Funcionario lo invitamos a que consulte y verifique su Inventario, por favor tenga en cuenta las siguientes indicaciones:
-<br>&nbsp &#9658 	Marque la casilla de “Verificación” de los bienes o elementos de los que usted es responsable en el listado que aparece a continuación de estas indicaciones.
+Apreciado Funcionario o Docente: lo invitamos a que consulte y verifique su Inventario.<br>Por favor tenga en cuenta las siguientes indicaciones:
+<br>&nbsp &#9658 Marque la casilla de “Verificación” de los bienes o elementos que ha verificado  están  bajo su responsabilidad en el listado que aparece a continuación de estas indicaciones.
 <br>&nbsp &#9658 En caso que usted no marque la casilla de “Verificación” de un elemento, por favor registre los comentarios o aclaraciones a que haya lugar en la opción “Registrar Observaciones”.
-<br>&nbsp &#9658 Una vez usted, esté de acuerdo con la totalidad de su inventario, por favor “Apruebe”, de lo contrario “Preapruebe” las acciones que vayan realizando en el sistema.
-<br>&nbsp &#9658 Usted tendrá  la opción “Generar pdf”  en cualquier momento del proceso, ya sea antes o después de la aprobación de su inventario.
+<br>&nbsp &#9658 Una vez usted, esté de acuerdo con la totalidad de su inventario, por favor “Apruebe”, de lo contrario “Preapruebe” las acciones que vaya realizando en el sistema.
+<br>&nbsp &#9658 Usted tendrá  la opción “Generar pdf”  en cualquier momento del proceso, ya sea antes o después de la aprobación de su inventario para descargar el reporte respectivo.
 <br>&nbsp &#9658 Una vez genere el pdf de su inventario aprobado, por favor firme y radique el documento en la Sección de Almacén e Inventarios.
 <br>&nbsp &#9658 Con la opción “Ver detalles” usted podrá consultar la hoja de vida del elemento e importar fotos del mismo.
 <br>&nbsp &#9658 Recuerde que los documentos electrónicos tienen la misma validez que los documentos en formato papel.(Ley 527 de 1999).";
+
+
+
+$this->idioma ["responsabilidad"] ="<center>La información visualizada es suministrada por la Sección Almacén General e Inventarios.
+		                            <br>Cualquier inquietud por favor comuniquese con esta dependencia responsable al teléfono 3239300 ext: 1621,1623,1624  .</center>";
+
 
 
 

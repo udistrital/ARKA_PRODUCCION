@@ -53,29 +53,28 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		$arregloDatos=explode("@",$_REQUEST['documentoContratista']);
+		$arregloDatos = explode ( "@", $_REQUEST ['documentoContratista'] );
 		
 		if (isset ( $_REQUEST ['documentoContratista'] ) && $_REQUEST ['documentoContratista'] != '') {
-			$docContratista = $arregloDatos[0];
+			$docContratista = $arregloDatos [0];
 		} else {
 			$docContratista = '';
 		}
 		
-		
-		$arregloDatos=explode("@",$_REQUEST['documentoContratista']);
+		$arregloDatos = explode ( "@", $_REQUEST ['documentoContratista'] );
 		
 		// COnsultar Elementos Activos del supervisor para asignarlos al contratista
 		// $cadenaSql = $this->miSql->getCadenaSql ( 'consultarElementosSupervisor', $_REQUEST ['funcionario'] );
 		// $elementos_supervisor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		// Consultar Elementos Asignados al contratista
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElementosContratista', array (
-				"funcionario"=>$_REQUEST ['funcionario'],
-				"contratista"=>$arregloDatos[0],
-				"tipo_contrato"=>$arregloDatos[1],
-				"numero_contrato"=>$arregloDatos[2],
-				"vigencia"=>$arregloDatos[3],
-				 
-		) );
+				"funcionario" => $_REQUEST ['funcionario'],
+				"contratista" => $arregloDatos [0],
+				"tipo_contrato" => $arregloDatos [1],
+				"numero_contrato" => $arregloDatos [2],
+				"vigencia" => $arregloDatos [3] 
+		)
+		 );
 		$elementos_contratista = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$cadenaSql2 = $this->miSql->getCadenaSql ( 'nombreContratista', $docContratista );
@@ -120,6 +119,26 @@ class registrarForm {
 		
 		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 		
+		if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+			$atributos ["id"] = "logos";
+			$atributos ["estilo"] = " ";
+			echo $this->miFormulario->division ( "inicio", $atributos );
+			unset ( $atributos );
+			{
+				
+				$esteCampo = 'logo';
+				$atributos ['id'] = $esteCampo;
+				$atributos ['tabIndex'] = $tab;
+				$atributos ['estilo'] = '';
+				$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'css/images/banner_arka.png';
+				$atributos ['ancho'] = '100%';
+				$atributos ['alto'] = '150px';
+				$tab ++;
+				echo $this->miFormulario->enlace ( $atributos );
+				unset ( $atributos );
+			}
+		}
+		
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 		$esteCampo = 'botonRegresar';
 		$atributos ['id'] = $esteCampo;
@@ -138,7 +157,7 @@ class registrarForm {
 		$atributos ['id'] = $esteCampo;
 		$atributos ["estilo"] = "jqueryui";
 		$atributos ['tipoEtiqueta'] = 'inicio';
-		$atributos ["leyenda"] = "Modificar Préstamo de Elementos: " . $nombreContratista[0]['CON_IDENTIFICACION']. " - " . $nombreContratista [0] ['CON_NOMBRE'];
+		$atributos ["leyenda"] = "Modificar Préstamo de Elementos: " . $nombreContratista [0] ['CON_IDENTIFICACION'] . " - " . $nombreContratista [0] ['CON_NOMBRE'];
 		echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 		
 		if ($elementos_contratista !== false) {
@@ -204,8 +223,6 @@ class registrarForm {
 			// unset ( $variable );
 			// }
 			// }
-			
-			
 			
 			if ($elementos_contratista !== false) {
 				
@@ -284,7 +301,6 @@ class registrarForm {
 			$atributos = array_merge ( $atributos, $atributosGlobales );
 			echo $this->miFormulario->campoBoton ( $atributos );
 			
-			
 			// -----------------CONTROL: Botón ----------------------------------------------------------------
 			$esteCampo = 'botonDocumentoSoporte';
 			$atributos ["id"] = $esteCampo;
@@ -300,13 +316,10 @@ class registrarForm {
 			$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
 			$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
 			$tab ++;
-				
+			
 			// Aplica atributos globales al control
 			$atributos = array_merge ( $atributos, $atributosGlobales );
 			echo $this->miFormulario->campoBoton ( $atributos );
-			
-			
-			
 			
 			// -----------------FIN CONTROL: Botón -----------------------------------------------------------
 			
@@ -337,10 +350,10 @@ class registrarForm {
 			$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=asignar";
-			$valorCodificado .= "&contratista=" . $arregloDatos[0];
-			$valorCodificado .= "&tipo_contrato=" .$arregloDatos[1];
-			$valorCodificado .= "&numero_contrato=" . $arregloDatos[2];
-			$valorCodificado .= "&vigencia=" . $arregloDatos[3];
+			$valorCodificado .= "&contratista=" . $arregloDatos [0];
+			$valorCodificado .= "&tipo_contrato=" . $arregloDatos [1];
+			$valorCodificado .= "&numero_contrato=" . $arregloDatos [2];
+			$valorCodificado .= "&vigencia=" . $arregloDatos [3];
 			$valorCodificado .= "&funcionario=" . $_REQUEST ['funcionario'];
 			$valorCodificado .= "&supervisor=" . $_REQUEST ['funcionario'];
 			$valorCodificado .= "&usuario=" . $_REQUEST ['usuario'];

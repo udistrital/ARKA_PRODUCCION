@@ -1,4 +1,9 @@
+#logo {
+	float: right;
+	border-style: outset;
+}
+
 #SeleccionRegistro {
-    float: right;
-     width: 40%; 
+	float: right;
+	width: 40%;
 }

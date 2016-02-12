@@ -217,7 +217,9 @@ class Sql extends \Sql {
                 $cadenaSql .= " catalogo.catalogo_elemento.elemento_nombre nivel,   ";
                 $cadenaSql .= " valor, ";
                 $cadenaSql .= " CASE WHEN grupo_depreciacion=false THEN 'No Aplica' ELSE 'Si aplica' END as depreciacion, ";
-                $cadenaSql .= " CASE WHEN grupo_depreciacion=false THEN 0 ELSE grupo_vidautil  END as vida_util ";
+                $cadenaSql .= " CASE WHEN grupo_depreciacion=false THEN 0 ELSE grupo_vidautil  END as vida_util ,";
+                $cadenaSql .= "  entrada.consecutivo || ' - ' || entrada.vigencia  numero_entrada_vigencia  ,";
+                $cadenaSql .= " salida.consecutivo || ' - ' ||salida.vigencia  numero_salida_vigencia  ";
 //                $cadenaSql .= " elemento_individual.funcionario as funcionario_actual, ";
 //                $cadenaSql .= 'arka_parametros.arka_funcionarios."FUN_NOMBRE" funcionario_actual_nombre, ';
 //                $cadenaSql .= ' dependencia."ESF_DEP_ENCARGADA" dependencia_actual';

@@ -139,7 +139,7 @@ class registrarForm {
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 		$esteCampo = 'encabezado';
 		$atributos ['id'] = $esteCampo;
-		$atributos ['tipo'] = 'information';
+		$atributos ['tipo'] = 'warning';
 		$atributos ['estilo'] = 'textoNotasFormulario';
 		$atributos ['mensaje'] = $this->lenguaje->getCadena ( $esteCampo );
 		
@@ -161,6 +161,30 @@ class registrarForm {
 			$datosfuncionarioNombre = '';
 		}
 		
+		echo $this->miConfigurador->getVariableConfiguracion ( 'ru	taUrlBloque' );
+		
+		if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+			$atributos ["id"] = "logos";
+			$atributos ["estilo"] = " ";
+			echo $this->miFormulario->division ( "inicio", $atributos );
+			unset ( $atributos );
+			{
+				
+				$esteCampo = 'logo';
+				$atributos ['id'] = $esteCampo;
+				$atributos ['tabIndex'] = $tab;
+				$atributos ['estilo'] = '';
+				$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'css/images/banner_arka.png';
+				$atributos ['ancho'] = '100%';
+				$atributos ['alto'] = '150px';
+				$tab ++;
+				echo $this->miFormulario->enlace ( $atributos );
+				unset ( $atributos );
+			}
+		}
+		echo $this->miFormulario->division ( "fin" );
+		unset ( $atributos );
+		
 		$esteCampo = "marcoDatosBasicos";
 		$atributos ['id'] = $esteCampo;
 		$atributos ["estilo"] = "jqueryui";
@@ -171,7 +195,21 @@ class registrarForm {
 		{
 			
 			if ($resultado) {
-				
+				if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'responsabilidad';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tipo'] = 'information';
+					$atributos ['estilo'] = 'textoNotasFormulario';
+					$atributos ['mensaje'] = $this->lenguaje->getCadena ( $esteCampo );
+					
+					$tab ++;
+					
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					unset ( $atributos );
+				}
 				// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 				$esteCampo = 'encabezado';
 				$atributos ['id'] = $esteCampo;

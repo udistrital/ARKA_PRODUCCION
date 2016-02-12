@@ -39,7 +39,7 @@ class registrarForm {
 		// -------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-				
+		
 		// Limpia Items Tabla temporal
 		
 		// $cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items' );
@@ -68,9 +68,26 @@ class registrarForm {
 		{
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
+			if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+				$atributos ["id"] = "logos";
+				$atributos ["estilo"] = " ";
+				echo $this->miFormulario->division ( "inicio", $atributos );
+				unset ( $atributos );
+				{
+					
+					$esteCampo = 'logo';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tabIndex'] = $tab;
+					$atributos ['estilo'] = '';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'css/images/banner_arka.png';
+					$atributos ['ancho'] = '100%';
+					$atributos ['alto'] = '150px';
+					$tab ++;
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+				}
+			}
 			
-			
-
 			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 			
 			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
@@ -78,7 +95,13 @@ class registrarForm {
 			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
 			
 			$variable = "pagina=" . $miPaginaActual;
-			$variable .= "&usuario=".$_REQUEST['usuario'];
+			$variable .= "&usuario=" . $_REQUEST ['usuario'];
+			
+			if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+				
+				$variable .= "&accesoCondor=true";
+			}
+			
 			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 			
 			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -95,7 +118,6 @@ class registrarForm {
 			
 			unset ( $atributos );
 			
-			
 			$esteCampo = "marcoDatosBasicos";
 			$atributos ['id'] = $esteCampo;
 			$atributos ["estilo"] = "jqueryui";
@@ -104,9 +126,9 @@ class registrarForm {
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			
 			{
-				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirma') {
+				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
 					
-					$mensaje = "Se realizó la descarga de los items para el contratista " .$_REQUEST['contratista'].". ".$_REQUEST['estado'];
+					$mensaje = "Se realizó la descarga de los items para el contratista " . $_REQUEST ['contratista'] . ". " . $_REQUEST ['estado'];
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -122,7 +144,7 @@ class registrarForm {
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
-				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'error') {
+				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'error') {
 					
 					$mensaje = "No fue posible realizar el descargue de los items al contratista.";
 					
@@ -141,7 +163,7 @@ class registrarForm {
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
 				
-				if (isset($_REQUEST['errores'])&&$_REQUEST ['errores'] == 'noItems') {
+				if (isset ( $_REQUEST ['errores'] ) && $_REQUEST ['errores'] == 'noItems') {
 					
 					$mensaje = "No se Agregaron Items ";
 					
@@ -159,8 +181,7 @@ class registrarForm {
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
-				
-					}
+			}
 			
 			// ------------------Division para los botones-------------------------
 			$atributos ["id"] = "botones";
@@ -185,7 +206,7 @@ class registrarForm {
 			
 			// Aplica atributos globales al control
 			$atributos = array_merge ( $atributos, $atributosGlobales );
-// 			echo $this->miFormulario->campoBoton ( $atributos );
+			// echo $this->miFormulario->campoBoton ( $atributos );
 			// -----------------FIN CONTROL: Botón -----------------------------------------------------------
 			
 			echo $this->miFormulario->marcoAgrupacion ( 'fin' );

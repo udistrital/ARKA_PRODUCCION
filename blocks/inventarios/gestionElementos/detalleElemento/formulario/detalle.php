@@ -24,8 +24,6 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
-		
-		
 		$this->miConfigurador->setVariableConfiguracion ( 'cache', true );
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
@@ -66,7 +64,6 @@ class registrarForm {
 		$_REQUEST ['elemento_seleccionado'] = $_REQUEST ['elemento'];
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_imagenperfil', $_REQUEST ['elemento'] );
-		
 		
 		$foto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
@@ -172,6 +169,26 @@ class registrarForm {
 		{
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
+			if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+				$atributos ["id"] = "logos";
+				$atributos ["estilo"] = " ";
+				echo $this->miFormulario->division ( "inicio", $atributos );
+				unset ( $atributos );
+				{
+					
+					$esteCampo = 'logo';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tabIndex'] = $tab;
+					$atributos ['estilo'] = '';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'css/images/banner_arka.png';
+					$atributos ['ancho'] = '100%';
+					$atributos ['alto'] = '150px';
+					$tab ++;
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+				}
+			}
+			
 			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 			
 			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
@@ -182,34 +199,29 @@ class registrarForm {
 				
 				$variable = "pagina=funcionarioElemento";
 				$variable .= "&opcion=Consultar";
-				$variable .= "&identificacion=" . $_REQUEST['usuario'];
-				$variable .= "&usuario=" . $_REQUEST['usuario'];
+				$variable .= "&identificacion=" . $_REQUEST ['usuario'];
+				$variable .= "&usuario=" . $_REQUEST ['usuario'];
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 			} else {
 				
 				$variable = "pagina=" . $miPaginaActual;
-				$variable .= "&usuario=" . $_REQUEST['usuario'];
+				$variable .= "&usuario=" . $_REQUEST ['usuario'];
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 			}
 			
-			
-			if (isset ( $_REQUEST ['accesoCondor'] )&& $_REQUEST ['accesoCondor'] =='true'){
+			if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
 				
 				$variable = "pagina=inventarioFuncionario";
 				$variable .= "&bloqueGrupo=inventarios/gestionElementos";
 				$variable .= "&bloque=funcionarioElemento";
 				$variable .= "&opcion=Consultar";
-				$variable .= "&identificacion=" . $_REQUEST['usuario'];
-				$variable .= "&usuario=" . $_REQUEST['funcionario'];
+				$variable .= "&identificacion=" . $_REQUEST ['usuario'];
+				$variable .= "&usuario=" . $_REQUEST ['funcionario'];
 				$variable .= "&accesoCondor='true'";
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
-				
-				
-				
 			}
 			
-			
-// 			if (isset ( $_REQUEST ['accesoCondor'] )) 
+			// if (isset ( $_REQUEST ['accesoCondor'] ))
 			{
 				// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 				$esteCampo = 'botonRegresar';
@@ -224,7 +236,7 @@ class registrarForm {
 				echo $this->miFormulario->enlace ( $atributos );
 				unset ( $atributos );
 			}
-		 	
+			
 			$esteCampo = "marcoDatosBasicos";
 			$atributos ['id'] = $esteCampo;
 			$atributos ["estilo"] = "jqueryui";

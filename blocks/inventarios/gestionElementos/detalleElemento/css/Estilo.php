@@ -18,6 +18,7 @@ $estilo[$indice++]="jquery.dataTables.min.css";
 $estilo[$indice++]="jquery.dataTables_themeroller.css";
 $estilo[$indice++]="documentoPlacas.css";
 $estilo[$indice++]="jquery.auto-complete.css";
+$estilo[$indice++]="miestilo.css";
 
 
 $estilo[$indice++]="fileinput.css";

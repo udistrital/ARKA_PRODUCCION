@@ -64,11 +64,31 @@ class registrarForm {
 		{
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
+			if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+				$atributos ["id"] = "logos";
+				$atributos ["estilo"] = " ";
+				echo $this->miFormulario->division ( "inicio", $atributos );
+				unset ( $atributos );
+				{
+					
+					$esteCampo = 'logo';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tabIndex'] = $tab;
+					$atributos ['estilo'] = '';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'css/images/banner_arka.png';
+					$atributos ['ancho'] = '100%';
+					$atributos ['alto'] = '150px';
+					$tab ++;
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+				}
+			}
+			
 			$esteCampo = "marcoDatosBasicos";
 			$atributos ['id'] = $esteCampo;
 			$atributos ["estilo"] = "jqueryui";
 			$atributos ['tipoEtiqueta'] = 'inicio';
-			$atributos ["leyenda"] = "Consultar Contratista para Préstamo de Elementos"; 
+			$atributos ["leyenda"] = "Consultar Contratista para Préstamo de Elementos";
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			
 			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -163,7 +183,6 @@ class registrarForm {
 		if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
 			
 			$valorCodificado .= "&accesoCondor=true";
-		
 		}
 		
 		/**
