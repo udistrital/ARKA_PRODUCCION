@@ -181,9 +181,10 @@ class registrarForm {
 				echo $this->miFormulario->enlace ( $atributos );
 				unset ( $atributos );
 			}
+			
+			echo $this->miFormulario->division ( "fin" );
+			unset ( $atributos );
 		}
-		echo $this->miFormulario->division ( "fin" );
-		unset ( $atributos );
 		
 		$esteCampo = "marcoDatosBasicos";
 		$atributos ['id'] = $esteCampo;

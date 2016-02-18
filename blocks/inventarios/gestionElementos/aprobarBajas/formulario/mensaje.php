@@ -128,7 +128,7 @@ class registrarForm {
 				
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No Se Pudo Hacer el Registro de Solicitud de Baja del Elemento";
+					$mensaje = "No Se Pudo Hacer el Registro de Solicitud de Baja del Elemento.  Probablemente ya existe baja asociada.";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

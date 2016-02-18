@@ -233,30 +233,30 @@ class RegistradorActa {
    
  <table align='center'>
             <tr>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Entrada:</th>
-                <td style='width:325px;text-align:center'>" . $datos[0]['consecutivo'] . "</td>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Fecha:</th>
-                <td style='width:325px;text-align:center'>" . $datos[0]['fecha_registro'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;\" colspan=\"1\">Entrada:</th>
+                <td style='width:325px;text-align:center;font-size:12px;'>" . $datos[0]['consecutivo'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;\" colspan=\"1\">Fecha:</th>
+                <td style='width:325px;text-align:center;font-size:12px;'>" . $datos[0]['fecha_registro'] . "</td>
             </tr>
             <tr>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Clase Entrada:</th>
-                <td  style='text-align:center'  colspan=\"3\">" . $datos[0]['clase_entrada'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;\" colspan=\"1\">Clase Entrada:</th>
+                <td  style='text-align:center;font-size:12px;'  colspan=\"3\">" . $datos[0]['clase_entrada'] . "</td>
             </tr>
             <tr>
-                <th style=\"text-align:right;width:85px;font-size:10px;text-align:right\" colspan=\"1\">Tipo Contrato:</th>
-                <td  style='text-align:center'>" . $datos[0]['tipo_contrato'] . "</td>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Número:</th>
-                <td  style='text-align:center'>" . $datos[0]['numero_contrato'] . " del " . $datos[0]['fecha_contrato'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;text-align:right\" colspan=\"1\">Tipo Contrato:</th>
+                <td  style='text-align:center;font-size:12px;'>" . $datos[0]['tipo_contrato'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;\" colspan=\"1\">Número:</th>
+                <td  style='text-align:center;font-size:12px;'>" . $datos[0]['numero_contrato'] . " del " . $datos[0]['fecha_contrato'] . "</td>
             </tr>
             <tr>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Proveedor:</th>
-                <td  style='text-align:center'>" . $datos[0]['proveedor'] . " - " . $datos[0]['nombre_proveedor'] . "</td>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Factura:</th>
-                <td  style='text-align:center'>" . $datos[0]['numero_factura'] . " del " . $datos[0]['fecha_factura'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;\" colspan=\"1\">Proveedor:</th>
+                <td  style='text-align:center;font-size:12px;'>" . $datos[0]['proveedor'] . " - " . $datos[0]['nombre_proveedor'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;\" colspan=\"1\">Factura:</th>
+                <td  style='text-align:center;font-size:12px;'>" . $datos[0]['numero_factura'] . " del " . $datos[0]['fecha_factura'] . "</td>
             </tr>
              <tr>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Observaciones:</th>
-                <td  style='text-align:center' colspan='3'>" . $datos[0]['observaciones'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;\" colspan=\"1\">Observaciones:</th>
+                <td  style='text-align:center;font-size:12px;' colspan='3'>" . $datos[0]['observaciones'] . "</td>
             </tr>
     </table><br>
  
