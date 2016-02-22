@@ -436,7 +436,7 @@ class Sql extends \Sql {
 
             case "consultarElementos_pdf":
                 $cadenaSql = "SELECT grupo_cuentasalida, unidad, cantidad, elemento.descripcion, valor,  ";
-                $cadenaSql .= " subtotal_sin_iva, aplicacion_iva.iva, total_iva, total_iva_con ,  tipo_bienes.descripcion as tipo_bien, placa ";
+                $cadenaSql .= " subtotal_sin_iva, aplicacion_iva.iva, total_iva, total_iva_con ,  tipo_bienes.descripcion as tipo_bien, placa,marca, elemento_individual.serie ";
                 $cadenaSql .= " FROM arka_inventarios.elemento  ";
                 $cadenaSql .= " JOIN arka_inventarios.elemento_individual On elemento_individual.id_elemento_gen=elemento.id_elemento ";
                 $cadenaSql .= " JOIN arka_inventarios.salida ON elemento_individual.id_salida=salida.id_salida  ";

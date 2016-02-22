@@ -131,7 +131,7 @@ class RegistradorActa {
             $contenido.= "<td style='text-align:center'>" . $datos_elementos[$key]['tipo_bien'] . "</td> ";
             $contenido.= "<td style='text-align:center'>" . $datos_elementos[$key]['placa'] . "</td> ";
             $contenido.= "<td style='text-align:center' >" . wordwrap($datos_elementos[$key]['descripcion'], 80, "<br>") . "</td> ";
-            $contenido.= "<td style='text-align:center' >" . wordwrap($datos_elementos[$key]['datos_elem'], 80, "<br>") . "</td> ";
+            $contenido.= "<td style='text-align:center' >" . wordwrap($datos_elementos[$key]['marca']." - ".$datos_elementos[$key]['serie'], 80, "<br>") . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($datos_elementos[$key]['valor'], 2, ",", ".") . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($datos_elementos[$key]['subtotal_sin_iva'], 2, ",", ".") . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;&nbsp;" . $datos_elementos[$key]['iva'] * 100 . "&nbsp;% </td> ";
